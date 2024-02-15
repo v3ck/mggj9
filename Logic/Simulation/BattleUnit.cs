@@ -12,10 +12,10 @@ namespace Logic.Simulation
 
         public UnitModel Model { get; } = model;
 
-        public IEnumerable<BattleActionBase> Act()
+        public IEnumerable<IBattleAction> Act()
         {
             var ability = SelectAbility();
-            return ability?.Use(this) ?? Enumerable.Empty<BattleActionBase>();
+            return ability?.Use(this) ?? Enumerable.Empty<IBattleAction>();
         }
 
         private IBattleAbility? SelectAbility()

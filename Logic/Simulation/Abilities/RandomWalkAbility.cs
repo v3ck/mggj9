@@ -12,8 +12,6 @@ namespace Logic.Simulation.Abilities
         public int CurrentCharge { get; set; } = 0;
         public int MaxCharge { get; } = 0;
 
-        public event EventHandler<BattleActionBase>? ActionPerformed;
-
         private readonly BattleState _state = state;
 
         private readonly HexGrid _grid = grid;
@@ -29,12 +27,12 @@ namespace Logic.Simulation.Abilities
                 Any((Hex hex) => !_state.Units.Values.Any(unit => unit.Location == hex));
         }
 
-        public void TryCharge(BattleActionBase action)
+        public void TryCharge(IBattleAction action)
         {
             // void
         }
 
-        public IEnumerable<BattleActionBase> Use(BattleUnit user)
+        public IEnumerable<IBattleAction> Use(BattleUnit user)
         {
             if (null == user?.Location)
             {

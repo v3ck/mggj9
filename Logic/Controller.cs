@@ -37,17 +37,17 @@ namespace Logic
             }
         }
 
-        private void PropagateAction(BattleActionBase action)
+        private void PropagateAction(IBattleAction action)
         {
             switch (action.Type)
             {
-                case BattleActionBase.ActionType.Move:
+                case ActionType.Move:
                     UnitMoved?.Invoke(this, MoveActionToEventArgs(action));
                     break;
             }
         }
 
-        private static UnitMovedEventArgs MoveActionToEventArgs(BattleActionBase action)
+        private static UnitMovedEventArgs MoveActionToEventArgs(IBattleAction action)
         {
             if (action is not MoveAction moveAction)
             {

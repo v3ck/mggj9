@@ -29,16 +29,16 @@ namespace Logic.Simulation
             }
         }
 
-        public IEnumerable<BattleActionBase> TakeTurn()
+        public IEnumerable<IBattleAction> TakeTurn()
         {
             var unitId = _state.Initiative.Dequeue();
             if (!_state.Units.TryGetValue(unitId, out BattleUnit? unit))
             {
-                return Enumerable.Empty<BattleActionBase>();
+                return Enumerable.Empty<IBattleAction>();
             }
 
             _state.Initiative.Enqueue(unitId);
-            return unit.Act() ?? Enumerable.Empty<BattleActionBase>();
+            return unit.Act() ?? Enumerable.Empty<IBattleAction>();
         }
     }
 }

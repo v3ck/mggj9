@@ -3,8 +3,10 @@ using Logic.Util;
 
 namespace Logic.Simulation.Actions
 {
-    internal class StatusAction() : BattleActionBase(ActionType.Status)
+    internal class StatusAction : IBattleAction
     {
+        public ActionType Type { get; } = ActionType.Status;
+
         public required int UnitId { get; init; }
 
         public required Hex Location { get; init; }

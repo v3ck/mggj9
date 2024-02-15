@@ -2,8 +2,10 @@
 
 namespace Logic.Simulation.Actions
 {
-    internal class HealthAction() : BattleActionBase(ActionType.Health)
+    internal class HealthAction : IBattleAction
     {
+        public ActionType Type { get; } = ActionType.Health;
+
         public required AbilityCode Action { get; init; }
 
         public required int UnitId { get; init; }
