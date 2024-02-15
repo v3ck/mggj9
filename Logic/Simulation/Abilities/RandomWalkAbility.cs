@@ -1,21 +1,24 @@
 ﻿using Logic.Extensions;
 using Logic.Models;
+using Logic.Simulation.Actions;
+using Logic.Util;
 
 namespace Logic.Simulation.Abilities
 {
-    internal class RandomWalkAbility(BattleState state, HexGrid grid) : IAbility
+    internal class RandomWalkAbility(BattleState state, HexGrid grid) : IBattleAbility
     {
-        public int Id { get; init; }
-        public int CurrentCharge { get; set; }
-        public int MaxCharge { get; set; }
+        public static AbilityCode Code => AbilityCode.RandomWalk;
 
-        public event EventHandler<BattleAction>? ActionPerformed;
+        public int CurrentCharge { get; set; } = 0;
+        public int MaxCharge { get; } = 0;
+
+        public event EventHandler<BattleActionBase>? ActionPerformed;
 
         private readonly BattleState _state = state;
 
         private readonly HexGrid _grid = grid;
 
-        public bool CanUse(Unit user)
+        public bool CanUse(BattleUnit user)
         {
             if (null == user?.Location)
             {
@@ -26,12 +29,12 @@ namespace Logic.Simulation.Abilities
                 Any((Hex hex) => !_state.Units.Values.Any(unit => unit.Location == hex));
         }
 
-        public void TryCharge(BattleAction action)
+        public void TryCharge(BattleActionBase action)
         {
             // void
         }
 
-        public IEnumerable<BattleAction> Use(Unit user)
+        public IEnumerable<BattleActionBase> Use(BattleUnit user)
         {
             if (null == user?.Location)
             {
@@ -46,13 +49,14 @@ namespace Logic.Simulation.Abilities
                 yield break;
             }
 
+            var oldLocation = user.Location;
             user.Location = target;
-            yield return new BattleAction()
+            yield return new MoveAction()
             {
-                AbilityId = Id,
-                Source = user.Location,
-                Target = target,
-                Type = BattleAction.ActionType.Move
+                UnitId = user.Model.Id,
+                FromLocation = oldLocation,
+                ToLocation = target,
+                IsTeleport = false
             };
         }
     }

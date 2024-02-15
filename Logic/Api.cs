@@ -1,6 +1,6 @@
 ﻿namespace Logic
 {
-    public static class Util
+    public static class Api
     {
         public static IController CreateController()
         {
