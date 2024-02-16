@@ -25,12 +25,7 @@ namespace Logic
 
         public void TakeTurn()
         {
-            if (null == _simulator)
-            {
-                return;
-            }
-
-            var actions = _simulator.TakeTurn();
+            var actions = _simulator?.TakeTurn() ?? Enumerable.Empty<IBattleAction>();
             foreach (var action in actions)
             {
                 PropagateAction(action);
@@ -51,7 +46,7 @@ namespace Logic
         {
             if (action is not MoveAction moveAction)
             {
-                throw new ArgumentNullException(nameof(action));
+                throw new ArgumentException("Incorrect ActionType", nameof(action));
             }
 
             return new UnitMovedEventArgs()
