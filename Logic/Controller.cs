@@ -1,5 +1,4 @@
-﻿
-using Logic.Events;
+﻿using Logic.Events;
 using Logic.Models;
 using Logic.Simulation;
 using Logic.Simulation.Actions;
@@ -29,6 +28,41 @@ namespace Logic
             foreach (var action in actions)
             {
                 PropagateAction(action);
+            }
+        }
+
+        public int AddUnit(UnitCode code)
+        {
+            var unit = new UnitModel()
+            {
+                Code = code,
+                IsEnemy = false // TODO
+            };
+            _model.Units.Add(unit.Id, unit);
+            return unit.Id;
+        }
+
+        public AbilityCode[] GetUnitAbilities(int unitId)
+        {
+            if (!_model.Units.TryGetValue(unitId, out var unit))
+            {
+                return [];
+            }
+
+            return [.. unit.Abilities];
+        }
+
+        public void UpdateUnitAbilities(int unitId, AbilityCode[] abilities)
+        {
+            if (!_model.Units.TryGetValue(unitId, out var unit))
+            {
+                return;
+            }
+
+            unit.Abilities.Clear();
+            foreach (var code in abilities)
+            {
+                unit.Abilities.Add(code);
             }
         }
 

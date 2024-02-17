@@ -1,4 +1,6 @@
-﻿namespace Logic.Models
+﻿using Logic.Util;
+
+namespace Logic.Models
 {
     internal class UnitModel
     {
@@ -6,8 +8,10 @@
 
         public int Id { get; } = _nextId++;
 
-        public required bool IsEnemy { get; set; }
+        public required UnitCode Code { get; init; }
 
-        public IList<string> Abilities { get; } = new List<string>();
+        public required bool IsEnemy { get; init; }
+
+        public IList<AbilityCode> Abilities { get; } = new List<AbilityCode>();
     }
 }

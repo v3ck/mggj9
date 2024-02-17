@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://by3slph8jj07y"
-path="res://.godot/imported/BlankCircle.png-f4b6b0e27a8d2eb88444739774bbf818.ctex"
+uid="uid://ctkxeravjnp84"
+path="res://.godot/imported/hex_tiles.png-cf5c0fdfbfdde6319e908d7a8f2554e4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/BlankCircle.png"
-dest_files=["res://.godot/imported/BlankCircle.png-f4b6b0e27a8d2eb88444739774bbf818.ctex"]
+source_file="res://sprites/hex_tiles.png"
+dest_files=["res://.godot/imported/hex_tiles.png-cf5c0fdfbfdde6319e908d7a8f2554e4.ctex"]
 
 [params]
 
