@@ -1,4 +1,6 @@
-﻿namespace Logic.Models
+﻿using Logic.Util;
+
+namespace Logic.Models
 {
     internal class Hex(int x, int y)
     {
@@ -17,5 +19,7 @@
         {
             return new Hex(a.X + b.X, a.Y + b.Y);
         }
+
+        public IntVector2 AsIntVector2 => new (X, Y);
     }
 }

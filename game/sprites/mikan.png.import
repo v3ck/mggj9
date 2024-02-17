@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cwagqu3u6fr6o"
-path="res://.godot/imported/girl1.png-5284a7f6467f20d4a5dbbed5d2d225f0.ctex"
+uid="uid://dqpvqfxg3pnal"
+path="res://.godot/imported/mikan.png-26f1f3e56fee42ab5ad95c7487a89669.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/girl1.png"
-dest_files=["res://.godot/imported/girl1.png-5284a7f6467f20d4a5dbbed5d2d225f0.ctex"]
+source_file="res://sprites/mikan.png"
+dest_files=["res://.godot/imported/mikan.png-26f1f3e56fee42ab5ad95c7487a89669.ctex"]
 
 [params]
 

@@ -11,6 +11,6 @@ namespace Logic.Simulation.Actions
 
         public required Hex Location { get; init; }
 
-        public required StatusCode Status { get; init; }
+        public required string Status { get; init; }
     }
 }

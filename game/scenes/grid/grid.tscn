@@ -1,13 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://b6n0yvlutrlsb"]
+[gd_scene load_steps=9 format=3 uid="uid://b6n0yvlutrlsb"]
 
 [ext_resource type="Texture2D" uid="uid://ctkxeravjnp84" path="res://sprites/hex_tiles.png" id="1_t5gjs"]
-[ext_resource type="Texture2D" uid="uid://cwagqu3u6fr6o" path="res://sprites/girl1.png" id="2_owk2p"]
-[ext_resource type="Texture2D" uid="uid://bo53mefnk1kr6" path="res://sprites/girl2.png" id="3_dr5ah"]
-[ext_resource type="Texture2D" uid="uid://bsqn6k3plgcu3" path="res://sprites/girl3.png" id="4_errpj"]
+[ext_resource type="PackedScene" uid="uid://765ik4ctipst" path="res://scenes/unit/unit.tscn" id="2_48bb6"]
+[ext_resource type="Resource" uid="uid://ddqd1niuges3u" path="res://resources/unit/yuka_unit.tres" id="3_hjb36"]
+[ext_resource type="Resource" uid="uid://mq6tutbmfcu1" path="res://resources/unit/slime_unit.tres" id="3_rabq5"]
+[ext_resource type="Resource" uid="uid://dcmrdtapq1wb2" path="res://resources/unit/kotori_unit.tres" id="3_top1p"]
+[ext_resource type="Resource" uid="uid://dqb3g7fvxn6lm" path="res://resources/unit/mikan_unit.tres" id="4_l2dby"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sbfnj"]
 texture = ExtResource("1_t5gjs")
-texture_region_size = Vector2i(24, 24)
+texture_region_size = Vector2i(24, 28)
 0:0/0 = 0
 1:0/0 = 0
 0:1/0 = 0
@@ -21,10 +23,8 @@ sources/0 = SubResource("TileSetAtlasSource_sbfnj")
 [node name="Grid" type="Node2D"]
 
 [node name="ColorRect" type="ColorRect" parent="."]
-offset_left = 5.0
-offset_top = -3.0
-offset_right = 485.0
-offset_bottom = 267.0
+offset_right = 480.0
+offset_bottom = 270.0
 color = Color(0.0666667, 0.247059, 0.509804, 1)
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -33,14 +33,18 @@ tile_set = SubResource("TileSet_p1ynn")
 format = 2
 layer_0/tile_data = PackedInt32Array(11, 0, 0, 12, 0, 1, 13, 65536, 1, 14, 0, 0, 15, 0, 1, 16, 65536, 1, 655375, 0, 1, 589838, 65536, 1, 524302, 0, 0, 458765, 0, 1, 393229, 65536, 1, 327693, 0, 1, 327692, 0, 0, 262157, 65536, 1, 196620, 0, 0, 131084, 0, 1, 65547, 65536, 1, 131083, 0, 0, 196618, 0, 1, 262154, 65536, 1, 327689, 0, 0, 393225, 0, 1, 458761, 0, 0, 393226, 65536, 1, 131082, 65536, 1, 196617, 0, 0, 262153, 0, 1, 65548, 0, 0, 131085, 65536, 1, 65549, 0, 1, 131086, 0, 0, 65546, 0, 1, 65550, 65536, 1, 65551, 0, 0, 65552, 0, 1, 131089, 0, 0, 131088, 65536, 1, 131087, 0, 1, 196625, 65536, 1, 196624, 0, 1, 262161, 0, 0, 262160, 65536, 1, 196623, 0, 0, 196622, 65536, 1, 196621, 0, 1, 262156, 0, 1, 196619, 65536, 1, 262158, 0, 0, 262159, 0, 1, 262155, 0, 0, 327688, 65536, 1, 327690, 0, 1, 327691, 65536, 1, 393228, 0, 1, 393227, 0, 0, 393230, 0, 0, 393231, 0, 1, 458767, 0, 0, 458766, 65536, 1, 458764, 0, 0, 524300, 0, 1, 524299, 0, 0, 524298, 65536, 1, 589834, 0, 1, 589835, 65536, 1, 589836, 0, 0, 589837, 0, 1, 589839, 0, 0, 655374, 0, 0, 655373, 65536, 1, 655372, 0, 1, 655371, 0, 0, 458763, 65536, 1, 458762, 0, 1, 524301, 65536, 1, 524303, 0, 1, 589840, 0, 1, 524305, 0, 0, 655376, 65536, 1, 393232, 65536, 1, 327696, 0, 1, 524304, 65536, 1, 458768, 0, 1, 393233, 0, 0, 458769, 65536, 1, 393234, 0, 1, 327698, 0, 0, 327697, 65536, 1, 262162, 0, 1, 327695, 0, 0, 327694, 65536, 1)
 
-[node name="Yuka" type="Sprite2D" parent="."]
-position = Vector2(324, 198)
-texture = ExtResource("2_owk2p")
+[node name="Yuka" parent="." instance=ExtResource("2_48bb6")]
+position = Vector2(288, 135)
+resource = ExtResource("3_hjb36")
 
-[node name="Mikan" type="Sprite2D" parent="."]
-position = Vector2(348, 156)
-texture = ExtResource("3_dr5ah")
+[node name="Mikan" parent="." instance=ExtResource("2_48bb6")]
+position = Vector2(324, 156)
+resource = ExtResource("4_l2dby")
 
-[node name="Kotori" type="Sprite2D" parent="."]
-position = Vector2(300, 156)
-texture = ExtResource("4_errpj")
+[node name="Kotori" parent="." instance=ExtResource("2_48bb6")]
+position = Vector2(312, 177)
+resource = ExtResource("3_top1p")
+
+[node name="Slime" parent="." instance=ExtResource("2_48bb6")]
+position = Vector2(312, 135)
+resource = ExtResource("3_rabq5")

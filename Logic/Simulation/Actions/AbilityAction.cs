@@ -11,6 +11,6 @@ namespace Logic.Simulation.Actions
 
         public required Hex EndLocation { get; init; }
 
-        public required AbilityCode Ability { get; init; }
+        public required string Ability { get; init; }
     }
 }

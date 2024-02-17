@@ -5,7 +5,7 @@ namespace Logic.Simulation.Abilities
 {
     internal interface IBattleAbility
     {
-        public static AbilityCode Code { get; }
+        public static string Code { get; }
 
         public int CurrentCharge { get; set; }
 

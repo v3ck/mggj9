@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" path="res://scenes/logic/LogicInterface.cs" id="1_itvnu"]
 
-[node name="Logic" type="Node2D"]
+[node name="Logic" type="Node"]
 script = ExtResource("1_itvnu")

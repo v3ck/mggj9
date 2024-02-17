@@ -7,7 +7,7 @@ namespace Logic.Simulation.Abilities
 {
     internal class RandomWalkAbility(BattleState state, HexGrid grid) : IBattleAbility
     {
-        public static AbilityCode Code => AbilityCode.RandomWalk;
+        public static string Code => "RANDOM_WALK";
 
         public int CurrentCharge { get; set; } = 0;
         public int MaxCharge { get; } = 0;

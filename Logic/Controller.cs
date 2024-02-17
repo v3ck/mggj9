@@ -10,6 +10,12 @@ namespace Logic
     {
         public event EventHandler<UnitMovedEventArgs>? UnitMoved;
 
+        public event EventHandler<StatusChangedEventArgs>? StatusChanged;
+
+        public event EventHandler<HealthChangedEventArgs>? HealthChanged;
+
+        public event EventHandler<AbilityFiredEventArgs>? AbilityFired;
+
         private readonly GameModel _model = new(new GameParameters()
         {
             GridRadius = 5
@@ -31,18 +37,20 @@ namespace Logic
             }
         }
 
-        public int AddUnit(UnitCode code)
+        public int AddUnit(string code, int health, string faction, string[] abilities)
         {
             var unit = new UnitModel()
             {
                 Code = code,
-                IsEnemy = false // TODO
+                Faction = faction,
+                MaxHealth = health
             };
             _model.Units.Add(unit.Id, unit);
+            UpdateUnitAbilities(unit.Id, abilities);
             return unit.Id;
         }
 
-        public AbilityCode[] GetUnitAbilities(int unitId)
+        public string[] GetUnitAbilities(int unitId)
         {
             if (!_model.Units.TryGetValue(unitId, out var unit))
             {
@@ -52,7 +60,7 @@ namespace Logic
             return [.. unit.Abilities];
         }
 
-        public void UpdateUnitAbilities(int unitId, AbilityCode[] abilities)
+        public void UpdateUnitAbilities(int unitId, string[] abilities)
         {
             if (!_model.Units.TryGetValue(unitId, out var unit))
             {
@@ -73,6 +81,15 @@ namespace Logic
                 case ActionType.Move:
                     UnitMoved?.Invoke(this, MoveActionToEventArgs(action));
                     break;
+                case ActionType.Status:
+                    StatusChanged?.Invoke(this, StatusActionToEventArgs(action));
+                    break;
+                case ActionType.Health:
+                    HealthChanged?.Invoke(this, HealthActionToEventArgs(action));
+                    break;
+                case ActionType.Ability:
+                    AbilityFired?.Invoke(this, AbilityActionToEventArgs(action));
+                    break;
             }
         }
 
@@ -85,10 +102,55 @@ namespace Logic
 
             return new UnitMovedEventArgs()
             {
-                FromLocation = new IntVector2(moveAction.FromLocation.X, moveAction.FromLocation.Y),
-                ToLocation = new IntVector2(moveAction.ToLocation.X, moveAction.ToLocation.Y),
+                FromLocation = moveAction.FromLocation.AsIntVector2,
+                ToLocation = moveAction.ToLocation.AsIntVector2,
                 UnitId = moveAction.UnitId,
                 IsTeleport = moveAction.IsTeleport
+            };
+        }
+
+        private static StatusChangedEventArgs StatusActionToEventArgs(IBattleAction action)
+        {
+            if (action is not StatusAction statusAction)
+            {
+                throw new ArgumentException("Incorrect ActionType", nameof(action));
+            }
+
+            return new StatusChangedEventArgs()
+            {
+                UnitId = statusAction.UnitId,
+                Location = statusAction.Location.AsIntVector2,
+                Status = statusAction.Status
+            };
+        }
+
+        private static HealthChangedEventArgs HealthActionToEventArgs(IBattleAction action)
+        {
+            if (action is not HealthAction healthAction)
+            {
+                throw new ArgumentException("Incorrect ActionType", nameof(action));
+            }
+
+            return new HealthChangedEventArgs()
+            {
+                UnitId = healthAction.UnitId,
+                Location = healthAction.Location.AsIntVector2,
+                Amount = healthAction.Amount
+            };
+        }
+
+        private static AbilityFiredEventArgs AbilityActionToEventArgs(IBattleAction action)
+        {
+            if (action is not AbilityAction abilityAction)
+            {
+                throw new ArgumentException("Incorrect ActionType", nameof(action));
+            }
+
+            return new AbilityFiredEventArgs()
+            {
+                FromLocation = abilityAction.BeginLocation.AsIntVector2,
+                ToLocation = abilityAction.EndLocation.AsIntVector2,
+                Ability = abilityAction.Ability
             };
         }
     }

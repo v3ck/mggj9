@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="AbilityResource" load_steps=2 format=3 uid="uid://xll0sl7stcc1"]
+
+[ext_resource type="Script" path="res://resources/ability/ability_resource.gd" id="1_uudct"]
+
+[resource]
+script = ExtResource("1_uudct")
+code = "RANDOM_WALK"
+display_name = "Random Walk"
+max_charge = 0
+default_cost = 1

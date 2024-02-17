@@ -1,4 +1,4 @@
-﻿using Logic.Util;
+﻿using Logic.Models;
 
 namespace Logic.Simulation.Actions
 {
@@ -6,7 +6,7 @@ namespace Logic.Simulation.Actions
     {
         public ActionType Type { get; } = ActionType.Health;
 
-        public required AbilityCode Action { get; init; }
+        public required Hex Location { get; init; }
 
         public required int UnitId { get; init; }
 

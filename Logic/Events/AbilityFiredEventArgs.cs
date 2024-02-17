@@ -8,6 +8,6 @@ namespace Logic.Events
 
         public required IntVector2 ToLocation { get; init; }
 
-        public required AbilityCode Ability { get; init; }
+        public required string Ability { get; init; }
     }
 }

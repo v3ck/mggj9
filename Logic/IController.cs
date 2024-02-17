@@ -10,14 +10,20 @@ namespace Logic
     {
         public event EventHandler<UnitMovedEventArgs>? UnitMoved;
 
+        public event EventHandler<StatusChangedEventArgs>? StatusChanged;
+
+        public event EventHandler<HealthChangedEventArgs>? HealthChanged;
+
+        public event EventHandler<AbilityFiredEventArgs>? AbilityFired;
+
         public void StartBattle();
 
         public void TakeTurn();
 
-        public int AddUnit(UnitCode configUnit);
+        public int AddUnit(string code, int health, string faction, string[] abilities);
 
-        public AbilityCode[] GetUnitAbilities(int unitId);
+        public string[] GetUnitAbilities(int unitId);
 
-        public void UpdateUnitAbilities(int unitId, AbilityCode[] abilities);
+        public void UpdateUnitAbilities(int unitId, string[] abilities);
     }
 }

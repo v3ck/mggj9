@@ -8,6 +8,6 @@ namespace Logic.Events
 
         public required IntVector2 Location { get; init; }
 
-        public required StatusCode Status { get; init; }
+        public required string Status { get; init; }
     }
 }

@@ -8,10 +8,12 @@ namespace Logic.Models
 
         public int Id { get; } = _nextId++;
 
-        public required UnitCode Code { get; init; }
+        public required string Code { get; init; }
 
-        public required bool IsEnemy { get; init; }
+        public required string Faction { get; init; }
 
-        public IList<AbilityCode> Abilities { get; } = new List<AbilityCode>();
+        public required int MaxHealth { get; init; }
+
+        public IList<string> Abilities { get; } = new List<string>();
     }
 }

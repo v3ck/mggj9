@@ -1,7 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://bkv8538fxsc61"]
+[gd_scene load_steps=5 format=3 uid="uid://bkv8538fxsc61"]
 
+[ext_resource type="Script" path="res://scenes/main/main.gd" id="1_07pwd"]
 [ext_resource type="PackedScene" uid="uid://b6n0yvlutrlsb" path="res://scenes/grid/grid.tscn" id="1_wr1dv"]
+[ext_resource type="Resource" uid="uid://ddqd1niuges3u" path="res://resources/unit/yuka_unit.tres" id="2_adocf"]
+[ext_resource type="PackedScene" uid="uid://jqn5ahdviand" path="res://scenes/logic/logic.tscn" id="3_qhva6"]
 
 [node name="Main" type="Node2D"]
+script = ExtResource("1_07pwd")
+unit = ExtResource("2_adocf")
 
 [node name="Grid" parent="." instance=ExtResource("1_wr1dv")]
+
+[node name="Logic" parent="." instance=ExtResource("3_qhva6")]
+
+[connection signal="UnitMoved" from="Logic" to="." method="_on_logic_unit_moved"]

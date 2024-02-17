@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="UnitResource" load_steps=4 format=3 uid="uid://dqb3g7fvxn6lm"]
+
+[ext_resource type="Resource" uid="uid://xll0sl7stcc1" path="res://resources/ability/random_walk_ability.tres" id="1_gks6j"]
+[ext_resource type="Script" path="res://resources/unit/unit_resource.gd" id="3_rfxwp"]
+[ext_resource type="Texture2D" uid="uid://dqpvqfxg3pnal" path="res://sprites/mikan.png" id="4_obl6y"]
+
+[resource]
+script = ExtResource("3_rfxwp")
+code = "MIKAN"
+display_name = "Mikan"
+sprite_sheet = ExtResource("4_obl6y")
+default_health = 10
+faction = "GOOD"
+default_abilities = Array[Resource("res://resources/ability/ability_resource.gd")]([ExtResource("1_gks6j")])

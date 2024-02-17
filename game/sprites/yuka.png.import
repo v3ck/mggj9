@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bsqn6k3plgcu3"
-path="res://.godot/imported/girl3.png-58bc2474a357dfb09c26a82c9ae27151.ctex"
+uid="uid://jgqlqqchxlch"
+path="res://.godot/imported/yuka.png-a1f180bf9b316e9afcefb42106d2d1ea.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/girl3.png"
-dest_files=["res://.godot/imported/girl3.png-58bc2474a357dfb09c26a82c9ae27151.ctex"]
+source_file="res://sprites/yuka.png"
+dest_files=["res://.godot/imported/yuka.png-a1f180bf9b316e9afcefb42106d2d1ea.ctex"]
 
 [params]
 
