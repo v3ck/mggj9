@@ -1,6 +1,7 @@
 extends Node2D
 
 @export var unit: UnitResource
+@export var spawns: Array[SpawnResource]
 
 func _ready():
 	#$Logic.AddUnit(unit)

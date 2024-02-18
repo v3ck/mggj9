@@ -1,11 +1,10 @@
 ﻿using Logic.Simulation.Actions;
-using Logic.Util;
 
 namespace Logic.Simulation.Abilities
 {
     internal interface IBattleAbility
     {
-        public static string Code { get; }
+        public static string Code { get; } = string.Empty;
 
         public int CurrentCharge { get; set; }
 

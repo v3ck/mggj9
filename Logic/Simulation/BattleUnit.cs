@@ -6,6 +6,10 @@ namespace Logic.Simulation
 {
     internal class BattleUnit(UnitModel model)
     {
+        private static int _nextId = 0;
+
+        public int Id { get; } = _nextId++;
+
         public Hex? Location { get; set; } = null;
 
         private readonly IList<IBattleAbility> _abilities = new List<IBattleAbility>();

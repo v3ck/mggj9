@@ -31,7 +31,7 @@ namespace Game
             _controller.AbilityFired += Controller_AbilityFired;
         }
 
-        public int AddUnit(Resource unitResource)
+        public void AddUnit(Resource unitResource)
 		{
             var abilities = unitResource
                 .Get("default_abilities")
@@ -40,7 +40,7 @@ namespace Game
                 .Select(abilityResource => abilityResource.Get("code").AsString())
                 .ToArray();
 
-            return _controller.AddUnit(
+            _controller.AddUnit(
                 unitResource.Get("code").AsString(),
                 unitResource.Get("default_health").AsInt32(),
                 unitResource.Get("faction").AsString(),

@@ -5,6 +5,8 @@
         private readonly IDictionary<int, BattleUnit> _units = new Dictionary<int, BattleUnit>();
         public IDictionary<int, BattleUnit> Units => _units;
 
-        public Queue<int> Initiative = new();
+        public TurnManager Turns = new();
+
+        public int Round = 0;
     }
 }

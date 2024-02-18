@@ -37,7 +37,7 @@ namespace Logic
             }
         }
 
-        public int AddUnit(string code, int health, string faction, string[] abilities)
+        public void AddUnit(string code, int health, string faction, string[] abilities)
         {
             var unit = new UnitModel()
             {
@@ -45,14 +45,13 @@ namespace Logic
                 Faction = faction,
                 MaxHealth = health
             };
-            _model.Units.Add(unit.Id, unit);
-            UpdateUnitAbilities(unit.Id, abilities);
-            return unit.Id;
+            _model.Units.Add(unit.Code, unit);
+            UpdateUnitAbilities(unit.Code, abilities);
         }
 
-        public string[] GetUnitAbilities(int unitId)
+        public string[] GetUnitAbilities(string unitCode)
         {
-            if (!_model.Units.TryGetValue(unitId, out var unit))
+            if (!_model.Units.TryGetValue(unitCode, out var unit))
             {
                 return [];
             }
@@ -60,17 +59,17 @@ namespace Logic
             return [.. unit.Abilities];
         }
 
-        public void UpdateUnitAbilities(int unitId, string[] abilities)
+        public void UpdateUnitAbilities(string unitCode, string[] abilities)
         {
-            if (!_model.Units.TryGetValue(unitId, out var unit))
+            if (!_model.Units.TryGetValue(unitCode, out var unit))
             {
                 return;
             }
 
             unit.Abilities.Clear();
-            foreach (var code in abilities)
+            foreach (var abilityCode in abilities)
             {
-                unit.Abilities.Add(code);
+                unit.Abilities.Add(abilityCode);
             }
         }
 

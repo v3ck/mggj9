@@ -51,7 +51,7 @@ namespace Logic.Simulation.Abilities
             user.Location = target;
             yield return new MoveAction()
             {
-                UnitId = user.Model.Id,
+                UnitId = user.Id,
                 FromLocation = oldLocation,
                 ToLocation = target,
                 IsTeleport = false

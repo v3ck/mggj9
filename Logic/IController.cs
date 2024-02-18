@@ -20,10 +20,10 @@ namespace Logic
 
         public void TakeTurn();
 
-        public int AddUnit(string code, int health, string faction, string[] abilities);
+        public void AddUnit(string code, int health, string faction, string[] abilities);
 
-        public string[] GetUnitAbilities(int unitId);
+        public string[] GetUnitAbilities(string unitCode);
 
-        public void UpdateUnitAbilities(int unitId, string[] abilities);
+        public void UpdateUnitAbilities(string unitCode, string[] abilities);
     }
 }

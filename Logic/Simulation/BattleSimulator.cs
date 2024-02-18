@@ -14,30 +14,28 @@ namespace Logic.Simulation
             _gameModel = gameModel;
             foreach (var unitModel in gameModel.Units.Values)
             {
-                _state.Units[unitModel.Id] = new BattleUnit(unitModel)
+                var unit = new BattleUnit(unitModel)
                 {
                     Location = gameModel.Grid.Hexes.
                         Where(hex => !_state.Units.Values.Any(unit => hex == unit.Location)).
                         Random()
                 };
+                _state.Units[unit.Id] = unit;
 
             }
 
-            foreach (var id in gameModel.Units.Keys.Shuffle())
-            {
-                _state.Initiative.Enqueue(id);
-            }
+            _state.Turns.Init(_state.Units.Keys.Shuffle());
         }
 
         public IEnumerable<IBattleAction> TakeTurn()
         {
-            var unitId = _state.Initiative.Dequeue();
+            var unitId = _state.Turns.Next();
             if (!_state.Units.TryGetValue(unitId, out BattleUnit? unit))
             {
-                return Enumerable.Empty<IBattleAction>();
+                _state.Turns.Remove(unitId);
+                return TakeTurn();
             }
 
-            _state.Initiative.Enqueue(unitId);
             return unit.Act() ?? Enumerable.Empty<IBattleAction>();
         }
     }
