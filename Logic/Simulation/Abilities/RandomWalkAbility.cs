@@ -1,13 +1,12 @@
 ﻿using Logic.Extensions;
 using Logic.Models;
 using Logic.Simulation.Actions;
-using Logic.Util;
 
 namespace Logic.Simulation.Abilities
 {
-    internal class RandomWalkAbility(BattleState state, HexGrid grid) : IBattleAbility
+    internal class RandomWalkAbility(BattleUnit user, BattleState state, HexGrid grid) : IBattleAbility
     {
-        public static string Code => "RANDOM_WALK";
+        public string Code => "RANDOM_WALK";
 
         public int CurrentCharge { get; set; } = 0;
         public int MaxCharge { get; } = 0;
@@ -16,14 +15,21 @@ namespace Logic.Simulation.Abilities
 
         private readonly HexGrid _grid = grid;
 
-        public bool CanUse(BattleUnit user)
+        private readonly BattleUnit _user = user;
+
+        public static IBattleAbility Create(BattleUnit user, BattleState state, GameModel gameModel)
         {
-            if (null == user?.Location)
+            return new RandomWalkAbility(user, state, gameModel.Grid);
+        }
+
+        public bool CanUse()
+        {
+            if (_user?.Location is null)
             {
                 return false;
             }
 
-            return _grid.AtDistance(user.Location, 1).
+            return _grid.AtDistance(_user.Location, 1).
                 Any((Hex hex) => !_state.Units.Values.Any(unit => unit.Location == hex));
         }
 
@@ -32,26 +38,26 @@ namespace Logic.Simulation.Abilities
             // void
         }
 
-        public IEnumerable<IBattleAction> Use(BattleUnit user)
+        public IEnumerable<IBattleAction> Use()
         {
-            if (null == user?.Location)
+            if (_user?.Location is null)
             {
                 yield break;
             }
 
-            var target = _grid.AtDistance(user.Location, 1).
+            var target = _grid.AtDistance(_user.Location, 1).
                 Where((Hex hex) => !_state.Units.Values.Any(unit => unit.Location == hex)).
                 Random();
-            if (null == target)
+            if (target is null)
             {
                 yield break;
             }
 
-            var oldLocation = user.Location;
-            user.Location = target;
+            var oldLocation = _user.Location;
+            _user.Location = target;
             yield return new MoveAction()
             {
-                UnitId = user.Id,
+                UnitId = _user.Id,
                 FromLocation = oldLocation,
                 ToLocation = target,
                 IsTeleport = false

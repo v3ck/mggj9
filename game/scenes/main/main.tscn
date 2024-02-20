@@ -1,26 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://bkv8538fxsc61"]
+[gd_scene load_steps=4 format=3 uid="uid://bkv8538fxsc61"]
 
 [ext_resource type="Script" path="res://scenes/main/main.gd" id="1_07pwd"]
 [ext_resource type="PackedScene" uid="uid://b6n0yvlutrlsb" path="res://scenes/grid/grid.tscn" id="1_wr1dv"]
-[ext_resource type="Resource" uid="uid://ddqd1niuges3u" path="res://resources/unit/yuka_unit.tres" id="2_adocf"]
-[ext_resource type="Script" path="res://resources/spawn/spawn_resource.gd" id="3_8jox7"]
-[ext_resource type="PackedScene" uid="uid://jqn5ahdviand" path="res://scenes/logic/logic.tscn" id="3_qhva6"]
-[ext_resource type="Resource" uid="uid://mq6tutbmfcu1" path="res://resources/unit/slime_unit.tres" id="4_dmujx"]
-
-[sub_resource type="Resource" id="Resource_gll3t"]
-script = ExtResource("3_8jox7")
-start_round = 1
-end_round = 3
-probability = 0.5
-unit = ExtResource("4_dmujx")
+[ext_resource type="PackedScene" uid="uid://wr0i5dvkm6gs" path="res://scenes/controller/controller.tscn" id="6_88m1q"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_07pwd")
-unit = ExtResource("2_adocf")
-spawns = Array[ExtResource("3_8jox7")]([SubResource("Resource_gll3t")])
 
 [node name="Grid" parent="." instance=ExtResource("1_wr1dv")]
+position = Vector2(216, 32)
 
-[node name="Logic" parent="." instance=ExtResource("3_qhva6")]
-
-[connection signal="UnitMoved" from="Logic" to="." method="_on_logic_unit_moved"]
+[node name="Controller" parent="." instance=ExtResource("6_88m1q")]

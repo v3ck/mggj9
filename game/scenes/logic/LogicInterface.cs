@@ -7,8 +7,8 @@ namespace Game
     /// <summary>
     /// Wraps Logic module to be used by Godot
     /// </summary>
-	public partial class LogicInterface : Node
-	{
+    public partial class LogicInterface : Node
+    {
         [Signal]
         public delegate void UnitMovedEventHandler(int id, Vector2I fromLocation, Vector2I toLocation, bool isTeleport);
 
@@ -21,7 +21,10 @@ namespace Game
         [Signal]
         public delegate void AbilityFiredEventHandler(Vector2I fromLocation, Vector2I toLocation, string ability);
 
-		private readonly Logic.IController _controller = Logic.Api.CreateController();
+        [Signal]
+        public delegate void ExistenceChangedEventHandler(int id, Vector2I location, string code, bool exists);
+
+        private readonly Logic.IController _controller = Logic.Api.CreateController();
 
         public override void _Ready()
         {
@@ -29,10 +32,11 @@ namespace Game
             _controller.StatusChanged += Controller_StatusChanged;
             _controller.HealthChanged += Controller_HealthChanged;
             _controller.AbilityFired += Controller_AbilityFired;
+            _controller.ExistenceChanged += Controller_ExistenceChanged;
         }
 
         public void AddUnit(Resource unitResource)
-		{
+        {
             var abilities = unitResource
                 .Get("default_abilities")
                 .AsGodotArray<Resource>()
@@ -45,7 +49,32 @@ namespace Game
                 unitResource.Get("default_health").AsInt32(),
                 unitResource.Get("faction").AsString(),
                 abilities);
-		}
+        }
+
+        public void AddSpawn(Resource spawnResource)
+        {
+            var unitCode = spawnResource
+                .Get("unit")
+                .As<Resource>()
+                .Get("code")
+                .AsString();
+
+            _controller.AddSpawn(
+                unitCode,
+                spawnResource.Get("start_round").AsInt32(),
+                spawnResource.Get("end_round").AsInt32(),
+                spawnResource.Get("probability").AsDouble());
+        }
+
+        public void TakeTurn()
+        {
+            _controller.TakeTurn();
+        }
+
+        public void StartBattle()
+        {
+            _controller.StartBattle();
+        }
 
         private void Controller_UnitMoved(object sender, Logic.Events.UnitMovedEventArgs e)
         {
@@ -84,9 +113,19 @@ namespace Game
                 e.Ability);
         }
 
+        private void Controller_ExistenceChanged(object sender, Logic.Events.ExistenceChangedEventArgs e)
+        {
+            EmitSignal(
+                SignalName.ExistenceChanged,
+                e.UnitId,
+                IntVector2ToVector2I(e.Location),
+                e.UnitCode,
+                e.Exists);
+        }
+
         private static Vector2I IntVector2ToVector2I(IntVector2 iv)
         {
             return new Vector2I(iv.X, iv.Y);
         }
-	}
+    }
 }

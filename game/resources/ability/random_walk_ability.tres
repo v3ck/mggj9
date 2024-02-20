@@ -8,3 +8,5 @@ code = "RANDOM_WALK"
 display_name = "Random Walk"
 max_charge = 0
 default_cost = 1
+condition_text = "There is an empty adjacent tile."
+effect_text = "Move to a random empty adjacent tile."

@@ -5,6 +5,7 @@
         Move,
         Ability,
         Health,
-        Status
+        Status,
+        Existence
     }
 }

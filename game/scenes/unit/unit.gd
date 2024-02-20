@@ -1,6 +1,9 @@
 extends Node2D
 
-@export var resource: UnitResource
+class_name Unit
+
+var resource: UnitResource
+var location: Vector2
 
 func _ready():
 	$Sprites.texture = resource.sprite_sheet

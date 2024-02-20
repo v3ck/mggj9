@@ -16,6 +16,8 @@ namespace Logic
 
         public event EventHandler<AbilityFiredEventArgs>? AbilityFired;
 
+        public event EventHandler<ExistenceChangedEventArgs>? ExistenceChanged;
+
         private readonly GameModel _model = new(new GameParameters()
         {
             GridRadius = 5
@@ -73,6 +75,17 @@ namespace Logic
             }
         }
 
+        public void AddSpawn(string unitCode, int beginRound, int endRound, double probability)
+        {
+            _model.Spawns.Add(new SpawnModel()
+            {
+                UnitCode = unitCode,
+                BeginRound = beginRound,
+                EndRound = endRound,
+                Probability = probability
+            });
+        }
+
         private void PropagateAction(IBattleAction action)
         {
             switch (action.Type)
@@ -88,6 +101,9 @@ namespace Logic
                     break;
                 case ActionType.Ability:
                     AbilityFired?.Invoke(this, AbilityActionToEventArgs(action));
+                    break;
+                case ActionType.Existence:
+                    ExistenceChanged?.Invoke(this, ExistenceActionToEventArgs(action));
                     break;
             }
         }
@@ -150,6 +166,22 @@ namespace Logic
                 FromLocation = abilityAction.BeginLocation.AsIntVector2,
                 ToLocation = abilityAction.EndLocation.AsIntVector2,
                 Ability = abilityAction.Ability
+            };
+        }
+
+        private static ExistenceChangedEventArgs ExistenceActionToEventArgs(IBattleAction action)
+        {
+            if (action is not ExistenceAction existenceAction)
+            {
+                throw new ArgumentException("Incorrect ActionType", nameof(action));
+            }
+
+            return new ExistenceChangedEventArgs()
+            {
+                UnitId = existenceAction.UnitId,
+                Location = existenceAction.Location.AsIntVector2,
+                Exists = existenceAction.Exists,
+                UnitCode = existenceAction.UnitCode
             };
         }
     }

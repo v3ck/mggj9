@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="SpawnResource" load_steps=3 format=3 uid="uid://xm5m8ciu86jk"]
+
+[ext_resource type="Script" path="res://resources/spawn/spawn_resource.gd" id="1_yadxk"]
+[ext_resource type="Resource" uid="uid://mq6tutbmfcu1" path="res://resources/unit/slime_unit.tres" id="2_iwol1"]
+
+[resource]
+script = ExtResource("1_yadxk")
+start_round = 0
+end_round = 65535
+probability = 0.25
+unit = ExtResource("2_iwol1")

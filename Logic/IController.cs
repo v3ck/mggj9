@@ -16,6 +16,8 @@ namespace Logic
 
         public event EventHandler<AbilityFiredEventArgs>? AbilityFired;
 
+        public event EventHandler<ExistenceChangedEventArgs>? ExistenceChanged;
+
         public void StartBattle();
 
         public void TakeTurn();
@@ -25,5 +27,7 @@ namespace Logic
         public string[] GetUnitAbilities(string unitCode);
 
         public void UpdateUnitAbilities(string unitCode, string[] abilities);
+
+        public void AddSpawn(string unitCode, int beginRound, int endRound, double probability);
     }
 }

@@ -2,7 +2,7 @@
 {
     internal class HexGrid
     {
-        private readonly ISet<Hex> _hexes = new HashSet<Hex>();
+        private readonly HashSet<Hex> _hexes = new ();
         public IEnumerable<Hex> Hexes => _hexes.AsEnumerable();
 
         public HexGrid(int radius)

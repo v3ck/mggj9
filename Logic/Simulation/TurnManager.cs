@@ -2,27 +2,22 @@
 {
     internal class TurnManager
     {
-        private readonly List<int> _unitOrder = new();
+        public event EventHandler<EventArgs>? RoundCompleted;
+
+        private readonly List<int> _unitOrder = [];
 
         private int _index = 0;
-
-        private int _round = 0;
-        public int Round => _round;
 
         public void Init(IEnumerable<int> ids)
         {
             _unitOrder.InsertRange(_index, ids);
         }
 
-        public int Next()
+        public (int, bool) Next()
         {
             var next = _unitOrder[_index];
             _index = (_unitOrder.Count <= (_index + 1)) ? 0 : (_index + 1);
-            if (0 == _index)
-            {
-                _round++;
-            }
-            return next;
+            return (next, 0 == _index);
         }
 
         public void Add(int id)
