@@ -1,6 +1,7 @@
 ﻿using Logic.Extensions;
 using Logic.Models;
 using Logic.Simulation.Actions;
+using System.Diagnostics;
 
 namespace Logic.Simulation
 {
@@ -17,15 +18,41 @@ namespace Logic.Simulation
         public BattleSimulator(GameModel gameModel)
         {
             _gameModel = gameModel;
-            SpawnUnits();
-            _turnManager.Init(_state.Units.Keys.Shuffle());
+        }
+
+        public IEnumerable<IBattleAction> Start()
+        {
+            Debug.WriteLine($"Round [{_state.Round}]");
+            return SpawnUnits();
         }
 
         public IEnumerable<IBattleAction> TakeTurn()
         {
             var (unitId, isEndOfRound) = _turnManager.Next();
-            return ProcessUnitAction(unitId)
+            var actions = ProcessUnitAction(unitId)
                 .Concat(ProcessEndOfRound(isEndOfRound));
+            foreach (var action in actions)
+            {
+                UpdateTurns(action);
+            }
+            return actions;
+        }
+
+        private void UpdateTurns(IBattleAction? action)
+        {
+            if (action is not ExistenceAction existenceAction)
+            {
+                return;
+            }
+
+            if (existenceAction.Exists)
+            {
+                _turnManager.Add(existenceAction.UnitId);
+            }
+            else
+            {
+                _turnManager.Remove(existenceAction.UnitId);
+            }
         }
 
         private Hex? PlaceUnit()
@@ -54,36 +81,46 @@ namespace Logic.Simulation
             }
 
             _state.Round++;
+            Debug.WriteLine($"Round [{_state.Round}]");
             return SpawnUnits();
         }
 
         private IEnumerable<IBattleAction> SpawnUnits()
         {
-            return _gameModel.Spawns
-                .Select(TrySpawnUnit)
-                .Aggregate(Enumerable.Empty<IBattleAction>(), (a, b) => a.Concat(b));
+            // I am certain there is a better way to write this but I had issues
+            List<IBattleAction> actions = [];
+            foreach (var spawn in _gameModel.Spawns)
+            {
+                var action = TrySpawnUnit(spawn);
+                if (action is not null)
+                {
+                    actions.Add(action);
+                }
+            }
+
+            return actions;
         }
 
-        private IEnumerable<IBattleAction> TrySpawnUnit(SpawnModel spawn)
+        private IBattleAction? TrySpawnUnit(SpawnModel spawn)
         {
             if (_state.Round < spawn.BeginRound)
             {
-                yield break;
+                return null;
             }
 
             if (spawn.EndRound <= _state.Round)
             {
-                yield break;
+                return null;
             }
 
             if (spawn.Probability < rng.NextDouble())
             {
-                yield break;
+                return null;
             }
 
             if (!_gameModel.Units.TryGetValue(spawn.UnitCode, out var unitModel))
             {
-                yield break;
+                return null;
             }
 
             var unit = new BattleUnit(unitModel, _state, _gameModel)
@@ -91,13 +128,14 @@ namespace Logic.Simulation
                 Location = PlaceUnit()
             };
             _state.Units[unit.Id] = unit;
+            _turnManager.Add(unit.Id);
 
             if (unit.Location is null)
             {
-                yield break;
+                return null;
             }
 
-            yield return new ExistenceAction()
+            return new ExistenceAction()
             {
                 UnitId = unit.Id,
                 UnitCode = unitModel.Code,
@@ -105,5 +143,54 @@ namespace Logic.Simulation
                 Location = unit.Location
             };
         }
+
+        //private IEnumerable<IBattleAction> SpawnUnits()
+        //{
+        //    return _gameModel.Spawns
+        //        .Select(TrySpawnUnit)
+        //        .Aggregate(Enumerable.Empty<IBattleAction>(), (a, b) => a.Concat(b));
+        //}
+
+        //private IEnumerable<IBattleAction> TrySpawnUnit(SpawnModel spawn)
+        //{
+        //    if (_state.Round < spawn.BeginRound)
+        //    {
+        //        yield break;
+        //    }
+
+        //    if (spawn.EndRound <= _state.Round)
+        //    {
+        //        yield break;
+        //    }
+
+        //    if (spawn.Probability < rng.NextDouble())
+        //    {
+        //        yield break;
+        //    }
+
+        //    if (!_gameModel.Units.TryGetValue(spawn.UnitCode, out var unitModel))
+        //    {
+        //        yield break;
+        //    }
+
+        //    var unit = new BattleUnit(unitModel, _state, _gameModel)
+        //    {
+        //        Location = PlaceUnit()
+        //    };
+        //    _state.Units[unit.Id] = unit;
+
+        //    if (unit.Location is null)
+        //    {
+        //        yield break;
+        //    }
+
+        //    yield return new ExistenceAction()
+        //    {
+        //        UnitId = unit.Id,
+        //        UnitCode = unitModel.Code,
+        //        Exists = true,
+        //        Location = unit.Location
+        //    };
+        //}
     }
 }

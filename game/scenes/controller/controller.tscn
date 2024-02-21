@@ -20,5 +20,9 @@ unitResources = Array[Resource("res://resources/unit/unit_resource.gd")]([ExtRes
 
 [node name="TurnTimer" type="Timer" parent="."]
 
+[connection signal="AbilityFired" from="Logic" to="." method="_on_logic_ability_fired"]
 [connection signal="ExistenceChanged" from="Logic" to="." method="_on_logic_existence_changed"]
+[connection signal="HealthChanged" from="Logic" to="." method="_on_logic_health_changed"]
+[connection signal="StatusChanged" from="Logic" to="." method="_on_logic_status_changed"]
+[connection signal="UnitMoved" from="Logic" to="." method="_on_logic_unit_moved"]
 [connection signal="timeout" from="TurnTimer" to="." method="_on_turn_timer_timeout"]

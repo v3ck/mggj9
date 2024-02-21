@@ -10,4 +10,5 @@ script = ExtResource("1_07pwd")
 [node name="Grid" parent="." instance=ExtResource("1_wr1dv")]
 position = Vector2(216, 32)
 
-[node name="Controller" parent="." instance=ExtResource("6_88m1q")]
+[node name="Controller" parent="." node_paths=PackedStringArray("grid") instance=ExtResource("6_88m1q")]
+grid = NodePath("../Grid")

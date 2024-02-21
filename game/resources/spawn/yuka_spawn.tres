@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("1_j6akb")
 start_round = 0
-end_round = 0
-probability = 0.0
+end_round = 1
+probability = 1.0
 unit = ExtResource("2_axp88")

@@ -29,8 +29,8 @@ namespace Logic.Simulation.Abilities
                 return false;
             }
 
-            return _grid.AtDistance(_user.Location, 1).
-                Any((Hex hex) => !_state.Units.Values.Any(unit => unit.Location == hex));
+            return _grid.AtDistance(_user.Location, 1)
+                .Any((Hex hex) => !_state.Units.Values.Any(unit => unit.Location == hex));
         }
 
         public void TryCharge(IBattleAction action)
@@ -45,9 +45,9 @@ namespace Logic.Simulation.Abilities
                 yield break;
             }
 
-            var target = _grid.AtDistance(_user.Location, 1).
-                Where((Hex hex) => !_state.Units.Values.Any(unit => unit.Location == hex)).
-                Random();
+            var target = _grid.AtDistance(_user.Location, 1)
+                .Where((Hex hex) => !_state.Units.Values.Any(unit => unit.Location == hex))
+                .Random();
             if (target is null)
             {
                 yield break;

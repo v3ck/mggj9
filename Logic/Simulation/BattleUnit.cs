@@ -17,6 +17,13 @@ namespace Logic.Simulation
             set => _location = value;
         }
 
+        private int _health;
+        public int Health
+        {
+            get => _health;
+            set => _health = value;
+        }
+
         private readonly List<IBattleAbility> _abilities = [];
 
         private readonly UnitModel _model;
@@ -37,6 +44,7 @@ namespace Logic.Simulation
                 model.Abilities.Select(abilityCode => AbilityFactory.Create(abilityCode, this, _state, _gameModel))
                 .Where(ability => ability is not null)
                 .Select(ability => ability!));
+            _health = model.MaxHealth;
         }
 
         public IEnumerable<IBattleAction> Act()

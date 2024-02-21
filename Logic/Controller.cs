@@ -2,7 +2,6 @@
 using Logic.Models;
 using Logic.Simulation;
 using Logic.Simulation.Actions;
-using Logic.Util;
 
 namespace Logic
 {
@@ -28,6 +27,11 @@ namespace Logic
         public void StartBattle()
         {
             _simulator = new(_model);
+            var actions = _simulator.Start();
+            foreach (var action in actions)
+            {
+                PropagateAction(action);
+            }
         }
 
         public void TakeTurn()
