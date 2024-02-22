@@ -10,22 +10,23 @@ namespace Logic.Simulation
 
         private int _index = 0;
 
-        private bool _started = false;
-
         public (int, bool) Next()
         {
-            _started = true;
             var next = _unitOrder[_index];
-            Debug.WriteLine($"Turn [{_index}]");
+            Debug.WriteLine($"Turn [{_index}], Unit [{next}]");
             _index = (_unitOrder.Count <= (_index + 1)) ? 0 : (_index + 1);
             return (next, 0 == _index);
         }
 
-        public void Add(int id)
+        public void Add(int id, bool init)
         {
-            _unitOrder.Insert(_index, id);
-            if (_started)
+            if (init)
             {
+                _unitOrder.Insert(_unitOrder.Count, id);
+            }
+            else
+            {
+                _unitOrder.Insert(_index, id);
                 _index++;
             }
         }

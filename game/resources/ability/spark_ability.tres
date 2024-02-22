@@ -4,9 +4,9 @@
 
 [resource]
 script = ExtResource("1_m6rtf")
-code = "RANDOM_WALK"
-display_name = "Random Walk"
+code = "SPARK"
+display_name = "Spark"
 max_charge = 0
 default_cost = 1
-condition_text = "There is an empty adjacent tile."
-effect_text = "Move to a random empty adjacent tile."
+condition_text = "There is an enemy within 2 tiles."
+effect_text = "Deal 2 damage to a random enemy within 2 tiles."

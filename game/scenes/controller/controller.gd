@@ -17,6 +17,9 @@ func _init():
 	unit_scene = load("res://scenes/unit/unit.tscn")
 
 func _ready():
+	for ability in abilityResources:
+		$Logic.AddAbility(ability)
+	
 	for unit in unitResources:
 		$Logic.AddUnit(unit)
 		unitResourcesDict[unit.code] = unit
@@ -36,6 +39,8 @@ func _create_unit(id: int, location: Vector2i, code: String):
 	var unit = unit_scene.instantiate()
 	unit.resource = unitResourcesDict[code]
 	unit.position = _location_to_position(location)
+	#print(location.x, ", ", location.y)
+	#print(unit.position.x, ", ", unit.position.y)
 	add_child(unit)
 	unitDict[id] = unit
 
@@ -56,11 +61,13 @@ func _on_logic_unit_moved(id, fromLocation, toLocation, isTeleport):
 		print("Controller._on_logic_unit_moved() -- id not found")
 		return
 	var unit = unitDict[id]
+	#print(fromLocation.x, ", ", fromLocation.y, " -- ", toLocation.x, ", ", toLocation.y)
 	if isTeleport:
-		unit.position = toLocation
+		unit.position = _location_to_position(toLocation)
 	else:
 		var tween = create_tween()
 		var target_position = _location_to_position(toLocation)
+		#print(unit.position.x, ", ", unit.position.y, " -- ", target_position.x, ", ", target_position.y)
 		tween.tween_property(unit, "position", target_position, 1)
 
 func _on_logic_health_changed(id, location, health):

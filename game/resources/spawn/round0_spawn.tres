@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="SpawnResource" load_steps=6 format=3 uid="uid://b75ok4sawwpf6"]
+
+[ext_resource type="Script" path="res://resources/spawn/spawn_resource.gd" id="1_dfs44"]
+[ext_resource type="Resource" uid="uid://ddqd1niuges3u" path="res://resources/unit/yuka_unit.tres" id="2_uxyl3"]
+[ext_resource type="Resource" uid="uid://dqb3g7fvxn6lm" path="res://resources/unit/mikan_unit.tres" id="3_1hv6i"]
+[ext_resource type="Resource" uid="uid://dcmrdtapq1wb2" path="res://resources/unit/kotori_unit.tres" id="4_cr8js"]
+[ext_resource type="Resource" uid="uid://mq6tutbmfcu1" path="res://resources/unit/slime_unit.tres" id="5_xqfcd"]
+
+[resource]
+script = ExtResource("1_dfs44")
+rounds = Array[int]([0])
+units = Array[Resource("res://resources/unit/unit_resource.gd")]([ExtResource("2_uxyl3"), ExtResource("3_1hv6i"), ExtResource("4_cr8js"), ExtResource("5_xqfcd")])

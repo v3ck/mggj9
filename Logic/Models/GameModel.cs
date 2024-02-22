@@ -6,6 +6,8 @@
 
         public Dictionary<string, UnitModel> Units { get; } = [];
 
-        public List<SpawnModel> Spawns { get; } = [];
+        public Dictionary<int, SpawnModel> Spawns { get; } = [];
+
+        public Dictionary<string, AbilityModel> Abilities { get; } = [];
     }
 }

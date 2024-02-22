@@ -2,6 +2,7 @@
 using Logic.Models;
 using Logic.Simulation;
 using Logic.Simulation.Actions;
+using System.Diagnostics;
 
 namespace Logic
 {
@@ -79,15 +80,30 @@ namespace Logic
             }
         }
 
-        public void AddSpawn(string unitCode, int beginRound, int endRound, double probability)
+        public void AddSpawn(int[] rounds, string[] unitCodes)
         {
-            _model.Spawns.Add(new SpawnModel()
+            foreach (var round in rounds)
             {
-                UnitCode = unitCode,
-                BeginRound = beginRound,
-                EndRound = endRound,
-                Probability = probability
-            });
+                _model.Spawns.Add(
+                    round,
+                    new SpawnModel()
+                    {
+                        UnitCodes = unitCodes,
+                        Round = round
+                    });
+            }
+        }
+
+        public void AddAbility(string abilityCode, int maxCharge, int cost)
+        {
+            _model.Abilities.Add(
+                abilityCode,
+                new AbilityModel()
+                {
+                    Code = abilityCode,
+                    MaxCharge = maxCharge,
+                    Cost = cost
+                });
         }
 
         private void PropagateAction(IBattleAction action)

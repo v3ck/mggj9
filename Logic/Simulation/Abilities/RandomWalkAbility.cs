@@ -4,64 +4,56 @@ using Logic.Simulation.Actions;
 
 namespace Logic.Simulation.Abilities
 {
-    internal class RandomWalkAbility(BattleUnit user, BattleState state, HexGrid grid) : IBattleAbility
+    internal class RandomWalkAbility(AbilityModel model, BattleUnit user, BattleState state, GameModel gameModel)
+        : BattleAbilityBase(model, user, state, gameModel)
     {
-        public string Code => "RANDOM_WALK";
+        public override string Code => "RANDOM_WALK";
 
-        public int CurrentCharge { get; set; } = 0;
-        public int MaxCharge { get; } = 0;
-
-        private readonly BattleState _state = state;
-
-        private readonly HexGrid _grid = grid;
-
-        private readonly BattleUnit _user = user;
-
-        public static IBattleAbility Create(BattleUnit user, BattleState state, GameModel gameModel)
+        public static IBattleAbility Create(AbilityModel model, BattleUnit user, BattleState state, GameModel gameModel)
         {
-            return new RandomWalkAbility(user, state, gameModel.Grid);
+            return new RandomWalkAbility(model, user, state, gameModel);
         }
 
-        public bool CanUse()
+        protected override bool CanUseSpecific()
         {
             if (_user?.Location is null)
             {
                 return false;
             }
 
-            return _grid.AtDistance(_user.Location, 1)
+            return _gameModel.Grid.AtDistance(_user.Location, 1)
                 .Any((Hex hex) => !_state.Units.Values.Any(unit => unit.Location == hex));
         }
 
-        public void TryCharge(IBattleAction action)
+        public override void TryCharge(IBattleAction action)
         {
             // void
         }
 
-        public IEnumerable<IBattleAction> Use()
+        protected override List<IBattleAction> UseSpecific()
         {
             if (_user?.Location is null)
             {
-                yield break;
+                return [];
             }
 
-            var target = _grid.AtDistance(_user.Location, 1)
+            var target = _gameModel.Grid.AtDistance(_user.Location, 1)
                 .Where((Hex hex) => !_state.Units.Values.Any(unit => unit.Location == hex))
                 .Random();
             if (target is null)
             {
-                yield break;
+                return [];
             }
 
             var oldLocation = _user.Location;
             _user.Location = target;
-            yield return new MoveAction()
+            return [new MoveAction()
             {
                 UnitId = _user.Id,
                 FromLocation = oldLocation,
                 ToLocation = target,
                 IsTeleport = false
-            };
+            }];
         }
     }
 }

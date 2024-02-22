@@ -20,25 +20,32 @@ namespace Logic.Simulation
             _gameModel = gameModel;
         }
 
-        public IEnumerable<IBattleAction> Start()
+        public List<IBattleAction> Start()
         {
             Debug.WriteLine($"Round [{_state.Round}]");
-            return SpawnUnits();
-        }
-
-        public IEnumerable<IBattleAction> TakeTurn()
-        {
-            var (unitId, isEndOfRound) = _turnManager.Next();
-            var actions = ProcessUnitAction(unitId)
-                .Concat(ProcessEndOfRound(isEndOfRound));
+            var actions = SpawnUnits();
             foreach (var action in actions)
             {
-                UpdateTurns(action);
+                UpdateTurns(action, true);
+            }
+            return actions;
+
+        }
+
+        public List<IBattleAction> TakeTurn()
+        {
+            var (unitId, isEndOfRound) = _turnManager.Next();
+            var unitActions = ProcessUnitAction(unitId);
+            var endRoundActions = ProcessEndOfRound(isEndOfRound);
+            var actions = unitActions.Concat(endRoundActions).ToList();
+            foreach (var action in actions)
+            {
+                UpdateTurns(action, false);
             }
             return actions;
         }
 
-        private void UpdateTurns(IBattleAction? action)
+        private void UpdateTurns(IBattleAction? action, bool isStarting)
         {
             if (action is not ExistenceAction existenceAction)
             {
@@ -47,7 +54,7 @@ namespace Logic.Simulation
 
             if (existenceAction.Exists)
             {
-                _turnManager.Add(existenceAction.UnitId);
+                _turnManager.Add(existenceAction.UnitId, isStarting);
             }
             else
             {
@@ -62,22 +69,22 @@ namespace Logic.Simulation
                 .Random();
         }
 
-        private IEnumerable<IBattleAction> ProcessUnitAction(int unitId)
+        private List<IBattleAction> ProcessUnitAction(int unitId)
         {
             if (!_state.Units.TryGetValue(unitId, out BattleUnit? unit))
             {
                 _turnManager.Remove(unitId);
-                return Enumerable.Empty<IBattleAction>();
+                return [];
             }
 
-            return unit.Act() ?? Enumerable.Empty<IBattleAction>();
+            return unit.Act();
         }
 
-        private IEnumerable<IBattleAction> ProcessEndOfRound(bool isEndOfRound)
+        private List<IBattleAction> ProcessEndOfRound(bool isEndOfRound)
         {
             if (!isEndOfRound)
             {
-                return Enumerable.Empty<IBattleAction>() ;
+                return [];
             }
 
             _state.Round++;
@@ -85,13 +92,18 @@ namespace Logic.Simulation
             return SpawnUnits();
         }
 
-        private IEnumerable<IBattleAction> SpawnUnits()
+        private List<IBattleAction> SpawnUnits()
         {
             // I am certain there is a better way to write this but I had issues
             List<IBattleAction> actions = [];
-            foreach (var spawn in _gameModel.Spawns)
+            if (!_gameModel.Spawns.TryGetValue(_state.Round, out var spawn))
             {
-                var action = TrySpawnUnit(spawn);
+                return actions;
+            }
+
+            foreach (var unitCode in spawn.UnitCodes)
+            {
+                var action = TrySpawnUnit(unitCode);
                 if (action is not null)
                 {
                     actions.Add(action);
@@ -101,24 +113,9 @@ namespace Logic.Simulation
             return actions;
         }
 
-        private IBattleAction? TrySpawnUnit(SpawnModel spawn)
+        private IBattleAction? TrySpawnUnit(string unitCode)
         {
-            if (_state.Round < spawn.BeginRound)
-            {
-                return null;
-            }
-
-            if (spawn.EndRound <= _state.Round)
-            {
-                return null;
-            }
-
-            if (spawn.Probability < rng.NextDouble())
-            {
-                return null;
-            }
-
-            if (!_gameModel.Units.TryGetValue(spawn.UnitCode, out var unitModel))
+            if (!_gameModel.Units.TryGetValue(unitCode, out var unitModel))
             {
                 return null;
             }
@@ -128,12 +125,13 @@ namespace Logic.Simulation
                 Location = PlaceUnit()
             };
             _state.Units[unit.Id] = unit;
-            _turnManager.Add(unit.Id);
 
             if (unit.Location is null)
             {
                 return null;
             }
+
+            Debug.WriteLine(unitCode);
 
             return new ExistenceAction()
             {
@@ -143,54 +141,5 @@ namespace Logic.Simulation
                 Location = unit.Location
             };
         }
-
-        //private IEnumerable<IBattleAction> SpawnUnits()
-        //{
-        //    return _gameModel.Spawns
-        //        .Select(TrySpawnUnit)
-        //        .Aggregate(Enumerable.Empty<IBattleAction>(), (a, b) => a.Concat(b));
-        //}
-
-        //private IEnumerable<IBattleAction> TrySpawnUnit(SpawnModel spawn)
-        //{
-        //    if (_state.Round < spawn.BeginRound)
-        //    {
-        //        yield break;
-        //    }
-
-        //    if (spawn.EndRound <= _state.Round)
-        //    {
-        //        yield break;
-        //    }
-
-        //    if (spawn.Probability < rng.NextDouble())
-        //    {
-        //        yield break;
-        //    }
-
-        //    if (!_gameModel.Units.TryGetValue(spawn.UnitCode, out var unitModel))
-        //    {
-        //        yield break;
-        //    }
-
-        //    var unit = new BattleUnit(unitModel, _state, _gameModel)
-        //    {
-        //        Location = PlaceUnit()
-        //    };
-        //    _state.Units[unit.Id] = unit;
-
-        //    if (unit.Location is null)
-        //    {
-        //        yield break;
-        //    }
-
-        //    yield return new ExistenceAction()
-        //    {
-        //        UnitId = unit.Id,
-        //        UnitCode = unitModel.Code,
-        //        Exists = true,
-        //        Location = unit.Location
-        //    };
-        //}
     }
 }

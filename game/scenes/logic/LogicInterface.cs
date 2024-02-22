@@ -53,17 +53,29 @@ namespace Game
 
         public void AddSpawn(Resource spawnResource)
         {
-            var unitCode = spawnResource
-                .Get("unit")
-                .As<Resource>()
-                .Get("code")
-                .AsString();
+            var rounds = spawnResource
+                .Get("rounds")
+                .AsGodotArray<int>()
+                .ToArray();
+
+            var unitCodes = spawnResource
+                .Get("units")
+                .AsGodotArray<Resource>()
+                .AsEnumerable()
+                .Select(unitResource => unitResource.Get("code").AsString())
+                .ToArray();
 
             _controller.AddSpawn(
-                unitCode,
-                spawnResource.Get("start_round").AsInt32(),
-                spawnResource.Get("end_round").AsInt32(),
-                spawnResource.Get("probability").AsDouble());
+                rounds,
+                unitCodes);
+        }
+
+        public void AddAbility(Resource abilityResource)
+        {
+            _controller.AddAbility(
+                abilityResource.Get("code").AsString(),
+                abilityResource.Get("max_charge").AsInt32(),
+                abilityResource.Get("default_cost").AsInt32());
         }
 
         public void TakeTurn()

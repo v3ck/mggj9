@@ -1,4 +1,6 @@
 ﻿using Logic.Models;
+using System.Diagnostics;
+using System.Reflection;
 
 namespace Logic.Simulation.Abilities
 {
@@ -6,22 +8,15 @@ namespace Logic.Simulation.Abilities
     {
         private static readonly Dictionary<string, Type?> _types = new()
         {
-            { "RANDOM_WALK", typeof(RandomWalkAbility) }
+            { "RANDOM_WALK", typeof(RandomWalkAbility) },
+            { "SPARK", typeof(SparkAbility) }
         };
 
-        //public static IBattleAbility? Create(string code, BattleUnit user, BattleState battleState, GameModel gameModel)
-        //{
-        //    var obj = _types.GetValueOrDefault(code)?
-        //        .GetConstructor([typeof(BattleUnit), typeof(BattleState), typeof(GameModel)])?
-        //        .Invoke([user, battleState, gameModel]);
-        //    return obj as IBattleAbility;
-        //}
-
-        public static IBattleAbility? Create(string code, BattleUnit user, BattleState battleState, GameModel gameModel)
+        public static IBattleAbility? Create(AbilityModel model, BattleUnit user, BattleState battleState, GameModel gameModel)
         {
-            var obj = _types.GetValueOrDefault(code)?
-                .GetMethod("Create", [typeof(BattleUnit), typeof(BattleState), typeof(GameModel)])?
-                .Invoke(null, [user, battleState, gameModel]);
+            var obj = _types.GetValueOrDefault(model.Code)?
+                .GetMethod("Create", [typeof(AbilityModel), typeof(BattleUnit), typeof(BattleState), typeof(GameModel)])?
+                .Invoke(null, [model, user, battleState, gameModel]);
             return obj as IBattleAbility;
         }
     }

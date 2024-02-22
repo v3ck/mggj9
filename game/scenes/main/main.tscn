@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://bkv8538fxsc61"]
+[gd_scene load_steps=7 format=3 uid="uid://bkv8538fxsc61"]
 
 [ext_resource type="Script" path="res://scenes/main/main.gd" id="1_07pwd"]
 [ext_resource type="PackedScene" uid="uid://b6n0yvlutrlsb" path="res://scenes/grid/grid.tscn" id="1_wr1dv"]
+[ext_resource type="Resource" uid="uid://b75ok4sawwpf6" path="res://resources/spawn/round0_spawn.tres" id="4_88rut"]
+[ext_resource type="Resource" uid="uid://xll0sl7stcc1" path="res://resources/ability/random_walk_ability.tres" id="5_iwget"]
 [ext_resource type="PackedScene" uid="uid://wr0i5dvkm6gs" path="res://scenes/controller/controller.tscn" id="6_88m1q"]
+[ext_resource type="Resource" uid="uid://d0b7xwsdp5fet" path="res://resources/ability/spark_ability.tres" id="6_jc3gg"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_07pwd")
@@ -11,4 +14,6 @@ script = ExtResource("1_07pwd")
 position = Vector2(216, 32)
 
 [node name="Controller" parent="." node_paths=PackedStringArray("grid") instance=ExtResource("6_88m1q")]
+spawnResources = Array[Resource("res://resources/spawn/spawn_resource.gd")]([ExtResource("4_88rut")])
+abilityResources = Array[Resource("res://resources/ability/ability_resource.gd")]([ExtResource("5_iwget"), ExtResource("6_jc3gg")])
 grid = NodePath("../Grid")

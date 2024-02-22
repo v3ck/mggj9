@@ -1,19 +1,32 @@
-[gd_scene load_steps=11 format=3 uid="uid://wr0i5dvkm6gs"]
+[gd_scene load_steps=12 format=3 uid="uid://wr0i5dvkm6gs"]
 
 [ext_resource type="Script" path="res://scenes/controller/controller.gd" id="1_daiu6"]
 [ext_resource type="Resource" uid="uid://ddqd1niuges3u" path="res://resources/unit/yuka_unit.tres" id="2_8u3ac"]
-[ext_resource type="Resource" uid="uid://b75ok4sawwpf6" path="res://resources/spawn/yuka_spawn.tres" id="2_a4h2p"]
+[ext_resource type="Resource" uid="uid://b75ok4sawwpf6" path="res://resources/spawn/round0_spawn.tres" id="2_dxtr5"]
 [ext_resource type="PackedScene" uid="uid://jqn5ahdviand" path="res://scenes/logic/logic.tscn" id="2_ndqxp"]
 [ext_resource type="Resource" uid="uid://dqb3g7fvxn6lm" path="res://resources/unit/mikan_unit.tres" id="3_eaxlo"]
-[ext_resource type="Resource" uid="uid://xm5m8ciu86jk" path="res://resources/spawn/mikan_spawn.tres" id="3_qpmqd"]
+[ext_resource type="Script" path="res://resources/spawn/spawn_resource.gd" id="3_h5ufc"]
 [ext_resource type="Resource" uid="uid://dcmrdtapq1wb2" path="res://resources/unit/kotori_unit.tres" id="4_pilr3"]
-[ext_resource type="Resource" uid="uid://0vfnx5qgvuds" path="res://resources/spawn/kotori_spawn.tres" id="4_xxgcd"]
 [ext_resource type="Resource" uid="uid://mq6tutbmfcu1" path="res://resources/unit/slime_unit.tres" id="5_c2rwi"]
-[ext_resource type="Resource" uid="uid://b2ibcftd5qe7g" path="res://resources/spawn/slime_spawn.tres" id="5_mrlmt"]
+
+[sub_resource type="Resource" id="Resource_kja4j"]
+script = ExtResource("3_h5ufc")
+rounds = Array[int]([])
+units = Array[Resource("res://resources/unit/unit_resource.gd")]([])
+
+[sub_resource type="Resource" id="Resource_gciqu"]
+script = ExtResource("3_h5ufc")
+rounds = Array[int]([])
+units = Array[Resource("res://resources/unit/unit_resource.gd")]([])
+
+[sub_resource type="Resource" id="Resource_wd3of"]
+script = ExtResource("3_h5ufc")
+rounds = Array[int]([])
+units = Array[Resource("res://resources/unit/unit_resource.gd")]([])
 
 [node name="Controller" type="Node"]
 script = ExtResource("1_daiu6")
-spawnResources = Array[Resource("res://resources/spawn/spawn_resource.gd")]([ExtResource("2_a4h2p"), ExtResource("3_qpmqd"), ExtResource("4_xxgcd"), ExtResource("5_mrlmt")])
+spawnResources = Array[ExtResource("3_h5ufc")]([ExtResource("2_dxtr5"), SubResource("Resource_kja4j"), SubResource("Resource_gciqu"), SubResource("Resource_wd3of")])
 unitResources = Array[Resource("res://resources/unit/unit_resource.gd")]([ExtResource("2_8u3ac"), ExtResource("3_eaxlo"), ExtResource("4_pilr3"), ExtResource("5_c2rwi")])
 
 [node name="Logic" parent="." instance=ExtResource("2_ndqxp")]

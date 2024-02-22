@@ -28,6 +28,8 @@ namespace Logic
 
         public void UpdateUnitAbilities(string unitCode, string[] abilities);
 
-        public void AddSpawn(string unitCode, int beginRound, int endRound, double probability);
+        public void AddSpawn(int[] rounds, string[] unitCodes);
+
+        public void AddAbility(string abilityCode, int maxCharge, int cost);
     }
 }

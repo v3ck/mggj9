@@ -2,8 +2,11 @@
 {
     internal class AbilityModel
     {
-        public int Charge { get; set; } = 0;
-        public int AbilityPoints { get; set; } = 0;
+        public required string Code { get; init; }
+
+        public required int MaxCharge { get; init; }
+
+        public required int Cost { get; init; }
 
     }
 }
