@@ -1,6 +1,7 @@
 ﻿using Logic.Models;
 using Logic.Simulation.Abilities;
 using Logic.Simulation.Actions;
+using System.Diagnostics;
 
 namespace Logic.Simulation
 {
@@ -58,6 +59,7 @@ namespace Logic.Simulation
         public List<IBattleAction> Act()
         {
             var ability = SelectAbility();
+            Debug.WriteLine($"Using ability: [{ability?.Code ?? "None"}]");
             List<IBattleAction> actions = [];
             if (ability is not null && ability.CanPay())
             {
@@ -84,6 +86,8 @@ namespace Logic.Simulation
             {
                 return;
             }
+
+            Debug.WriteLine($"Added ability: [{ability?.Code ?? "None"}]");
 
             _abilities.Add(ability);
         }

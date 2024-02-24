@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="AbilityResource" load_steps=2 format=3 uid="uid://c6cvndyjyd8y4"]
+
+[ext_resource type="Script" path="res://resources/ability/ability_resource.gd" id="1_c5bif"]
+
+[resource]
+script = ExtResource("1_c5bif")
+code = "APPROACH"
+display_name = "Approach"
+max_charge = 0
+default_cost = 1
+condition_text = "There is an enemy in play but not adjacent."
+effect_text = "Move to the adjacent tile that is closest to an enemy."

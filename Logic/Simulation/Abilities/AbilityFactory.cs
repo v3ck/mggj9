@@ -9,7 +9,8 @@ namespace Logic.Simulation.Abilities
         private static readonly Dictionary<string, Type?> _types = new()
         {
             { "RANDOM_WALK", typeof(RandomWalkAbility) },
-            { "SPARK", typeof(SparkAbility) }
+            { "SPARK", typeof(SparkAbility) },
+            { "APPROACH", typeof(ApproachAbility) }
         };
 
         public static IBattleAbility? Create(AbilityModel model, BattleUnit user, BattleState battleState, GameModel gameModel)

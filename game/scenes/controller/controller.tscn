@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://wr0i5dvkm6gs"]
+[gd_scene load_steps=14 format=3 uid="uid://wr0i5dvkm6gs"]
 
 [ext_resource type="Script" path="res://scenes/controller/controller.gd" id="1_daiu6"]
 [ext_resource type="Resource" uid="uid://ddqd1niuges3u" path="res://resources/unit/yuka_unit.tres" id="2_8u3ac"]
@@ -8,6 +8,8 @@
 [ext_resource type="Script" path="res://resources/spawn/spawn_resource.gd" id="3_h5ufc"]
 [ext_resource type="Resource" uid="uid://dcmrdtapq1wb2" path="res://resources/unit/kotori_unit.tres" id="4_pilr3"]
 [ext_resource type="Resource" uid="uid://mq6tutbmfcu1" path="res://resources/unit/slime_unit.tres" id="5_c2rwi"]
+[ext_resource type="PackedScene" uid="uid://765ik4ctipst" path="res://scenes/unit/unit.tscn" id="8_4vjjq"]
+[ext_resource type="PackedScene" uid="uid://3m4lp1gvjhdy" path="res://scenes/projectile/projectile.tscn" id="9_hi8et"]
 
 [sub_resource type="Resource" id="Resource_kja4j"]
 script = ExtResource("3_h5ufc")
@@ -28,6 +30,8 @@ units = Array[Resource("res://resources/unit/unit_resource.gd")]([])
 script = ExtResource("1_daiu6")
 spawnResources = Array[ExtResource("3_h5ufc")]([ExtResource("2_dxtr5"), SubResource("Resource_kja4j"), SubResource("Resource_gciqu"), SubResource("Resource_wd3of")])
 unitResources = Array[Resource("res://resources/unit/unit_resource.gd")]([ExtResource("2_8u3ac"), ExtResource("3_eaxlo"), ExtResource("4_pilr3"), ExtResource("5_c2rwi")])
+unit_scene = ExtResource("8_4vjjq")
+projectile_scene = ExtResource("9_hi8et")
 
 [node name="Logic" parent="." instance=ExtResource("2_ndqxp")]
 

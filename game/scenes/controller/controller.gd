@@ -7,18 +7,18 @@ class_name Controller
 @export var abilityResources: Array[AbilityResource]
 @export var grid: Grid
 
-var unit_scene
+@export var unit_scene: PackedScene
+@export var projectile_scene: PackedScene
 
 var unitResourcesDict: Dictionary
+var abilityResourcesDict: Dictionary
 
 var unitDict: Dictionary
-
-func _init():
-	unit_scene = load("res://scenes/unit/unit.tscn")
 
 func _ready():
 	for ability in abilityResources:
 		$Logic.AddAbility(ability)
+		abilityResourcesDict[ability.code] = ability
 	
 	for unit in unitResources:
 		$Logic.AddUnit(unit)
@@ -30,8 +30,12 @@ func _ready():
 	$Logic.StartBattle()
 	$TurnTimer.start()
 
-func _destroy_unit():
-	pass
+func _destroy_unit(id: int):
+	if not unitDict.has(id):
+		return
+	var unit = unitDict[id]
+	unitDict.erase(id)
+	unit.kill()
 
 func _create_unit(id: int, location: Vector2i, code: String):
 	if not unitResourcesDict.has(code):
@@ -54,7 +58,7 @@ func _on_logic_existence_changed(id: int, location: Vector2i, code: String, exis
 	if exists:
 		_create_unit(id, location, code)
 	else:
-		_destroy_unit()
+		_destroy_unit(id)
 
 func _on_logic_unit_moved(id, fromLocation, toLocation, isTeleport):
 	if not unitDict.has(id):
@@ -77,4 +81,12 @@ func _on_logic_status_changed(id, location, status):
 	pass
 
 func _on_logic_ability_fired(fromLocation, toLocation, ability):
-	pass
+	if not abilityResourcesDict.has(ability):
+		return
+	var ability_resource = abilityResourcesDict[ability]
+	var projectile = projectile_scene.instantiate()
+	add_child(projectile)
+	projectile.fire(
+		_location_to_position(fromLocation),
+		_location_to_position(toLocation),
+		ability_resource.projectile_texture)

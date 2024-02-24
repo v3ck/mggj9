@@ -52,3 +52,7 @@ hframes = 2
 libraries = {
 "": SubResource("AnimationLibrary_k1evn")
 }
+
+[node name="DeathTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]

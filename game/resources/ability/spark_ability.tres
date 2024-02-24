@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="AbilityResource" load_steps=2 format=3 uid="uid://d0b7xwsdp5fet"]
+[gd_resource type="Resource" script_class="AbilityResource" load_steps=3 format=3 uid="uid://d0b7xwsdp5fet"]
 
 [ext_resource type="Script" path="res://resources/ability/ability_resource.gd" id="1_m6rtf"]
+[ext_resource type="Texture2D" uid="uid://5fy8nnm7wrvy" path="res://sprites/spark_projectile.png" id="1_ydojt"]
 
 [resource]
 script = ExtResource("1_m6rtf")
@@ -10,3 +11,4 @@ max_charge = 0
 default_cost = 1
 condition_text = "There is an enemy within 2 tiles."
 effect_text = "Deal 2 damage to a random enemy within 2 tiles."
+projectile_texture = ExtResource("1_ydojt")

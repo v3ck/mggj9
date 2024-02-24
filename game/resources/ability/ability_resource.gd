@@ -8,3 +8,4 @@ class_name AbilityResource
 @export var default_cost: int
 @export var condition_text: String
 @export var effect_text: String
+@export var projectile_texture: Texture2D
