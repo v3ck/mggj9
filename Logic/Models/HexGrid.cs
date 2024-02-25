@@ -1,27 +1,28 @@
-﻿using System.Diagnostics;
-
-namespace Logic.Models
+﻿namespace Logic.Models
 {
     internal class HexGrid
     {
         private readonly HashSet<Hex> _hexes = [];
         public IEnumerable<Hex> Hexes => _hexes.AsEnumerable();
 
+        private readonly Hex _centre;
+        public Hex Centre => _centre;
+
         public HexGrid(int radius)
         {
-            var centreHex = new Hex(radius, radius);
-            _hexes.Add(centreHex);
+            _centre = new Hex(radius, radius);
+            _hexes.Add(_centre);
 
             foreach (int i in Enumerable.Range(1, radius))
             {
                 foreach (int j in Enumerable.Range(0, i))
                 {
-                    _hexes.Add(centreHex + new Hex(-i, j));
-                    _hexes.Add(centreHex + new Hex(i, -j));
-                    _hexes.Add(centreHex + new Hex(j - i, i));
-                    _hexes.Add(centreHex + new Hex(i - j, -i));
-                    _hexes.Add(centreHex + new Hex(j, i - j));
-                    _hexes.Add(centreHex + new Hex(-j, j - i));
+                    _hexes.Add(_centre + new Hex(-i, j));
+                    _hexes.Add(_centre + new Hex(i, -j));
+                    _hexes.Add(_centre + new Hex(j - i, i));
+                    _hexes.Add(_centre + new Hex(i - j, -i));
+                    _hexes.Add(_centre + new Hex(j, i - j));
+                    _hexes.Add(_centre + new Hex(-j, j - i));
                 }
             }
         }

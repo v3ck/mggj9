@@ -12,8 +12,8 @@ namespace Logic.Simulation
 
         public (int, bool) Next()
         {
+            Debug.WriteLine($"Turn [{_index}] / [{_unitOrder.Count}]");
             var next = _unitOrder[_index];
-            Debug.WriteLine($"Turn [{_index}], Unit [{next}]");
             _index = (_unitOrder.Count <= (_index + 1)) ? 0 : (_index + 1);
             return (next, 0 == _index);
         }
@@ -23,10 +23,12 @@ namespace Logic.Simulation
             if (init)
             {
                 _unitOrder.Insert(_unitOrder.Count, id);
+                Debug.WriteLine($"Add [{_unitOrder.Count}]");
             }
             else
             {
                 _unitOrder.Insert(_index, id);
+                Debug.WriteLine($"Add [{_index}]");
                 _index++;
             }
         }
@@ -39,6 +41,11 @@ namespace Logic.Simulation
             {
                 _index--;
             }
+            else if (removeIndex == _unitOrder.Count)
+            {
+                _index = 0;
+            }
+            Debug.WriteLine($"Remove [{removeIndex}]");
         }
     }
 }

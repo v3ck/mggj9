@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="AbilityResource" load_steps=2 format=3 uid="uid://bejvo5xohpkwm"]
+
+[ext_resource type="Script" path="res://resources/ability/ability_resource.gd" id="1_eoelv"]
+
+[resource]
+script = ExtResource("1_eoelv")
+code = "RETREAT_3"
+display_name = "Retreat (3 Tiles)"
+max_charge = 0
+default_cost = 1
+condition_text = "There is an enemy closer than 3 tiles away and a vacant adjacent tiles that is farther from any enemies."
+effect_text = "Move to an adjacent tile that is farther from any enemies."
+projectile_speed = 10.0

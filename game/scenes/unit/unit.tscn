@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://765ik4ctipst"]
+[gd_scene load_steps=7 format=3 uid="uid://765ik4ctipst"]
 
 [ext_resource type="Script" path="res://scenes/unit/unit.gd" id="1_l6ft8"]
 [ext_resource type="Texture2D" uid="uid://bmuptkq2ls44k" path="res://sprites/slime.png" id="2_ddjpu"]
+[ext_resource type="PackedScene" uid="uid://3ruxyshq3xbf" path="res://scenes/health_bar/health_bar.tscn" id="3_oj2v3"]
 
 [sub_resource type="Animation" id="Animation_hu5xt"]
 resource_name = "Idle"
@@ -54,5 +55,8 @@ libraries = {
 }
 
 [node name="DeathTimer" type="Timer" parent="."]
+
+[node name="HealthBar" parent="." instance=ExtResource("3_oj2v3")]
+position = Vector2(0, -10)
 
 [connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]

@@ -59,10 +59,10 @@ namespace Logic.Simulation
         public List<IBattleAction> Act()
         {
             var ability = SelectAbility();
-            Debug.WriteLine($"Using ability: [{ability?.Code ?? "None"}]");
             List<IBattleAction> actions = [];
             if (ability is not null && ability.CanPay())
             {
+                Debug.WriteLine($"Using ability: [{ability.Code}]");
                 actions = ability.Use();
             }
             _abilityPoints++;
@@ -87,7 +87,7 @@ namespace Logic.Simulation
                 return;
             }
 
-            Debug.WriteLine($"Added ability: [{ability?.Code ?? "None"}]");
+            //Debug.WriteLine($"Added ability: [{ability?.Code ?? "None"}]");
 
             _abilities.Add(ability);
         }

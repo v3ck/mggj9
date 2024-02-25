@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="UnitResource" load_steps=4 format=3 uid="uid://mq6tutbmfcu1"]
+[gd_resource type="Resource" script_class="UnitResource" load_steps=5 format=3 uid="uid://mq6tutbmfcu1"]
 
 [ext_resource type="Resource" uid="uid://xll0sl7stcc1" path="res://resources/ability/random_walk_ability.tres" id="1_7iefo"]
+[ext_resource type="Resource" uid="uid://dpd4vmophqpjb" path="res://resources/ability/slime_slap_ability.tres" id="1_ka4pd"]
 [ext_resource type="Texture2D" uid="uid://bmuptkq2ls44k" path="res://sprites/slime.png" id="3_8nchg"]
 [ext_resource type="Script" path="res://resources/unit/unit_resource.gd" id="3_e8vyh"]
 
@@ -9,6 +10,6 @@ script = ExtResource("3_e8vyh")
 code = "SLIME"
 display_name = "Slime"
 sprite_sheet = ExtResource("3_8nchg")
-default_health = 2
+default_health = 5
 faction = "EVIL"
-default_abilities = Array[Resource("res://resources/ability/ability_resource.gd")]([ExtResource("1_7iefo")])
+default_abilities = Array[Resource("res://resources/ability/ability_resource.gd")]([ExtResource("1_ka4pd"), ExtResource("1_7iefo")])

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="AbilityResource" load_steps=3 format=3 uid="uid://b4btacdxuo1qf"]
+
+[ext_resource type="Texture2D" uid="uid://djdqljms8kobw" path="res://sprites/fireball_projectile.png" id="1_8mio7"]
+[ext_resource type="Script" path="res://resources/ability/ability_resource.gd" id="2_nhjky"]
+
+[resource]
+script = ExtResource("2_nhjky")
+code = "FIREBALL"
+display_name = "Wild Fireball"
+max_charge = 0
+default_cost = 2
+condition_text = "There is a circle of radius 2 within 3 tiles that has no allies and at least 1 enemy inside."
+effect_text = "Deal 3 damage to all units in a circle of radius 2 that has no allies and and least 1 enemy inside."
+projectile_texture = ExtResource("1_8mio7")
+projectile_speed = 3.0

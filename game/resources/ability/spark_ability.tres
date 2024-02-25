@@ -12,3 +12,4 @@ default_cost = 1
 condition_text = "There is an enemy within 2 tiles."
 effect_text = "Deal 2 damage to a random enemy within 2 tiles."
 projectile_texture = ExtResource("1_ydojt")
+projectile_speed = 2

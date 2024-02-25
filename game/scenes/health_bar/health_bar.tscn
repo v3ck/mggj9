@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://3ruxyshq3xbf"]
+
+[ext_resource type="Script" path="res://scenes/health_bar/health_bar.gd" id="1_lh875"]
+[ext_resource type="FontFile" uid="uid://b5ubunvnnpcpt" path="res://fonts/monogram.ttf" id="2_yvrao"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_rege8"]
+font = ExtResource("2_yvrao")
+
+[node name="HealthBar" type="Node2D"]
+script = ExtResource("1_lh875")
+
+[node name="MaxBar" type="ColorRect" parent="."]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -1.0
+offset_right = 8.0
+offset_bottom = 1.0
+grow_vertical = 2
+color = Color(0.0352941, 0.0352941, 0.054902, 1)
+
+[node name="CurrentBar" type="ColorRect" parent="."]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -1.0
+offset_right = 8.0
+offset_bottom = 1.0
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="."]
+visible = false
+offset_right = 40.0
+offset_bottom = 23.0
+text = "0"
+label_settings = SubResource("LabelSettings_rege8")

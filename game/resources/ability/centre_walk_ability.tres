@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="AbilityResource" load_steps=2 format=3 uid="uid://upemqtn7fyby"]
+
+[ext_resource type="Script" path="res://resources/ability/ability_resource.gd" id="1_rssqb"]
+
+[resource]
+script = ExtResource("1_rssqb")
+code = "CENTRE_WALK"
+display_name = "Centre Walk"
+max_charge = 0
+default_cost = 1
+condition_text = "There is an empty adjacent tile that is closer to the centre."
+effect_text = "Move to an empty adjacent tile that is closer to the centre."
+projectile_speed = 10.0

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="AbilityResource" load_steps=2 format=3 uid="uid://qg67ld7c5l8u"]
+
+[ext_resource type="Script" path="res://resources/ability/ability_resource.gd" id="1_k0iod"]
+
+[resource]
+script = ExtResource("1_k0iod")
+code = "REST"
+display_name = "Rest"
+max_charge = 0
+default_cost = 1
+condition_text = "Always."
+effect_text = "Restore 1 health."
+projectile_speed = 10.0

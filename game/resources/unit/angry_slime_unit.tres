@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="UnitResource" load_steps=5 format=3 uid="uid://6movworpe6ql"]
+
+[ext_resource type="Resource" uid="uid://dpd4vmophqpjb" path="res://resources/ability/slime_slap_ability.tres" id="1_fweb7"]
+[ext_resource type="Resource" uid="uid://b3dcbx6nx7h5l" path="res://resources/ability/approach_enemies_1_ability.tres" id="2_6vnqp"]
+[ext_resource type="Script" path="res://resources/unit/unit_resource.gd" id="3_2hmsr"]
+[ext_resource type="Texture2D" uid="uid://bhnwxl1d5inoq" path="res://sprites/angry_slime.png" id="4_sunec"]
+
+[resource]
+script = ExtResource("3_2hmsr")
+code = "ANGRY_SLIME"
+display_name = "Angry Slime"
+sprite_sheet = ExtResource("4_sunec")
+default_health = 5
+faction = "EVIL"
+default_abilities = Array[Resource("res://resources/ability/ability_resource.gd")]([ExtResource("1_fweb7"), ExtResource("2_6vnqp")])

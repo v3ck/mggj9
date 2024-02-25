@@ -3,15 +3,19 @@ using Logic.Simulation.Actions;
 
 namespace Logic.Simulation.Abilities
 {
-    internal class ApproachAbility(AbilityModel model, BattleUnit user, BattleState state, GameModel gameModel)
+    internal abstract class ApproachAbility(
+        AbilityModel model,
+        BattleUnit user,
+        BattleState state,
+        GameModel gameModel,
+        int minDistance,
+        bool approachAllies,
+        bool approachEnemies)
         : BattleAbilityBase(model, user, state, gameModel)
     {
-        public override string Code => "APPROACH";
-
-        public static IBattleAbility Create(AbilityModel model, BattleUnit user, BattleState state, GameModel gameModel)
-        {
-            return new ApproachAbility(model, user, state, gameModel);
-        }
+        private readonly int _minDistance = minDistance;
+        private readonly bool _approachAllies = approachAllies;
+        private readonly bool _approachEnemies = approachEnemies;
 
         protected override bool CanUseSpecific()
         {
@@ -20,19 +24,23 @@ namespace Logic.Simulation.Abilities
                 return false;
             }
 
-            var anEnemyExists = _state.Units.Values
+            if (!_state.Units.Values
                 .Any(unit => unit.Location is not null &&
-                unit.Model.Faction != _user.Model.Faction);
+                IsValidFaction(unit)))
+            {
+                return false;
+            }
 
-            var isEnemyTooClose = _state.Units.Values
+            if (_state.Units.Values
                 .Any(unit => unit.Location is not null &&
-                (unit.Location - _user.Location).Magnitude <= 1 &&
-                unit.Model.Faction != _user.Model.Faction);
+                (unit.Location - _user.Location).Magnitude <= _minDistance &&
+                IsValidFaction(unit)))
+            {
+                return false;
+            }
 
-            var isRoomToMove = _gameModel.Grid.AtDistance(_user.Location, 1)
-                .Any((Hex hex) => !_state.Units.Values.Any(unit => unit.Location == hex));
-
-            return anEnemyExists && !isEnemyTooClose && isRoomToMove;
+            return _gameModel.Grid.AtDistance(_user.Location, 1)
+                .Any(CanMoveToHex);
         }
 
         public override void TryCharge(IBattleAction action)
@@ -54,7 +62,7 @@ namespace Logic.Simulation.Abilities
                 return [];
             }
 
-            var target = candidates.MinBy(CalculateDistanceToClosestEnemy);
+            var target = candidates.MinBy(CalculateDistanceToClosestUnit);
             if (target is null)
             {
                 return [];
@@ -71,12 +79,47 @@ namespace Logic.Simulation.Abilities
             }];
         }
 
-        private int CalculateDistanceToClosestEnemy(Hex location)
+        private int CalculateDistanceToClosestUnit(Hex location)
         {
             return _state.Units.Values
-                .Where(unit => unit.Model.Faction != _user.Model.Faction &&
+                .Where(unit => IsValidFaction(unit) &&
                     unit.Location is not null)
                 .Min(unit => (unit.Location - location).Magnitude);
+        }
+
+        private bool IsValidFaction(BattleUnit unit)
+        {
+            if (!_approachAllies && (unit.Model.Faction == _user.Model.Faction))
+            {
+                return false;
+            }
+
+            if (!_approachEnemies && (unit.Model.Faction != _user.Model.Faction))
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool CanMoveToHex(Hex hex)
+        {
+            if (_state.Units.Values.Any(unit => unit.Location == hex))
+            {
+                return false;
+            }
+
+            var distanceAfter = _state.Units.Values
+                .Where(unit => unit.Location is not null)
+                .Where(IsValidFaction)
+                .Min(unit => (unit.Location - hex).Magnitude);
+
+            var distanceBefore = _state.Units.Values
+                .Where(unit => unit.Location is not null)
+                .Where(IsValidFaction)
+                .Min(unit => (unit.Location - _user.Location).Magnitude);
+
+            return distanceAfter < distanceBefore;
         }
     }
 }

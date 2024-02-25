@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="AbilityResource" load_steps=3 format=3 uid="uid://cb7ya2xfsl72w"]
+
+[ext_resource type="Texture2D" uid="uid://gpco1usqw8vi" path="res://sprites/assassinate_projectile.png" id="1_ckuet"]
+[ext_resource type="Script" path="res://resources/ability/ability_resource.gd" id="2_0ioad"]
+
+[resource]
+script = ExtResource("2_0ioad")
+code = "ASSASSINATE"
+display_name = "Assassinate"
+max_charge = 0
+default_cost = 2
+condition_text = "There is a vacant tile within 2 tiles that is adjacent to an enemy."
+effect_text = "Teleport to a tile within 2 tiles that is adjacent to the lowest health enemy in range and as few other enemies as possible and deal 4 damage to it."
+projectile_texture = ExtResource("1_ckuet")
+projectile_speed = 1.0

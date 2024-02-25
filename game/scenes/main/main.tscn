@@ -1,13 +1,30 @@
-[gd_scene load_steps=9 format=3 uid="uid://bkv8538fxsc61"]
+[gd_scene load_steps=26 format=3 uid="uid://bkv8538fxsc61"]
 
 [ext_resource type="Script" path="res://scenes/main/main.gd" id="1_07pwd"]
 [ext_resource type="PackedScene" uid="uid://b6n0yvlutrlsb" path="res://scenes/grid/grid.tscn" id="1_wr1dv"]
 [ext_resource type="Resource" uid="uid://b75ok4sawwpf6" path="res://resources/spawn/round0_spawn.tres" id="4_88rut"]
 [ext_resource type="Resource" uid="uid://xll0sl7stcc1" path="res://resources/ability/random_walk_ability.tres" id="5_iwget"]
 [ext_resource type="Resource" uid="uid://bexj1ak44vewr" path="res://resources/spawn/slime_spawn.tres" id="5_uhfy7"]
+[ext_resource type="Resource" uid="uid://7tt1u6stq2wj" path="res://resources/spawn/angry_slime_spawn.tres" id="6_4e5sd"]
 [ext_resource type="PackedScene" uid="uid://wr0i5dvkm6gs" path="res://scenes/controller/controller.tscn" id="6_88m1q"]
 [ext_resource type="Resource" uid="uid://d0b7xwsdp5fet" path="res://resources/ability/spark_ability.tres" id="6_jc3gg"]
-[ext_resource type="Resource" uid="uid://c6cvndyjyd8y4" path="res://resources/ability/approach_ability.tres" id="7_ejak3"]
+[ext_resource type="Resource" uid="uid://ddqd1niuges3u" path="res://resources/unit/yuka_unit.tres" id="7_nqcj2"]
+[ext_resource type="Resource" uid="uid://dqb3g7fvxn6lm" path="res://resources/unit/mikan_unit.tres" id="8_ogbh4"]
+[ext_resource type="Resource" uid="uid://upemqtn7fyby" path="res://resources/ability/centre_walk_ability.tres" id="9_kjkqx"]
+[ext_resource type="Resource" uid="uid://dcmrdtapq1wb2" path="res://resources/unit/kotori_unit.tres" id="9_oe6ay"]
+[ext_resource type="Resource" uid="uid://bk8rf8066d7sg" path="res://resources/ability/approach_enemies_2_ability.tres" id="10_2phbt"]
+[ext_resource type="Resource" uid="uid://mq6tutbmfcu1" path="res://resources/unit/slime_unit.tres" id="10_efar8"]
+[ext_resource type="Resource" uid="uid://dvwcxiqf4xxwu" path="res://resources/ability/light_orb_ability.tres" id="10_w027o"]
+[ext_resource type="Resource" uid="uid://cuhdde8q8fjrd" path="res://resources/ability/approach_all_3_ability.tres" id="11_7uflm"]
+[ext_resource type="Resource" uid="uid://6movworpe6ql" path="res://resources/unit/angry_slime_unit.tres" id="11_e41fa"]
+[ext_resource type="Resource" uid="uid://dpd4vmophqpjb" path="res://resources/ability/slime_slap_ability.tres" id="12_xnrpn"]
+[ext_resource type="Resource" uid="uid://jduynkc2nju4" path="res://resources/ability/retreat_2_ability.tres" id="13_vks4q"]
+[ext_resource type="Resource" uid="uid://bejvo5xohpkwm" path="res://resources/ability/retreat_3_ability.tres" id="14_xgahi"]
+[ext_resource type="Resource" uid="uid://cb7ya2xfsl72w" path="res://resources/ability/assassinate_ability.tres" id="15_w4gft"]
+[ext_resource type="Resource" uid="uid://b3dcbx6nx7h5l" path="res://resources/ability/approach_enemies_1_ability.tres" id="16_aav7o"]
+[ext_resource type="Resource" uid="uid://b4btacdxuo1qf" path="res://resources/ability/fireball_ability.tres" id="23_u7p64"]
+[ext_resource type="Resource" uid="uid://2vs3hjxi157g" path="res://resources/ability/accurate_fireball_ability.tres" id="24_kvxay"]
+[ext_resource type="Resource" uid="uid://qg67ld7c5l8u" path="res://resources/ability/rest_ability.tres" id="25_6tlon"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_07pwd")
@@ -16,6 +33,7 @@ script = ExtResource("1_07pwd")
 position = Vector2(216, 32)
 
 [node name="Controller" parent="." node_paths=PackedStringArray("grid") instance=ExtResource("6_88m1q")]
-spawnResources = Array[Resource("res://resources/spawn/spawn_resource.gd")]([ExtResource("4_88rut"), ExtResource("5_uhfy7")])
-abilityResources = Array[Resource("res://resources/ability/ability_resource.gd")]([ExtResource("5_iwget"), ExtResource("6_jc3gg"), ExtResource("7_ejak3")])
+spawnResources = Array[Resource("res://resources/spawn/spawn_resource.gd")]([ExtResource("4_88rut"), ExtResource("6_4e5sd"), ExtResource("5_uhfy7")])
+unitResources = Array[Resource("res://resources/unit/unit_resource.gd")]([ExtResource("7_nqcj2"), ExtResource("8_ogbh4"), ExtResource("9_oe6ay"), ExtResource("10_efar8"), ExtResource("11_e41fa")])
+abilityResources = Array[Resource("res://resources/ability/ability_resource.gd")]([ExtResource("5_iwget"), ExtResource("6_jc3gg"), ExtResource("9_kjkqx"), ExtResource("10_w027o"), ExtResource("10_2phbt"), ExtResource("11_7uflm"), ExtResource("12_xnrpn"), ExtResource("13_vks4q"), ExtResource("14_xgahi"), ExtResource("15_w4gft"), ExtResource("16_aav7o"), ExtResource("23_u7p64"), ExtResource("24_kvxay"), ExtResource("25_6tlon")])
 grid = NodePath("../Grid")

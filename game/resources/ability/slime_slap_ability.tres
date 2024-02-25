@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="AbilityResource" load_steps=3 format=3 uid="uid://dpd4vmophqpjb"]
+
+[ext_resource type="Texture2D" uid="uid://coy26alvicrws" path="res://sprites/slime_slap_projectile.png" id="1_85udr"]
+[ext_resource type="Script" path="res://resources/ability/ability_resource.gd" id="2_bd183"]
+
+[resource]
+script = ExtResource("2_bd183")
+code = "SLIME_SLAP"
+display_name = "Slime Slap"
+max_charge = 0
+default_cost = 1
+condition_text = "There is an adjacent enemy."
+effect_text = "Deal 1 damage to a random adjacent enemy."
+projectile_texture = ExtResource("1_85udr")
+projectile_speed = 1.0

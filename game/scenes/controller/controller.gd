@@ -15,7 +15,7 @@ var abilityResourcesDict: Dictionary
 
 var unitDict: Dictionary
 
-func _ready():
+func _ready():	
 	for ability in abilityResources:
 		$Logic.AddAbility(ability)
 		abilityResourcesDict[ability.code] = ability
@@ -28,6 +28,8 @@ func _ready():
 		$Logic.AddSpawn(spawn)
 	
 	$Logic.StartBattle()
+	
+	$TurnTimer.wait_time = 1.0 / GlobalSettings.tick_rate
 	$TurnTimer.start()
 
 func _destroy_unit(id: int):
@@ -60,7 +62,7 @@ func _on_logic_existence_changed(id: int, location: Vector2i, code: String, exis
 	else:
 		_destroy_unit(id)
 
-func _on_logic_unit_moved(id, fromLocation, toLocation, isTeleport):
+func _on_logic_unit_moved(id, _fromLocation, toLocation, isTeleport):
 	if not unitDict.has(id):
 		print("Controller._on_logic_unit_moved() -- id not found")
 		return
@@ -72,12 +74,16 @@ func _on_logic_unit_moved(id, fromLocation, toLocation, isTeleport):
 		var tween = create_tween()
 		var target_position = _location_to_position(toLocation)
 		#print(unit.position.x, ", ", unit.position.y, " -- ", target_position.x, ", ", target_position.y)
-		tween.tween_property(unit, "position", target_position, 1)
+		tween.tween_property(unit, "position", target_position, 1.0 / GlobalSettings.tick_rate)
 
-func _on_logic_health_changed(id, location, health):
-	pass
+func _on_logic_health_changed(id, _location, health):
+	if not unitDict.has(id):
+		print("Controller._on_logic_health_changed() -- id not found")
+		return
+	var unit = unitDict[id]
+	unit.set_health(max(0, health))
 
-func _on_logic_status_changed(id, location, status):
+func _on_logic_status_changed(_id, _location, _status):
 	pass
 
 func _on_logic_ability_fired(fromLocation, toLocation, ability):
@@ -89,4 +95,5 @@ func _on_logic_ability_fired(fromLocation, toLocation, ability):
 	projectile.fire(
 		_location_to_position(fromLocation),
 		_location_to_position(toLocation),
-		ability_resource.projectile_texture)
+		ability_resource.projectile_texture,
+		ability_resource.projectile_speed)

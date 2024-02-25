@@ -62,11 +62,18 @@ namespace Logic.Simulation
             }
         }
 
-        private Hex? PlaceUnit()
+        private Hex? PlaceUnit(UnitModel unit)
         {
-            return _gameModel.Grid.Hexes
+            var candidates = _gameModel.Grid.Hexes
                 .Where(hex => !_state.Units.Values.Any(unit => hex == unit.Location))
-                .Random();
+                .Shuffle();
+
+            if ("GOOD" == unit.Faction)
+            {
+                return candidates.MaxBy(hex => hex.Y);
+            }
+
+            return candidates.MinBy(hex => hex.Y);
         }
 
         private List<IBattleAction> ProcessUnitAction(int unitId)
@@ -122,7 +129,7 @@ namespace Logic.Simulation
 
             var unit = new BattleUnit(unitModel, _state, _gameModel)
             {
-                Location = PlaceUnit()
+                Location = PlaceUnit(unitModel)
             };
             _state.Units[unit.Id] = unit;
 
