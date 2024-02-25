@@ -16,4 +16,4 @@ display_name = "Yuka"
 sprite_sheet = ExtResource("4_ejl7v")
 default_health = 10
 faction = "GOOD"
-default_abilities = Array[Resource("res://resources/ability/ability_resource.gd")]([ExtResource("1_72lqb"), ExtResource("1_2fx2g"), ExtResource("1_rrmlr"), ExtResource("2_lnm4v"), ExtResource("3_feooi"), ExtResource("6_ct1tl")])
+default_abilities = Array[Resource("res://resources/ability/ability_resource.gd")]([ExtResource("1_2fx2g"), ExtResource("1_72lqb"), ExtResource("1_rrmlr"), ExtResource("2_lnm4v"), ExtResource("3_feooi"), ExtResource("6_ct1tl")])

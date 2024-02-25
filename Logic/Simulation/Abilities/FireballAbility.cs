@@ -95,6 +95,7 @@ namespace Logic.Simulation.Abilities
                 return [];
             }
 
+            var oldHealth = target.Health;
             target.Health -= 3;
 
             List<IBattleAction> actions = [];
@@ -102,7 +103,8 @@ namespace Logic.Simulation.Abilities
             {
                 UnitId = target.Id,
                 Location = location,
-                Amount = target.Health
+                Amount = target.Health,
+                PreviousAmount = oldHealth
             });
 
             if (target.Health <= 0)

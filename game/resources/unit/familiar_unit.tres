@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="UnitResource" load_steps=5 format=3 uid="uid://byq23g468qaw3"]
+
+[ext_resource type="Resource" uid="uid://xll0sl7stcc1" path="res://resources/ability/random_walk_ability.tres" id="2_2clo0"]
+[ext_resource type="Resource" uid="uid://dvwcxiqf4xxwu" path="res://resources/ability/light_orb_ability.tres" id="3_mgxk5"]
+[ext_resource type="Texture2D" uid="uid://dxg1vfxxduy3n" path="res://sprites/familiar.png" id="4_830ac"]
+[ext_resource type="Script" path="res://resources/unit/unit_resource.gd" id="6_rd7ss"]
+
+[resource]
+script = ExtResource("6_rd7ss")
+code = "FAMILIAR"
+display_name = "Familiar"
+sprite_sheet = ExtResource("4_830ac")
+default_health = 1
+faction = "GOOD"
+default_abilities = Array[Resource("res://resources/ability/ability_resource.gd")]([ExtResource("3_mgxk5"), ExtResource("2_2clo0")])

@@ -62,11 +62,19 @@ namespace Logic.Simulation
             List<IBattleAction> actions = [];
             if (ability is not null && ability.CanPay())
             {
-                Debug.WriteLine($"Using ability: [{ability.Code}]");
+                Debug.WriteLine($"[{_model.Code}] used [{ability.Code}]");
                 actions = ability.Use();
             }
             _abilityPoints++;
             return actions;
+        }
+
+        public void ChargeAbilities(IBattleAction action)
+        {
+            foreach (var ability in _abilities)
+            {
+                ability.TryCharge(action);
+            }
         }
 
         private IBattleAbility? SelectAbility()

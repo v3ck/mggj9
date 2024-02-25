@@ -41,6 +41,7 @@ namespace Logic.Simulation
             foreach (var action in actions)
             {
                 UpdateTurns(action, false);
+                UpdateUnits(action);
             }
             return actions;
         }
@@ -59,6 +60,19 @@ namespace Logic.Simulation
             else
             {
                 _turnManager.Remove(existenceAction.UnitId);
+            }
+        }
+
+        private void UpdateUnits(IBattleAction? action)
+        {
+            if (action is null)
+            {
+                return;
+            }
+
+            foreach (var unit in _state.Units.Values)
+            {
+                unit.ChargeAbilities(action);
             }
         }
 
@@ -101,7 +115,6 @@ namespace Logic.Simulation
 
         private List<IBattleAction> SpawnUnits()
         {
-            // I am certain there is a better way to write this but I had issues
             List<IBattleAction> actions = [];
             if (!_gameModel.Spawns.TryGetValue(_state.Round, out var spawn))
             {

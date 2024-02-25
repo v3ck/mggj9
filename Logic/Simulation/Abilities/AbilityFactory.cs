@@ -19,7 +19,8 @@ namespace Logic.Simulation.Abilities
             { "RETREAT_3", typeof(Retreat3Ability) },
             { "ASSASSINATE", typeof(AssassinateAbility) },
             { "FIREBALL", typeof(FireballAbility) },
-            { "ACCURATE_FIREBALL", typeof(AccurateFireballAbility) }
+            { "ACCURATE_FIREBALL", typeof(AccurateFireballAbility) },
+            { "SUMMON_FAMILIAR", typeof(SummonFamiliarAbility) }
         };
 
         public static IBattleAbility? Create(AbilityModel model, BattleUnit user, BattleState battleState, GameModel gameModel)

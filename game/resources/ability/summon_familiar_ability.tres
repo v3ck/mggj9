@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="AbilityResource" load_steps=2 format=3 uid="uid://c6h2yam44f4s6"]
+
+[ext_resource type="Script" path="res://resources/ability/ability_resource.gd" id="1_165wk"]
+
+[resource]
+script = ExtResource("1_165wk")
+code = "SUMMON_FAMILIAR"
+display_name = "Summon Familiar"
+max_charge = 5
+default_cost = 1
+condition_text = "There is an empty adjacent tile."
+effect_text = "Summon a Familiar in an adjacent tile that heals allies."
+charge_text = "An ally takes 1 damage."
+projectile_speed = 10.0

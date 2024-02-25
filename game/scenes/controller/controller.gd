@@ -9,13 +9,14 @@ class_name Controller
 
 @export var unit_scene: PackedScene
 @export var projectile_scene: PackedScene
+@export var ping_scene: PackedScene
 
 var unitResourcesDict: Dictionary
 var abilityResourcesDict: Dictionary
 
 var unitDict: Dictionary
 
-func _ready():	
+func _ready():
 	for ability in abilityResources:
 		$Logic.AddAbility(ability)
 		abilityResourcesDict[ability.code] = ability
@@ -76,12 +77,18 @@ func _on_logic_unit_moved(id, _fromLocation, toLocation, isTeleport):
 		#print(unit.position.x, ", ", unit.position.y, " -- ", target_position.x, ", ", target_position.y)
 		tween.tween_property(unit, "position", target_position, 1.0 / GlobalSettings.tick_rate)
 
-func _on_logic_health_changed(id, _location, health):
+func _on_logic_health_changed(id, location, health):
 	if not unitDict.has(id):
 		print("Controller._on_logic_health_changed() -- id not found")
 		return
 	var unit = unitDict[id]
 	unit.set_health(max(0, health))
+	_ping(location)
+
+func _ping(location):
+	var ping = ping_scene.instantiate()
+	add_child(ping)
+	ping.play(_location_to_position(location))
 
 func _on_logic_status_changed(_id, _location, _status):
 	pass

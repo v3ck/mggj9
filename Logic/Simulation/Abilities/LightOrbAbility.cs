@@ -60,7 +60,8 @@ namespace Logic.Simulation.Abilities
                 {
                     UnitId = target.Id,
                     Location = target.Location,
-                    Amount = target.Health
+                    Amount = target.Health,
+                    PreviousAmount = oldHealth
                 });
             }
 

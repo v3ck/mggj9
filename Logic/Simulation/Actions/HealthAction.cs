@@ -11,5 +11,7 @@ namespace Logic.Simulation.Actions
         public required int UnitId { get; init; }
 
         public required int Amount { get; init; }
+
+        public required int PreviousAmount { get; init; }
     }
 }

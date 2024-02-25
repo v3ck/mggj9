@@ -1,7 +1,6 @@
 ﻿using Logic.Extensions;
 using Logic.Models;
 using Logic.Simulation.Actions;
-using System.ComponentModel.Design;
 
 namespace Logic.Simulation.Abilities
 {
@@ -17,7 +16,13 @@ namespace Logic.Simulation.Abilities
 
         protected override bool CanUseSpecific()
         {
-            return _state.Units.Values.Any(IsTargetValid);
+            if (_user.Location is null)
+            {
+                return false;
+            }
+
+            return _gameModel.Grid.WithinDistance(_user.Location, 0, 2)
+                .Any(IsTargetValid);
         }
 
         public override void TryCharge(IBattleAction action)
@@ -32,26 +37,26 @@ namespace Logic.Simulation.Abilities
                 return [];
             }
 
-            var targetUnit = _state.Units.Values
+            var targetLocation = _gameModel.Grid.WithinDistance(_user.Location, 0, 2)
                 .Where(IsTargetValid)
-                .MinBy(unit => unit.Health);
-
-            if (targetUnit?.Location is null)
-            {
-                return [];
-            }
-
-            var targetLocation = _gameModel.Grid.AtDistance(targetUnit.Location, 1)
-                .Where(hex => (hex - _user.Location).Magnitude < 3)
-                .Where(hex => !_state.Units.Values.Any(otherUnit => otherUnit.Location == hex))
-                .Shuffle()
                 .MinBy(hex => _state.Units.Values
                     .Where(unit => unit.Location is not null)
                     .Where(unit => unit.Model.Faction != _user.Model.Faction)
                     .Where(unit => 1 == (hex - unit.Location).Magnitude)
                     .Count());
 
-            if (targetLocation == null)
+            if (targetLocation is null)
+            {
+                return [];
+            }
+
+            var targetUnit = _state.Units.Values
+                .Where(unit => unit.Location is not null)
+                .Where(unit => unit.Model.Faction != _user.Model.Faction)
+                .Where(unit => 1 == (targetLocation - unit.Location).Magnitude)
+                .MinBy(unit => unit.Health);
+
+            if (targetUnit is null)
             {
                 return [];
             }
@@ -75,13 +80,15 @@ namespace Logic.Simulation.Abilities
                 Ability = Code
             });
 
+            var oldHealth = targetUnit.Health;
             targetUnit.Health -= 4;
 
             actions.Add(new HealthAction()
             {
                 UnitId = targetUnit.Id,
                 Location = targetUnit.Location,
-                Amount = targetUnit.Health
+                Amount = targetUnit.Health,
+                PreviousAmount = oldHealth
             });
 
             if (targetUnit.Health <= 0)
@@ -100,26 +107,45 @@ namespace Logic.Simulation.Abilities
             return actions;
         }
 
-        private bool IsTargetValid(BattleUnit unit)
+        //private bool IsTargetValid(BattleUnit unit)
+        //{
+        //    if (_user.Location is null)
+        //    {
+        //        return false;
+        //    }
+
+        //    if (unit.Location is null)
+        //    {
+        //        return false;
+        //    }
+
+        //    if (unit.Model.Faction == _user.Model.Faction)
+        //    {
+        //        return false;
+        //    }
+
+        //    return _gameModel.Grid.AtDistance(unit.Location, 1)
+        //        .Where(hex => (hex - _user.Location).Magnitude < 3)
+        //        .Where(hex => !_state.Units.Values.Any(otherUnit => otherUnit.Location == hex))
+        //        .Any();
+        //}
+
+        private bool IsTargetValid(Hex hex)
         {
             if (_user.Location is null)
             {
                 return false;
             }
 
-            if (unit.Location is null)
+            if (_state.Units.Values.Any(unit => unit.Location == hex))
             {
                 return false;
             }
 
-            if (unit.Model.Faction == _user.Model.Faction)
-            {
-                return false;
-            }
-
-            return _gameModel.Grid.AtDistance(unit.Location, 1)
-                .Where(hex => (hex - _user.Location).Magnitude < 3)
-                .Where(hex => !_state.Units.Values.Any(otherUnit => otherUnit.Location == hex))
+            return _state.Units.Values
+                .Where(unit => unit.Location is not null)
+                .Where(unit => unit.Model.Faction != _user.Model.Faction)
+                .Where(unit => 1 == (hex - unit.Location).Magnitude)
                 .Any();
         }
     }

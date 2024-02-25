@@ -50,12 +50,14 @@ namespace Logic.Simulation.Abilities
                 Ability = Code
             });
 
+            var oldHealth = target.Health;
             target.Health -= _damage;
             actions.Add(new HealthAction()
             {
                 UnitId = target.Id,
                 Location = target.Location,
-                Amount = target.Health
+                Amount = target.Health,
+                PreviousAmount = oldHealth
             });
 
             if (target.Health <= 0)

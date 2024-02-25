@@ -12,7 +12,7 @@ namespace Logic.Simulation
 
         public (int, bool) Next()
         {
-            Debug.WriteLine($"Turn [{_index}] / [{_unitOrder.Count}]");
+            //Debug.WriteLine($"Turn [{_index}] / [{_unitOrder.Count}]");
             var next = _unitOrder[_index];
             _index = (_unitOrder.Count <= (_index + 1)) ? 0 : (_index + 1);
             return (next, 0 == _index);
