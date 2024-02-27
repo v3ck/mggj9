@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://btuo78q6jws4f"]
+
+[ext_resource type="Script" path="res://scenes/unit_card/unit_card.gd" id="1_fv7yx"]
+[ext_resource type="Texture2D" uid="uid://cu51a58ffm2go" path="res://sprites/yuka_portrait.png" id="1_x80v0"]
+[ext_resource type="LabelSettings" uid="uid://b0r421v2a4uh5" path="res://resources/label_settings/card_label_settings.tres" id="2_hkr1u"]
+
+[node name="UnitCard" type="Node2D"]
+script = ExtResource("1_fv7yx")
+
+[node name="Portrait" type="Sprite2D" parent="."]
+position = Vector2(16, 35)
+texture = ExtResource("1_x80v0")
+
+[node name="NameLabel" type="Label" parent="."]
+offset_left = 9.0
+offset_right = 70.0
+offset_bottom = 14.0
+text = "Yuka"
+label_settings = ExtResource("2_hkr1u")
+
+[node name="AbilityPointLabel" type="Label" parent="."]
+offset_left = 33.0
+offset_top = 20.0
+offset_right = 81.0
+offset_bottom = 33.0
+text = "10/10 HP"
+label_settings = ExtResource("2_hkr1u")
+
+[node name="HealthLabel" type="Label" parent="."]
+offset_left = 33.0
+offset_top = 38.0
+offset_right = 73.0
+offset_bottom = 51.0
+text = "1 AP"
+label_settings = ExtResource("2_hkr1u")

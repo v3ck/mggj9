@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://bkv8538fxsc61"]
+[gd_scene load_steps=31 format=3 uid="uid://bkv8538fxsc61"]
 
 [ext_resource type="Script" path="res://scenes/main/main.gd" id="1_07pwd"]
 [ext_resource type="PackedScene" uid="uid://b6n0yvlutrlsb" path="res://scenes/grid/grid.tscn" id="1_wr1dv"]
@@ -28,6 +28,8 @@
 [ext_resource type="Resource" uid="uid://qg67ld7c5l8u" path="res://resources/ability/rest_ability.tres" id="25_6tlon"]
 [ext_resource type="PackedScene" uid="uid://dpvca101loa23" path="res://scenes/ping/ping.tscn" id="26_2bay3"]
 [ext_resource type="Resource" uid="uid://c6h2yam44f4s6" path="res://resources/ability/summon_familiar_ability.tres" id="27_bxpwg"]
+[ext_resource type="PackedScene" uid="uid://crwc7ru5ynjdi" path="res://scenes/ability_viewer/ability_viewer.tscn" id="29_grio7"]
+[ext_resource type="PackedScene" uid="uid://btuo78q6jws4f" path="res://scenes/unit_card/unit_card.tscn" id="30_rpf2q"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_07pwd")
@@ -41,3 +43,17 @@ unitResources = Array[Resource("res://resources/unit/unit_resource.gd")]([ExtRes
 abilityResources = Array[Resource("res://resources/ability/ability_resource.gd")]([ExtResource("5_iwget"), ExtResource("6_jc3gg"), ExtResource("9_kjkqx"), ExtResource("10_w027o"), ExtResource("10_2phbt"), ExtResource("11_7uflm"), ExtResource("12_xnrpn"), ExtResource("13_vks4q"), ExtResource("14_xgahi"), ExtResource("15_w4gft"), ExtResource("16_aav7o"), ExtResource("23_u7p64"), ExtResource("24_kvxay"), ExtResource("25_6tlon"), ExtResource("27_bxpwg")])
 grid = NodePath("../Grid")
 ping_scene = ExtResource("26_2bay3")
+
+[node name="AbilityViewer" parent="." instance=ExtResource("29_grio7")]
+visible = false
+
+[node name="UnitCard" parent="." instance=ExtResource("30_rpf2q")]
+unitResource = ExtResource("7_nqcj2")
+
+[node name="UnitCard2" parent="." instance=ExtResource("30_rpf2q")]
+position = Vector2(0, 65)
+unitResource = ExtResource("8_ogbh4")
+
+[node name="UnitCard3" parent="." instance=ExtResource("30_rpf2q")]
+position = Vector2(0, 134)
+unitResource = ExtResource("9_oe6ay")
