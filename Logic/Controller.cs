@@ -8,6 +8,8 @@ namespace Logic
 {
     internal class Controller : IController
     {
+        private const int MAX_TURN_ATTEMPTS = 255;
+
         public event EventHandler<UnitMovedEventArgs>? UnitMoved;
 
         public event EventHandler<StatusChangedEventArgs>? StatusChanged;
@@ -37,11 +39,31 @@ namespace Logic
 
         public void TakeTurn()
         {
+            foreach (var _ in Enumerable.Range(0, MAX_TURN_ATTEMPTS))
+            {
+                if (TryTakeTurn())
+                {
+                    return;
+                }
+            }
+
+            throw new Exception("The simulation is stuck.");
+        }
+
+        private bool TryTakeTurn()
+        {
             var actions = _simulator?.TakeTurn() ?? Enumerable.Empty<IBattleAction>();
+            if (!actions.Any())
+            {
+                return false;
+            }
+
             foreach (var action in actions)
             {
                 PropagateAction(action);
             }
+
+            return true;
         }
 
         public void AddUnit(string code, int health, string faction, string[] abilities)

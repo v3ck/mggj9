@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=3 uid="uid://djoortudd7ghi"]
+
+[ext_resource type="Script" path="res://scenes/ability_list_item/ability_list_item.gd" id="1_e7m8n"]
+[ext_resource type="Texture2D" uid="uid://bf77603xqn8c0" path="res://sprites/ability_list_highlight.png" id="2_s82du"]
+[ext_resource type="LabelSettings" uid="uid://bknbg0c361emk" path="res://resources/label_settings/list_label_settings.tres" id="3_4fu78"]
+[ext_resource type="PackedScene" uid="uid://crwc7ru5ynjdi" path="res://scenes/ability_viewer/ability_viewer.tscn" id="4_xr2j6"]
+
+[node name="AbilityListItem" type="Control"]
+custom_minimum_size = Vector2(200, 17)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 200.0
+offset_bottom = 17.0
+script = ExtResource("1_e7m8n")
+
+[node name="Background" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(200, 17)
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 17.0
+color = Color(0.0352941, 0.0352941, 0.054902, 1)
+
+[node name="Highlight" type="TextureRect" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 30.0
+texture = ExtResource("2_s82du")
+stretch_mode = 2
+
+[node name="NameLabel" type="Label" parent="."]
+custom_minimum_size = Vector2(180, 13)
+layout_mode = 0
+offset_left = 5.0
+offset_top = 1.0
+offset_right = 195.0
+offset_bottom = 14.0
+text = "bug"
+label_settings = ExtResource("3_4fu78")
+vertical_alignment = 1
+
+[node name="AbilityViewer" parent="." instance=ExtResource("4_xr2j6")]
+visible = false

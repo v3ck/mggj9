@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://cemn37sjhwln8"]
+
+[ext_resource type="PackedScene" uid="uid://btuo78q6jws4f" path="res://scenes/unit_card/unit_card.tscn" id="1_1vts8"]
+[ext_resource type="Resource" uid="uid://ddqd1niuges3u" path="res://resources/unit/yuka_unit.tres" id="2_o4gl3"]
+[ext_resource type="Resource" uid="uid://dqb3g7fvxn6lm" path="res://resources/unit/mikan_unit.tres" id="3_b86k0"]
+[ext_resource type="Resource" uid="uid://dcmrdtapq1wb2" path="res://resources/unit/kotori_unit.tres" id="4_h7fy0"]
+
+[node name="Hud" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="YukaCard" parent="." instance=ExtResource("1_1vts8")]
+unitResource = ExtResource("2_o4gl3")
+
+[node name="MikanCard" parent="." instance=ExtResource("1_1vts8")]
+offset_top = 53.0
+offset_bottom = 53.0
+unitResource = ExtResource("3_b86k0")
+
+[node name="KotoriCard" parent="." instance=ExtResource("1_1vts8")]
+offset_top = 106.0
+offset_bottom = 106.0
+unitResource = ExtResource("4_h7fy0")

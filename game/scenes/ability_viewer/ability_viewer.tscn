@@ -2,17 +2,21 @@
 
 [ext_resource type="Script" path="res://scenes/ability_viewer/ability_viewer.gd" id="1_fx24e"]
 [ext_resource type="LabelSettings" uid="uid://nvqwigq2hu0h" path="res://resources/label_settings/normal_label_settings.tres" id="2_o4wnd"]
-[ext_resource type="LabelSettings" uid="uid://cm8p2588pdjtu" path="res://resources/label_settings/header_label_settings.tres" id="3_e0jsq"]
+[ext_resource type="LabelSettings" uid="uid://cm8p2588pdjtu" path="res://resources/label_settings/header_label_settings.tres" id="3_mhftp"]
 
-[node name="AbilityViewer" type="Node2D"]
+[node name="AbilityViewer" type="Control"]
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_fx24e")
 
 [node name="TempBackground" type="ColorRect" parent="."]
+layout_mode = 0
 offset_right = 213.0
 offset_bottom = 249.0
 color = Color(0.380392, 0.439216, 0.466667, 1)
 
 [node name="ConditionLabel" type="Label" parent="."]
+layout_mode = 0
 offset_top = 50.0
 offset_right = 132.0
 offset_bottom = 76.0
@@ -20,6 +24,7 @@ text = "<Condition>"
 label_settings = ExtResource("2_o4wnd")
 
 [node name="ChargePointLabel" type="Label" parent="."]
+layout_mode = 0
 offset_left = 44.0
 offset_top = 15.0
 offset_right = 68.0
@@ -28,6 +33,7 @@ text = "<CP>"
 label_settings = ExtResource("2_o4wnd")
 
 [node name="AbilityPointLabel" type="Label" parent="."]
+layout_mode = 0
 offset_left = 44.0
 offset_right = 68.0
 offset_bottom = 13.0
@@ -35,6 +41,7 @@ text = "<AP>"
 label_settings = ExtResource("2_o4wnd")
 
 [node name="ChargeLabel" type="Label" parent="."]
+layout_mode = 0
 offset_left = 1.0
 offset_top = 115.0
 offset_right = 49.0
@@ -43,6 +50,7 @@ text = "<Charge>"
 label_settings = ExtResource("2_o4wnd")
 
 [node name="EffectLabel" type="Label" parent="."]
+layout_mode = 0
 offset_left = 1.0
 offset_top = 170.0
 offset_right = 49.0
@@ -51,37 +59,42 @@ text = "<Effect>"
 label_settings = ExtResource("2_o4wnd")
 
 [node name="ConditionHeader" type="Label" parent="."]
+layout_mode = 0
 offset_top = 35.0
 offset_right = 66.0
 offset_bottom = 48.0
 text = "Can Use If:"
-label_settings = ExtResource("3_e0jsq")
+label_settings = ExtResource("3_mhftp")
 
 [node name="ChargeHeader" type="Label" parent="."]
+layout_mode = 0
 offset_left = 2.0
 offset_top = 102.0
 offset_right = 116.0
 offset_bottom = 115.0
 text = "Gain A Charge When:"
-label_settings = ExtResource("3_e0jsq")
+label_settings = ExtResource("3_mhftp")
 
 [node name="EffectHeader" type="Label" parent="."]
+layout_mode = 0
 offset_left = 2.0
 offset_top = 156.0
 offset_right = 44.0
 offset_bottom = 169.0
 text = "Effect:"
-label_settings = ExtResource("3_e0jsq")
+label_settings = ExtResource("3_mhftp")
 
 [node name="AbilityPointHeader" type="Label" parent="."]
+layout_mode = 0
 offset_right = 18.0
 offset_bottom = 13.0
 text = "AP:"
-label_settings = ExtResource("3_e0jsq")
+label_settings = ExtResource("3_mhftp")
 
 [node name="ChargePointHeader" type="Label" parent="."]
+layout_mode = 0
 offset_top = 14.0
 offset_right = 72.0
 offset_bottom = 27.0
 text = "Charge:"
-label_settings = ExtResource("3_e0jsq")
+label_settings = ExtResource("3_mhftp")

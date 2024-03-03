@@ -1,0 +1,194 @@
+[gd_scene load_steps=26 format=3 uid="uid://borq772raudgp"]
+
+[ext_resource type="Script" path="res://scenes/ability_menu/ability_menu.gd" id="1_u3vyq"]
+[ext_resource type="PackedScene" uid="uid://dlcrb35vhekeg" path="res://scenes/ability_list/ability_list.tscn" id="2_kw6xt"]
+[ext_resource type="Texture2D" uid="uid://0up7bnkilnsf" path="res://sprites/move_up_button.png" id="3_0gchx"]
+[ext_resource type="Texture2D" uid="uid://hshe8twknpuk" path="res://sprites/move_down_button.png" id="4_lm6jl"]
+[ext_resource type="LabelSettings" uid="uid://cm8p2588pdjtu" path="res://resources/label_settings/header_label_settings.tres" id="5_6j3i3"]
+[ext_resource type="Texture2D" uid="uid://didpdfgii173s" path="res://sprites/equip_button.png" id="5_17u72"]
+[ext_resource type="Texture2D" uid="uid://vxau6xu63jmj" path="res://sprites/unequip_button.png" id="6_bc8af"]
+[ext_resource type="Texture2D" uid="uid://jgqlqqchxlch" path="res://sprites/yuka.png" id="6_iguhp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bwdh4"]
+atlas = ExtResource("3_0gchx")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lihh0"]
+atlas = ExtResource("3_0gchx")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i7h40"]
+atlas = ExtResource("3_0gchx")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_50dwb"]
+atlas = ExtResource("3_0gchx")
+region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6gbxj"]
+atlas = ExtResource("4_lm6jl")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dfwj5"]
+atlas = ExtResource("4_lm6jl")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_md0vj"]
+atlas = ExtResource("4_lm6jl")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5r6ei"]
+atlas = ExtResource("4_lm6jl")
+region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pabip"]
+atlas = ExtResource("5_17u72")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_647x0"]
+atlas = ExtResource("5_17u72")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a8ene"]
+atlas = ExtResource("5_17u72")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a6wht"]
+atlas = ExtResource("5_17u72")
+region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5f00k"]
+atlas = ExtResource("6_bc8af")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s6x5f"]
+atlas = ExtResource("6_bc8af")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_siby5"]
+atlas = ExtResource("6_bc8af")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1svsj"]
+atlas = ExtResource("6_bc8af")
+region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4maog"]
+atlas = ExtResource("6_iguhp")
+region = Rect2(0, 0, 16, 16)
+
+[node name="AbilityMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_u3vyq")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.501961)
+
+[node name="UnitAbilityList" parent="." instance=ExtResource("2_kw6xt")]
+layout_mode = 0
+offset_left = 45.0
+offset_top = 28.0
+offset_right = 45.0
+offset_bottom = 28.0
+
+[node name="AvailableAbilityList" parent="." instance=ExtResource("2_kw6xt")]
+layout_mode = 0
+offset_left = 279.0
+offset_top = 28.0
+offset_right = 279.0
+offset_bottom = 28.0
+
+[node name="MoveUpButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 119.0
+offset_right = 40.0
+offset_bottom = 143.0
+disabled = true
+texture_normal = SubResource("AtlasTexture_bwdh4")
+texture_pressed = SubResource("AtlasTexture_lihh0")
+texture_hover = SubResource("AtlasTexture_i7h40")
+texture_disabled = SubResource("AtlasTexture_50dwb")
+
+[node name="MoveDownButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 145.0
+offset_right = 40.0
+offset_bottom = 169.0
+disabled = true
+texture_normal = SubResource("AtlasTexture_6gbxj")
+texture_pressed = SubResource("AtlasTexture_dfwj5")
+texture_hover = SubResource("AtlasTexture_md0vj")
+texture_disabled = SubResource("AtlasTexture_5r6ei")
+
+[node name="EquipButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 251.0
+offset_top = 118.0
+offset_right = 275.0
+offset_bottom = 142.0
+disabled = true
+texture_normal = SubResource("AtlasTexture_pabip")
+texture_pressed = SubResource("AtlasTexture_647x0")
+texture_hover = SubResource("AtlasTexture_a8ene")
+texture_disabled = SubResource("AtlasTexture_a6wht")
+
+[node name="UnequipButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 250.0
+offset_top = 146.0
+offset_right = 274.0
+offset_bottom = 170.0
+disabled = true
+texture_normal = SubResource("AtlasTexture_5f00k")
+texture_pressed = SubResource("AtlasTexture_s6x5f")
+texture_hover = SubResource("AtlasTexture_siby5")
+texture_disabled = SubResource("AtlasTexture_1svsj")
+
+[node name="UnitLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 127.0
+offset_top = 6.0
+offset_right = 167.0
+offset_bottom = 29.0
+text = "Yuka
+"
+label_settings = ExtResource("5_6j3i3")
+
+[node name="CodexLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 349.0
+offset_top = 6.0
+offset_right = 389.0
+offset_bottom = 29.0
+text = "Codex
+"
+label_settings = ExtResource("5_6j3i3")
+
+[node name="UnitIcon" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 101.0
+offset_top = 6.0
+offset_right = 117.0
+offset_bottom = 22.0
+texture = SubResource("AtlasTexture_4maog")
+stretch_mode = 2
+
+[connection signal="selection_changed" from="UnitAbilityList" to="." method="_on_unit_ability_list_selection_changed"]
+[connection signal="selection_changed" from="AvailableAbilityList" to="." method="_on_available_ability_list_selection_changed"]
+[connection signal="button_up" from="MoveUpButton" to="." method="_on_move_up_button_button_up"]
+[connection signal="button_up" from="MoveDownButton" to="." method="_on_move_down_button_button_up"]
+[connection signal="button_up" from="EquipButton" to="." method="_on_equip_button_button_up"]
+[connection signal="button_up" from="UnequipButton" to="." method="_on_unequip_button_button_up"]

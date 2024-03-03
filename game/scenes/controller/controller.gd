@@ -6,6 +6,7 @@ class_name Controller
 @export var unitResources: Array[UnitResource]
 @export var abilityResources: Array[AbilityResource]
 @export var grid: Grid
+@export var hud: Hud
 
 @export var unit_scene: PackedScene
 @export var projectile_scene: PackedScene
@@ -83,6 +84,7 @@ func _on_logic_health_changed(id, location, health):
 		return
 	var unit = unitDict[id]
 	unit.set_health(max(0, health))
+	hud.update_unit(unit.resource.code, health, -1)
 	_ping(location)
 
 func _ping(location):

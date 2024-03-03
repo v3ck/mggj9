@@ -1,35 +1,91 @@
-[gd_scene load_steps=4 format=3 uid="uid://btuo78q6jws4f"]
+[gd_scene load_steps=9 format=3 uid="uid://btuo78q6jws4f"]
 
 [ext_resource type="Script" path="res://scenes/unit_card/unit_card.gd" id="1_fv7yx"]
 [ext_resource type="Texture2D" uid="uid://cu51a58ffm2go" path="res://sprites/yuka_portrait.png" id="1_x80v0"]
 [ext_resource type="LabelSettings" uid="uid://b0r421v2a4uh5" path="res://resources/label_settings/card_label_settings.tres" id="2_hkr1u"]
+[ext_resource type="Texture2D" uid="uid://6hxeuol3hd7h" path="res://sprites/edit_button.png" id="4_p40gs"]
 
-[node name="UnitCard" type="Node2D"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_1x7w4"]
+atlas = ExtResource("4_p40gs")
+region = Rect2(0, 0, 31, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8f6jq"]
+atlas = ExtResource("4_p40gs")
+region = Rect2(31, 0, 31, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_angfh"]
+atlas = ExtResource("4_p40gs")
+region = Rect2(62, 0, 31, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0g3hc"]
+atlas = ExtResource("4_p40gs")
+region = Rect2(93, 0, 31, 15)
+
+[node name="UnitCard" type="Control"]
+custom_minimum_size = Vector2(101, 50)
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1.0
+offset_right = 102.0
+offset_bottom = 50.0
 script = ExtResource("1_fv7yx")
 
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -1.0
+offset_right = 101.0
+offset_bottom = 50.0
+color = Color(0.172549, 0.490196, 0.388235, 1)
+
 [node name="Portrait" type="Sprite2D" parent="."]
-position = Vector2(16, 35)
+position = Vector2(19, 30)
 texture = ExtResource("1_x80v0")
 
 [node name="NameLabel" type="Label" parent="."]
-offset_left = 9.0
-offset_right = 70.0
-offset_bottom = 14.0
+layout_mode = 0
+offset_left = 3.0
+offset_right = 64.0
+offset_bottom = 13.0
 text = "Yuka"
 label_settings = ExtResource("2_hkr1u")
+metadata/_edit_use_anchors_ = true
 
 [node name="AbilityPointLabel" type="Label" parent="."]
-offset_left = 33.0
-offset_top = 20.0
-offset_right = 81.0
-offset_bottom = 33.0
-text = "10/10 HP"
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.148515
+offset_left = 50.0
+offset_top = 25.0
+offset_right = 98.0
+offset_bottom = 38.0
+text = "null"
 label_settings = ExtResource("2_hkr1u")
+horizontal_alignment = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="HealthLabel" type="Label" parent="."]
-offset_left = 33.0
-offset_top = 38.0
-offset_right = 73.0
-offset_bottom = 51.0
-text = "1 AP"
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.227723
+offset_left = 58.0
+offset_top = 35.0
+offset_right = 98.0
+offset_bottom = 48.0
+text = "null"
 label_settings = ExtResource("2_hkr1u")
+horizontal_alignment = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="EditButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 66.0
+offset_top = 4.0
+offset_right = 97.0
+offset_bottom = 19.0
+texture_normal = SubResource("AtlasTexture_1x7w4")
+texture_pressed = SubResource("AtlasTexture_8f6jq")
+texture_hover = SubResource("AtlasTexture_angfh")
+texture_disabled = SubResource("AtlasTexture_0g3hc")
+metadata/_edit_use_anchors_ = true
+
+[connection signal="button_down" from="EditButton" to="." method="_on_edit_button_button_down"]
