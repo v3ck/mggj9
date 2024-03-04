@@ -6,5 +6,7 @@
         public IDictionary<int, BattleUnit> Units => _units;
 
         public int Round { get; set; }
+
+        public int Score { get; set; } = 0;
     }
 }

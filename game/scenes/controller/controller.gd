@@ -16,8 +16,11 @@ var unitResourcesDict: Dictionary
 var abilityResourcesDict: Dictionary
 
 var unitDict: Dictionary
+var hero_id_map: Dictionary
 
 func _ready():
+	_connect_hud()
+	
 	for ability in abilityResources:
 		$Logic.AddAbility(ability)
 		abilityResourcesDict[ability.code] = ability
@@ -33,6 +36,16 @@ func _ready():
 	
 	$TurnTimer.wait_time = 1.0 / GlobalSettings.tick_rate
 	$TurnTimer.start()
+
+func _connect_hud():
+	hud.edit_clicked.connect(_on_hud_edit_clicked)
+	hud.paused.connect(_on_hud_paused)
+	hud.resumed.connect(_on_hud_resumed)
+	hud.ability_moved_up.connect(_on_hud_ability_moved_up)
+	hud.ability_moved_down.connect(_on_hud_ability_moved_down)
+	hud.ability_equipped.connect(_on_hud_ability_equipped)
+	hud.ability_unequipped.connect(_on_hud_ability_unequipped)
+	hud.reward_picked.connect(_on_hud_reward_picked)
 
 func _destroy_unit(id: int):
 	if not unitDict.has(id):
@@ -51,6 +64,16 @@ func _create_unit(id: int, location: Vector2i, code: String):
 	#print(unit.position.x, ", ", unit.position.y)
 	add_child(unit)
 	unitDict[id] = unit
+	_link_hero(id, code)
+
+func _link_hero(unit_id: int, unit_code: String):
+	match(unit_code):
+		"YUKA":
+			hero_id_map["YUKA"] = unit_id
+		"MIKAN":
+			hero_id_map["MIKAN"] = unit_id
+		"KOTORI":
+			hero_id_map["KOTORI"] = unit_id
 
 func _location_to_position(location: Vector2i):
 	return grid.TileToPixel(location.x, location.y) + grid.position
@@ -58,7 +81,11 @@ func _location_to_position(location: Vector2i):
 func _on_turn_timer_timeout():
 	$Logic.TakeTurn()
 
-func _on_logic_existence_changed(id: int, location: Vector2i, code: String, exists: bool):
+func _on_logic_existence_changed(
+	id: int,
+	location: Vector2i,
+	code: String,
+	exists: bool):
 	if exists:
 		_create_unit(id, location, code)
 	else:
@@ -73,10 +100,16 @@ func _on_logic_unit_moved(id, _fromLocation, toLocation, isTeleport):
 	if isTeleport:
 		unit.position = _location_to_position(toLocation)
 	else:
-		var tween = create_tween()
-		var target_position = _location_to_position(toLocation)
-		#print(unit.position.x, ", ", unit.position.y, " -- ", target_position.x, ", ", target_position.y)
-		tween.tween_property(unit, "position", target_position, 1.0 / GlobalSettings.tick_rate)
+		_walk_unit(unit, toLocation)
+
+func _walk_unit(unit, to_location):
+	var tween = create_tween()
+	var target_position = _location_to_position(to_location)
+	#print(unit.position.x, ", ", unit.position.y, " -- ", target_position.x, ", ", target_position.y)
+	tween.tween_property(
+		unit, "position",
+		target_position,
+		1.0 / GlobalSettings.tick_rate)
 
 func _on_logic_health_changed(id, location, health):
 	if not unitDict.has(id):
@@ -106,3 +139,63 @@ func _on_logic_ability_fired(fromLocation, toLocation, ability):
 		_location_to_position(toLocation),
 		ability_resource.projectile_texture,
 		ability_resource.projectile_speed)
+
+func _on_hud_edit_clicked(unit_code: String):
+	if not hero_id_map.has(unit_code):
+		return
+	if not unitResourcesDict.has(unit_code):
+		return
+	var unit_resource = unitResourcesDict[unit_code]
+	hud.open_ability_menu(unit_resource)
+	_update_hud_ability_menu(unit_code)
+
+func _ability_codes_to_abilities(ability_codes: Array[String]):
+	# Can GDScript do better than this mess?
+	var abilities: Array[AbilityResource] = []
+	for code in ability_codes:
+		if abilityResourcesDict.has(code):
+			abilities.append(abilityResourcesDict[code])
+	return abilities
+
+func _on_hud_paused():
+	$TurnTimer.stop()
+
+func _on_hud_resumed():
+	$TurnTimer.start()
+
+func _on_hud_ability_moved_up(unit_code: String, ability_code: String):
+	$Logic.MoveUnitAbilityUp(unit_code, ability_code)
+	_update_hud_ability_menu(unit_code)
+
+func _on_hud_ability_moved_down(unit_code: String, ability_code: String):
+	$Logic.MoveUnitAbilityDown(unit_code, ability_code)
+	_update_hud_ability_menu(unit_code)
+
+func _on_hud_ability_equipped(unit_code: String, ability_code: String):
+	$Logic.EquipAbility(unit_code, ability_code)
+	_update_hud_ability_menu(unit_code)
+
+func _on_hud_ability_unequipped(unit_code: String, ability_code: String):
+	$Logic.UnequipAbility(unit_code, ability_code)
+	_update_hud_ability_menu(unit_code)
+
+func _update_hud_ability_menu(unit_code: String):
+	var unit_ability_codes = $Logic.GetUnitAbilities(unit_code)
+	var unit_abilities = _ability_codes_to_abilities(unit_ability_codes)
+	var codex_ability_codes = $Logic.GetCodexAbilities(unit_code)
+	var codex_abilities = _ability_codes_to_abilities(codex_ability_codes)
+	hud.update_ability_menu(unit_abilities, codex_abilities)
+
+func _on_logic_reward_obtained(ability_codes: Array):
+	var why_do_i_have_to_do_this: Array[String] = []
+	for code in ability_codes:
+		why_do_i_have_to_do_this.append(code)
+	var abilities = _ability_codes_to_abilities(why_do_i_have_to_do_this)
+	hud.open_reward_picker(abilities)
+
+func _on_hud_reward_picked(ability_code: String):
+	$Logic.AddCodexAbility(ability_code)
+
+func _on_logic_score_changed(amount):
+	print(amount)
+	hud.update_score(amount)

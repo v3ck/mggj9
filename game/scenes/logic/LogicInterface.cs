@@ -24,6 +24,12 @@ namespace Game
         [Signal]
         public delegate void ExistenceChangedEventHandler(int id, Vector2I location, string code, bool exists);
 
+        [Signal]
+        public delegate void RewardObtainedEventHandler(string[] abilityCodes);
+
+        [Signal]
+        public delegate void ScoreChangedEventHandler(int amount);
+
         private readonly Logic.IController _controller = Logic.Api.CreateController();
 
         public override void _Ready()
@@ -33,6 +39,8 @@ namespace Game
             _controller.HealthChanged += Controller_HealthChanged;
             _controller.AbilityFired += Controller_AbilityFired;
             _controller.ExistenceChanged += Controller_ExistenceChanged;
+            _controller.RewardObtained += Controller_RewardObtained;
+            _controller.ScoreChanged += Controller_ScoreChanged;
         }
 
         public void AddUnit(Resource unitResource)
@@ -75,7 +83,8 @@ namespace Game
             _controller.AddAbility(
                 abilityResource.Get("code").AsString(),
                 abilityResource.Get("max_charge").AsInt32(),
-                abilityResource.Get("default_cost").AsInt32());
+                abilityResource.Get("default_cost").AsInt32(),
+                abilityResource.Get("rarity").AsInt32());
         }
 
         public void TakeTurn()
@@ -86,6 +95,46 @@ namespace Game
         public void StartBattle()
         {
             _controller.StartBattle();
+        }
+
+        public string[] GetUnitAbilities(string unitCode)
+        {
+            return _controller.GetUnitAbilities(unitCode);
+        }
+
+        public string[] GetAllCodexAbilities()
+        {
+            return _controller.GetAllCodexAbilities();
+        }
+
+        public string[] GetCodexAbilities(string unitCode)
+        {
+            return _controller.GetCodexAbilities(unitCode);
+        }
+
+        public void AddCodexAbility(string abilityCode)
+        {
+            _controller.AddCodexAbility(abilityCode);
+        }
+
+        public void MoveUnitAbilityUp(string unitCode, string abilityCode)
+        {
+            _controller.MoveUnitAbilityUp(unitCode, abilityCode);
+        }
+
+        public void MoveUnitAbilityDown(string unitCode, string abilityCode)
+        {
+            _controller.MoveUnitAbilityDown(unitCode, abilityCode);
+        }
+
+        public void EquipAbility(string unitCode, string abilityCode)
+        {
+            _controller.EquipAbility(unitCode, abilityCode);
+        }
+
+        public void UnequipAbility(string unitCode, string abilityCode)
+        {
+            _controller.UnequipAbility(unitCode, abilityCode);
         }
 
         private void Controller_UnitMoved(object sender, Logic.Events.UnitMovedEventArgs e)
@@ -133,6 +182,20 @@ namespace Game
                 IntVector2ToVector2I(e.Location),
                 e.UnitCode,
                 e.Exists);
+        }
+
+        private void Controller_RewardObtained(object sender, Logic.Events.RewardObtainedEventArgs e)
+        {
+            EmitSignal(
+                SignalName.RewardObtained,
+                e.Abilities);
+        }
+
+        private void Controller_ScoreChanged(object sender, Logic.Events.ScoreChangedEventArgs e)
+        {
+            EmitSignal(
+                SignalName.ScoreChanged,
+                e.Amount);
         }
 
         private static Vector2I IntVector2ToVector2I(IntVector2 iv)

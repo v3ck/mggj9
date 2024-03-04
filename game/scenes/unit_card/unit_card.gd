@@ -2,16 +2,16 @@ extends Control
 
 class_name UnitCard
 
-@export var unitResource: UnitResource
+@export var unit_resource: UnitResource
 
 signal edit_clicked
 
 var max_health: int = 0
 
 func _ready():
-	$Portrait.texture = unitResource.portrait_sprite
-	$NameLabel.text = unitResource.display_name
-	max_health = unitResource.default_health
+	$Portrait.texture = unit_resource.portrait_sprite
+	$NameLabel.text = unit_resource.display_name
+	max_health = unit_resource.default_health
 	set_health(max_health)
 	set_ability_points(-1)
 

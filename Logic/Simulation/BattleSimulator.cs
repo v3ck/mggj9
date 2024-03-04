@@ -22,14 +22,13 @@ namespace Logic.Simulation
 
         public List<IBattleAction> Start()
         {
-            Debug.WriteLine($"Round [{_state.Round}]");
+            //Debug.WriteLine($"Round [{_state.Round}]");
             var actions = SpawnUnits();
             foreach (var action in actions)
             {
                 UpdateTurns(action, true);
             }
             return actions;
-
         }
 
         public List<IBattleAction> TakeTurn()
@@ -43,7 +42,19 @@ namespace Logic.Simulation
                 UpdateTurns(action, false);
                 UpdateUnits(action);
             }
+
+            actions.AddRange(UpdateScores(actions));
+
             return actions;
+        }
+
+        public void UpdateUnitAbilities(string unitCode)
+        {
+            var units = _state.Units.Values.Where(unit => unit.Model.Code == unitCode);
+            foreach (var unit in units)
+            {
+                unit.RefreshAbilities();
+            }
         }
 
         private void UpdateTurns(IBattleAction? action, bool isStarting)
@@ -74,6 +85,76 @@ namespace Logic.Simulation
             {
                 unit.ChargeAbilities(action);
             }
+        }
+
+        private List<IBattleAction> UpdateScores(IEnumerable<IBattleAction> actions)
+        {
+            var scoreActions = new List<IBattleAction?>();
+            foreach (var action in actions)
+            {
+                scoreActions.AddRange(UpdateScore(action));
+            }
+            return scoreActions
+                .Where(scoreAction => scoreAction is not null)
+                .Select(scoreAction => scoreAction!)
+                .ToList();
+        }
+
+        private List<IBattleAction> UpdateScore(IBattleAction? action)
+        {
+            if (action is not ExistenceAction existenceAction)
+            {
+                return [];
+            }
+
+            if (existenceAction.Exists)
+            {
+                return [];
+            }
+
+            if (!_gameModel.Units.TryGetValue(existenceAction.UnitCode, out var unit))
+            {
+                return [];
+            }
+
+            if ("GOOD" == unit.Faction)
+            {
+                return [];
+            }
+
+            _state.Score += 1;
+            List<IBattleAction> scoreActions = [];
+            scoreActions.Add(new ScoreAction()
+            {
+                Amount = _state.Score
+            });
+
+            if (0 == _state.Score % _gameModel.RewardInterval)
+            {
+                scoreActions.Add(GenerateRewards());
+            }
+
+            return scoreActions;
+        }
+
+        private IBattleAction GenerateRewards()
+        {
+            return new RewardAction
+            {
+                AbilityCodes = Enumerable.Range(0, 3)
+                    .Select(x => GenerateReward())
+                    .ToArray()
+            };
+        }
+
+        private string GenerateReward()
+        {
+            var rand = rng.Next(13);
+            var rarity = (rand < 1) ? 2 : ((rand < 4) ? 1 : 0);
+            return _gameModel.Abilities.Values
+                .Where(ability => rarity == ability.Rarity)
+                .Random()?
+                .Code ?? string.Empty;
         }
 
         private Hex? PlaceUnit(UnitModel unit)
@@ -109,7 +190,7 @@ namespace Logic.Simulation
             }
 
             _state.Round++;
-            Debug.WriteLine($"Round [{_state.Round}]");
+            //Debug.WriteLine($"Round [{_state.Round}]");
             return SpawnUnits();
         }
 
@@ -151,7 +232,7 @@ namespace Logic.Simulation
                 return null;
             }
 
-            Debug.WriteLine(unitCode);
+            //Debug.WriteLine(unitCode);
 
             return new ExistenceAction()
             {

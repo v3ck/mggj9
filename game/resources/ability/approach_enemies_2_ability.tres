@@ -10,4 +10,6 @@ max_charge = 0
 default_cost = 1
 condition_text = "There is an enemy in play but not within 2 tiles."
 effect_text = "Move to the adjacent tile that is closest to an enemy."
+charge_text = ""
 projectile_speed = 10.0
+rarity = 0

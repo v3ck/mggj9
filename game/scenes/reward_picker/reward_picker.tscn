@@ -1,0 +1,92 @@
+[gd_scene load_steps=9 format=3 uid="uid://cdluvd2xr8u5k"]
+
+[ext_resource type="PackedScene" uid="uid://dlcrb35vhekeg" path="res://scenes/ability_list/ability_list.tscn" id="1_8iufu"]
+[ext_resource type="Script" path="res://scenes/reward_picker/reward_picker.gd" id="1_efer1"]
+[ext_resource type="Texture2D" uid="uid://cl3mea1jd5ejq" path="res://sprites/accept_button.png" id="2_aun14"]
+[ext_resource type="LabelSettings" uid="uid://bq3a27jj6i6mt" path="res://resources/label_settings/list_header_label_settings.tres" id="3_7xkpm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nmhqr"]
+atlas = ExtResource("2_aun14")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ekkmf"]
+atlas = ExtResource("2_aun14")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5gfkq"]
+atlas = ExtResource("2_aun14")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x6fej"]
+atlas = ExtResource("2_aun14")
+region = Rect2(72, 0, 24, 24)
+
+[node name="RewardPicker" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_efer1")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.101961, 0.333333, 0.337255, 0.87451)
+
+[node name="AbilityList" parent="." instance=ExtResource("1_8iufu")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -27.0
+offset_right = 100.0
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Header" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -60.0
+offset_top = -44.0
+offset_right = 60.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Choose a new ability"
+label_settings = ExtResource("3_7xkpm")
+
+[node name="AcceptButton" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = 31.0
+offset_right = 12.0
+offset_bottom = 55.0
+grow_horizontal = 2
+grow_vertical = 2
+disabled = true
+texture_normal = SubResource("AtlasTexture_nmhqr")
+texture_pressed = SubResource("AtlasTexture_ekkmf")
+texture_hover = SubResource("AtlasTexture_5gfkq")
+texture_disabled = SubResource("AtlasTexture_x6fej")
+
+[connection signal="selection_changed" from="AbilityList" to="." method="_on_ability_list_selection_changed"]
+[connection signal="button_up" from="AcceptButton" to="." method="_on_accept_button_button_up"]

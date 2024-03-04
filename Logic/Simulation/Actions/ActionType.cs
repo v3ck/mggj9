@@ -6,6 +6,8 @@
         Ability,
         Health,
         Status,
-        Existence
+        Existence,
+        Reward,
+        Score
     }
 }

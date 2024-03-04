@@ -2,7 +2,6 @@
 using Logic.Models;
 using Logic.Simulation;
 using Logic.Simulation.Actions;
-using System.Diagnostics;
 
 namespace Logic
 {
@@ -20,9 +19,14 @@ namespace Logic
 
         public event EventHandler<ExistenceChangedEventArgs>? ExistenceChanged;
 
+        public event EventHandler<RewardObtainedEventArgs>? RewardObtained;
+
+        public event EventHandler<ScoreChangedEventArgs>? ScoreChanged;
+
         private readonly GameModel _model = new(new GameParameters()
         {
-            GridRadius = 5
+            GridRadius = 5,
+            RewardInterval = 5
         });
 
         private BattleSimulator? _simulator = null;
@@ -75,7 +79,7 @@ namespace Logic
                 MaxHealth = health
             };
             _model.Units.Add(unit.Code, unit);
-            UpdateUnitAbilities(unit.Code, abilities);
+            unit.Abilities.AddRange(abilities);
         }
 
         public string[] GetUnitAbilities(string unitCode)
@@ -88,18 +92,107 @@ namespace Logic
             return [.. unit.Abilities];
         }
 
-        public void UpdateUnitAbilities(string unitCode, string[] abilities)
+        public string[] GetAllCodexAbilities()
+        {
+            return [.. _model.CodexAbilities];
+        }
+
+        public string[] GetCodexAbilities(string unitCode)
+        {
+            if (!_model.Units.TryGetValue(unitCode, out var unit))
+            {
+                return [];
+            }
+
+            return [.. _model.CodexAbilities
+                .Where(abilityCode => !unit.Abilities.Contains(abilityCode))
+                .Distinct()
+                .Order()];
+        }
+
+        public void AddCodexAbility(string abilityCode)
+        {
+            _model.CodexAbilities.Add(abilityCode);
+        }
+
+        public void MoveUnitAbilityUp(string unitCode, string abilityCode)
         {
             if (!_model.Units.TryGetValue(unitCode, out var unit))
             {
                 return;
             }
 
-            unit.Abilities.Clear();
-            foreach (var abilityCode in abilities)
+            if (!unit.Abilities.Contains(abilityCode))
             {
-                unit.Abilities.Add(abilityCode);
+                return;
             }
+
+            var index = unit.Abilities.IndexOf(abilityCode);
+            if (0 == index)
+            {
+                return;
+            }
+
+            unit.Abilities.RemoveAt(index);
+            unit.Abilities.Insert(index - 1, abilityCode);
+            _simulator?.UpdateUnitAbilities(unitCode);
+        }
+
+        public void MoveUnitAbilityDown(string unitCode, string abilityCode)
+        {
+            if (!_model.Units.TryGetValue(unitCode, out var unit))
+            {
+                return;
+            }
+
+            if (!unit.Abilities.Contains(abilityCode))
+            {
+                return;
+            }
+
+            var index = unit.Abilities.IndexOf(abilityCode);
+            if (unit.Abilities.Count - 1 <= index)
+            {
+                return;
+            }
+
+            unit.Abilities.RemoveAt(index);
+            unit.Abilities.Insert(index + 1, abilityCode);
+            _simulator?.UpdateUnitAbilities(unitCode);
+        }
+
+        public void EquipAbility(string unitCode, string abilityCode)
+        {
+            if (!_model.Units.TryGetValue(unitCode, out var unit))
+            {
+                return;
+            }
+
+            if (!_model.CodexAbilities.Contains(abilityCode))
+            {
+                return;
+            }
+
+            unit.Abilities.Add(abilityCode);
+            _model.CodexAbilities.Remove(abilityCode);
+            _simulator?.UpdateUnitAbilities(unitCode);
+        }
+
+        public void UnequipAbility(string unitCode, string abilityCode)
+        {
+            if (!_model.Units.TryGetValue(unitCode, out var unit))
+            {
+                return;
+            }
+
+            if (!unit.Abilities.Contains(abilityCode))
+            {
+                return;
+            }
+
+            unit.Abilities.Remove(abilityCode);
+            _model.CodexAbilities.Add(abilityCode);
+            _simulator?.UpdateUnitAbilities(unitCode);
         }
 
         public void AddSpawn(int[] rounds, string[] unitCodes)
@@ -116,7 +209,7 @@ namespace Logic
             }
         }
 
-        public void AddAbility(string abilityCode, int maxCharge, int cost)
+        public void AddAbility(string abilityCode, int maxCharge, int cost, int rarity)
         {
             _model.Abilities.Add(
                 abilityCode,
@@ -124,7 +217,8 @@ namespace Logic
                 {
                     Code = abilityCode,
                     MaxCharge = maxCharge,
-                    Cost = cost
+                    Cost = cost,
+                    Rarity = rarity
                 });
         }
 
@@ -146,6 +240,12 @@ namespace Logic
                     break;
                 case ActionType.Existence:
                     ExistenceChanged?.Invoke(this, ExistenceActionToEventArgs(action));
+                    break;
+                case ActionType.Reward:
+                    RewardObtained?.Invoke(this, RewardActionToEventArgs(action));
+                    break;
+                case ActionType.Score:
+                    ScoreChanged?.Invoke(this, ScoreActionToEventArgs(action));
                     break;
             }
         }
@@ -224,6 +324,32 @@ namespace Logic
                 Location = existenceAction.Location.AsIntVector2,
                 Exists = existenceAction.Exists,
                 UnitCode = existenceAction.UnitCode
+            };
+        }
+
+        private static RewardObtainedEventArgs RewardActionToEventArgs(IBattleAction action)
+        {
+            if (action is not RewardAction rewardAction)
+            {
+                throw new ArgumentException("Incorrect ActionType", nameof(action));
+            }
+
+            return new RewardObtainedEventArgs()
+            {
+                Abilities = rewardAction.AbilityCodes
+            };
+        }
+
+        private ScoreChangedEventArgs ScoreActionToEventArgs(IBattleAction action)
+        {
+            if (action is not ScoreAction scoreAction)
+            {
+                throw new ArgumentException("Incorrect ActionType", nameof(action));
+            }
+
+            return new ScoreChangedEventArgs()
+            {
+                Amount = scoreAction.Amount
             };
         }
     }

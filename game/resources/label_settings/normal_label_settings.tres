@@ -3,5 +3,6 @@
 [ext_resource type="FontFile" uid="uid://b5ubunvnnpcpt" path="res://fonts/monogram.ttf" id="1_f5few"]
 
 [resource]
+line_spacing = 0.0
 font = ExtResource("1_f5few")
 font_color = Color(0.0352941, 0.0352941, 0.054902, 1)

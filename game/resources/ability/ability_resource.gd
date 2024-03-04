@@ -11,3 +11,4 @@ class_name AbilityResource
 @export var charge_text: String
 @export var projectile_texture: Texture2D
 @export var projectile_speed: float = 10.0
+@export var rarity: int = -1

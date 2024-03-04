@@ -1,7 +1,6 @@
 ﻿using Logic.Models;
 using Logic.Simulation.Abilities;
 using Logic.Simulation.Actions;
-using System.Diagnostics;
 
 namespace Logic.Simulation
 {
@@ -32,7 +31,8 @@ namespace Logic.Simulation
             set => _abilityPoints = value;
         }
 
-        private readonly List<IBattleAbility> _abilities = [];
+        //private readonly List<IBattleAbility> _abilities = [];
+        private readonly Dictionary<string, IBattleAbility> _abilities = new();
 
         private readonly UnitModel _model;
         public UnitModel Model => _model;
@@ -49,8 +49,17 @@ namespace Logic.Simulation
             _state = state;
             _gameModel = gameModel;
             _health = model.MaxHealth;
+            RefreshAbilities();
+        }
 
-            foreach (var abilityCode in model.Abilities)
+        public void RefreshAbilities()
+        {
+            foreach (var abilityCode in _abilities.Keys)
+            {
+                TryRemoveAbility(abilityCode);
+            }
+
+            foreach (var abilityCode in _model.Abilities)
             {
                 TryAddAbility(abilityCode);
             }
@@ -62,7 +71,7 @@ namespace Logic.Simulation
             List<IBattleAction> actions = [];
             if (ability is not null && ability.CanPay())
             {
-                Debug.WriteLine($"[{_model.Code}] used [{ability.Code}]");
+                //Debug.WriteLine($"[{_model.Code}] used [{ability.Code}]");
                 actions = ability.Use();
             }
             _abilityPoints++;
@@ -71,7 +80,7 @@ namespace Logic.Simulation
 
         public void ChargeAbilities(IBattleAction action)
         {
-            foreach (var ability in _abilities)
+            foreach (var ability in _abilities.Values)
             {
                 ability.TryCharge(action);
             }
@@ -79,11 +88,25 @@ namespace Logic.Simulation
 
         private IBattleAbility? SelectAbility()
         {
-            return _abilities.FirstOrDefault(ability => ability?.CanUse() ?? false, null);
+            var code = _model.Abilities
+                .Where(_abilities.ContainsKey)
+                .Where(abilityCode => _abilities[abilityCode].CanUse())
+                .FirstOrDefault();
+            if (code is null)
+            {
+                return null;
+            }
+
+            return _abilities[code];
         }
 
         private void TryAddAbility(string abilityCode)
         {
+            if (_abilities.ContainsKey(abilityCode))
+            {
+                return;
+            }
+
             if (!_gameModel.Abilities.TryGetValue(abilityCode, out var abilityModel))
             {
                 return;
@@ -97,7 +120,17 @@ namespace Logic.Simulation
 
             //Debug.WriteLine($"Added ability: [{ability?.Code ?? "None"}]");
 
-            _abilities.Add(ability);
+            _abilities.Add(abilityCode, ability);
+        }
+
+        private void TryRemoveAbility(string abilityCode)
+        {
+            if (_model.Abilities.Contains(abilityCode))
+            {
+                return;
+            }
+
+            _abilities.Remove(abilityCode);
         }
     }
 }

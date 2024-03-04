@@ -11,5 +11,7 @@ max_charge = 0
 default_cost = 2
 condition_text = "There is a circle of radius 2 within 3 tiles that has no allies and at least 1 enemy inside."
 effect_text = "Deal 3 damage to all units in a circle of radius 2 that has no allies and and least 1 enemy inside."
+charge_text = ""
 projectile_texture = ExtResource("1_8mio7")
 projectile_speed = 3.0
+rarity = 0

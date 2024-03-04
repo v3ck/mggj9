@@ -1,10 +1,9 @@
-[gd_scene load_steps=32 format=3 uid="uid://bkv8538fxsc61"]
+[gd_scene load_steps=31 format=3 uid="uid://bkv8538fxsc61"]
 
 [ext_resource type="Script" path="res://scenes/main/main.gd" id="1_07pwd"]
 [ext_resource type="PackedScene" uid="uid://b6n0yvlutrlsb" path="res://scenes/grid/grid.tscn" id="1_wr1dv"]
 [ext_resource type="PackedScene" uid="uid://cemn37sjhwln8" path="res://scenes/hud/hud.tscn" id="3_m8th6"]
 [ext_resource type="Resource" uid="uid://b75ok4sawwpf6" path="res://resources/spawn/round0_spawn.tres" id="4_88rut"]
-[ext_resource type="Script" path="res://scenes/hud/hud.gd" id="4_pb00e"]
 [ext_resource type="Resource" uid="uid://xll0sl7stcc1" path="res://resources/ability/random_walk_ability.tres" id="5_iwget"]
 [ext_resource type="PackedScene" uid="uid://borq772raudgp" path="res://scenes/ability_menu/ability_menu.tscn" id="5_rmlqy"]
 [ext_resource type="Resource" uid="uid://bexj1ak44vewr" path="res://resources/spawn/slime_spawn.tres" id="5_uhfy7"]
@@ -38,14 +37,15 @@ script = ExtResource("1_07pwd")
 [node name="Grid" parent="." instance=ExtResource("1_wr1dv")]
 position = Vector2(216, 32)
 
-[node name="Hud" parent="." instance=ExtResource("3_m8th6")]
-script = ExtResource("4_pb00e")
-ability_menu_scene = ExtResource("5_rmlqy")
-
 [node name="Controller" parent="." node_paths=PackedStringArray("grid", "hud") instance=ExtResource("6_88m1q")]
 spawnResources = Array[Resource("res://resources/spawn/spawn_resource.gd")]([ExtResource("4_88rut"), ExtResource("6_4e5sd"), ExtResource("5_uhfy7")])
 unitResources = Array[Resource("res://resources/unit/unit_resource.gd")]([ExtResource("7_nqcj2"), ExtResource("8_ogbh4"), ExtResource("9_oe6ay"), ExtResource("10_efar8"), ExtResource("11_e41fa"), ExtResource("12_6uf5l")])
 abilityResources = Array[Resource("res://resources/ability/ability_resource.gd")]([ExtResource("5_iwget"), ExtResource("6_jc3gg"), ExtResource("9_kjkqx"), ExtResource("10_w027o"), ExtResource("10_2phbt"), ExtResource("11_7uflm"), ExtResource("12_xnrpn"), ExtResource("13_vks4q"), ExtResource("14_xgahi"), ExtResource("15_w4gft"), ExtResource("16_aav7o"), ExtResource("23_u7p64"), ExtResource("24_kvxay"), ExtResource("25_6tlon"), ExtResource("27_bxpwg")])
 grid = NodePath("../Grid")
-hud = NodePath("../Hud")
+hud = NodePath("../CanvasLayer/Hud")
 ping_scene = ExtResource("26_2bay3")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Hud" parent="CanvasLayer" instance=ExtResource("3_m8th6")]
+ability_menu_scene = ExtResource("5_rmlqy")

@@ -18,6 +18,10 @@ namespace Logic
 
         public event EventHandler<ExistenceChangedEventArgs>? ExistenceChanged;
 
+        public event EventHandler<RewardObtainedEventArgs>? RewardObtained;
+
+        public event EventHandler<ScoreChangedEventArgs>? ScoreChanged;
+
         public void StartBattle();
 
         public void TakeTurn();
@@ -26,10 +30,22 @@ namespace Logic
 
         public string[] GetUnitAbilities(string unitCode);
 
-        public void UpdateUnitAbilities(string unitCode, string[] abilities);
+        public string[] GetAllCodexAbilities();
+
+        public string[] GetCodexAbilities(string unitCode);
+
+        public void AddCodexAbility(string abilityCode);
+
+        public void MoveUnitAbilityUp(string unitCode, string abilityCode);
+
+        public void MoveUnitAbilityDown(string unitCode, string abilityCode);
+
+        public void EquipAbility(string unitCode, string abilityCode);
+
+        public void UnequipAbility(string unitCode, string abilityCode);
 
         public void AddSpawn(int[] rounds, string[] unitCodes);
 
-        public void AddAbility(string abilityCode, int maxCharge, int cost);
+        public void AddAbility(string abilityCode, int maxCharge, int cost, int rarity);
     }
 }

@@ -3,6 +3,7 @@ extends Control
 class_name AbilityList
 
 @export var ability_list_item_scene: PackedScene
+@export var ability_viewer_scene: PackedScene
 
 var selected_ability_code: String
 var has_selection: bool = false
@@ -13,7 +14,8 @@ func refresh(abilities: Array[AbilityResource]):
 	_clear()
 	var found_selection = false
 	for ability in abilities:
-		found_selection = found_selection or _add(ability)
+		var is_selection = _add(ability)
+		found_selection = found_selection or is_selection
 	if not found_selection:
 		has_selection = false
 		selection_changed.emit()
@@ -26,10 +28,11 @@ func _clear():
 func _add(ability: AbilityResource) -> bool:
 	var item = ability_list_item_scene.instantiate()
 	item.resource = ability
-	item.mouse_selected.connect(_on_item_mouse_selected(item))
+	item.mouse_selected.connect(_on_item_mouse_selected.bind(item))
+	item.ability_viewed.connect(_on_item_ability_viewed.bind(item))
 	$Container.add_child(item)
 	if has_selection and selected_ability_code == ability.code:
-		item.highlight()
+		item.highlight(true)
 		return true
 	return false
 
@@ -48,4 +51,9 @@ func _on_item_mouse_selected(item: AbilityListItem):
 	selected_ability_code = item.resource.code
 	has_selection = true
 	selection_changed.emit()
+
+func _on_item_ability_viewed(item: AbilityListItem):
+	var ability_viewer = ability_viewer_scene.instantiate()
+	ability_viewer.display(item.resource)
+	add_child(ability_viewer)
 

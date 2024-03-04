@@ -8,5 +8,7 @@
 
         public required int Cost { get; init; }
 
+        public required int Rarity { get; init; }
+
     }
 }

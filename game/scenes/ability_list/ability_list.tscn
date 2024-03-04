@@ -1,16 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://dlcrb35vhekeg"]
+[gd_scene load_steps=4 format=3 uid="uid://dlcrb35vhekeg"]
 
 [ext_resource type="Script" path="res://scenes/ability_list/ability_list.gd" id="1_3pd66"]
 [ext_resource type="PackedScene" uid="uid://djoortudd7ghi" path="res://scenes/ability_list_item/ability_list_item.tscn" id="1_xjdli"]
+[ext_resource type="PackedScene" uid="uid://crwc7ru5ynjdi" path="res://scenes/ability_viewer/ability_viewer.tscn" id="3_fl0pj"]
 
 [node name="AbilityList" type="ScrollContainer"]
-custom_minimum_size = Vector2(200, 232)
+custom_minimum_size = Vector2(200, 0)
 offset_right = 200.0
 offset_bottom = 232.0
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 3
 script = ExtResource("1_3pd66")
 ability_list_item_scene = ExtResource("1_xjdli")
+ability_viewer_scene = ExtResource("3_fl0pj")
 
 [node name="Container" type="VBoxContainer" parent="."]
 custom_minimum_size = Vector2(200, 240)

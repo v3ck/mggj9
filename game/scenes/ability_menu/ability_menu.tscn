@@ -1,13 +1,14 @@
-[gd_scene load_steps=26 format=3 uid="uid://borq772raudgp"]
+[gd_scene load_steps=31 format=3 uid="uid://borq772raudgp"]
 
 [ext_resource type="Script" path="res://scenes/ability_menu/ability_menu.gd" id="1_u3vyq"]
 [ext_resource type="PackedScene" uid="uid://dlcrb35vhekeg" path="res://scenes/ability_list/ability_list.tscn" id="2_kw6xt"]
 [ext_resource type="Texture2D" uid="uid://0up7bnkilnsf" path="res://sprites/move_up_button.png" id="3_0gchx"]
 [ext_resource type="Texture2D" uid="uid://hshe8twknpuk" path="res://sprites/move_down_button.png" id="4_lm6jl"]
-[ext_resource type="LabelSettings" uid="uid://cm8p2588pdjtu" path="res://resources/label_settings/header_label_settings.tres" id="5_6j3i3"]
 [ext_resource type="Texture2D" uid="uid://didpdfgii173s" path="res://sprites/equip_button.png" id="5_17u72"]
 [ext_resource type="Texture2D" uid="uid://vxau6xu63jmj" path="res://sprites/unequip_button.png" id="6_bc8af"]
 [ext_resource type="Texture2D" uid="uid://jgqlqqchxlch" path="res://sprites/yuka.png" id="6_iguhp"]
+[ext_resource type="Texture2D" uid="uid://cl3mea1jd5ejq" path="res://sprites/accept_button.png" id="6_ywfay"]
+[ext_resource type="LabelSettings" uid="uid://bq3a27jj6i6mt" path="res://resources/label_settings/list_header_label_settings.tres" id="8_7rv7x"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bwdh4"]
 atlas = ExtResource("3_0gchx")
@@ -57,20 +58,36 @@ region = Rect2(48, 0, 24, 24)
 atlas = ExtResource("5_17u72")
 region = Rect2(72, 0, 24, 24)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_5f00k"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_8i08r"]
 atlas = ExtResource("6_bc8af")
 region = Rect2(0, 0, 24, 24)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_s6x5f"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_0iv23"]
 atlas = ExtResource("6_bc8af")
 region = Rect2(24, 0, 24, 24)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_siby5"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_mwc7r"]
 atlas = ExtResource("6_bc8af")
 region = Rect2(48, 0, 24, 24)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1svsj"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_s5pfy"]
 atlas = ExtResource("6_bc8af")
+region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5f00k"]
+atlas = ExtResource("6_ywfay")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s6x5f"]
+atlas = ExtResource("6_ywfay")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_siby5"]
+atlas = ExtResource("6_ywfay")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1svsj"]
+atlas = ExtResource("6_ywfay")
 region = Rect2(72, 0, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4maog"]
@@ -78,12 +95,11 @@ atlas = ExtResource("6_iguhp")
 region = Rect2(0, 0, 16, 16)
 
 [node name="AbilityMenu" type="Control"]
+custom_minimum_size = Vector2(480, 270)
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 0
+offset_right = 480.0
+offset_bottom = 270.0
 script = ExtResource("1_u3vyq")
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -93,28 +109,43 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 0.501961)
+color = Color(0.101961, 0.333333, 0.337255, 0.87451)
 
 [node name="UnitAbilityList" parent="." instance=ExtResource("2_kw6xt")]
-layout_mode = 0
-offset_left = 45.0
-offset_top = 28.0
-offset_right = 45.0
-offset_bottom = 28.0
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -202.0
+offset_top = 24.0
+offset_right = -2.0
+offset_bottom = 256.0
+grow_horizontal = 2
 
 [node name="AvailableAbilityList" parent="." instance=ExtResource("2_kw6xt")]
-layout_mode = 0
-offset_left = 279.0
-offset_top = 28.0
-offset_right = 279.0
-offset_bottom = 28.0
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 30.0
+offset_top = 24.0
+offset_right = 230.0
+offset_bottom = 256.0
+grow_horizontal = 2
 
 [node name="MoveUpButton" type="TextureButton" parent="."]
-layout_mode = 0
-offset_left = 16.0
-offset_top = 119.0
-offset_right = 40.0
-offset_bottom = 143.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -230.0
+offset_top = -26.0
+offset_right = -206.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
 disabled = true
 texture_normal = SubResource("AtlasTexture_bwdh4")
 texture_pressed = SubResource("AtlasTexture_lihh0")
@@ -122,11 +153,18 @@ texture_hover = SubResource("AtlasTexture_i7h40")
 texture_disabled = SubResource("AtlasTexture_50dwb")
 
 [node name="MoveDownButton" type="TextureButton" parent="."]
-layout_mode = 0
-offset_left = 16.0
-offset_top = 145.0
-offset_right = 40.0
-offset_bottom = 169.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -230.0
+offset_top = 2.0
+offset_right = -206.0
+offset_bottom = 26.0
+grow_horizontal = 2
+grow_vertical = 2
 disabled = true
 texture_normal = SubResource("AtlasTexture_6gbxj")
 texture_pressed = SubResource("AtlasTexture_dfwj5")
@@ -134,11 +172,18 @@ texture_hover = SubResource("AtlasTexture_md0vj")
 texture_disabled = SubResource("AtlasTexture_5r6ei")
 
 [node name="EquipButton" type="TextureButton" parent="."]
-layout_mode = 0
-offset_left = 251.0
-offset_top = 118.0
-offset_right = 275.0
-offset_bottom = 142.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 2.0
+offset_top = -26.0
+offset_right = 26.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
 disabled = true
 texture_normal = SubResource("AtlasTexture_pabip")
 texture_pressed = SubResource("AtlasTexture_647x0")
@@ -146,43 +191,82 @@ texture_hover = SubResource("AtlasTexture_a8ene")
 texture_disabled = SubResource("AtlasTexture_a6wht")
 
 [node name="UnequipButton" type="TextureButton" parent="."]
-layout_mode = 0
-offset_left = 250.0
-offset_top = 146.0
-offset_right = 274.0
-offset_bottom = 170.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 26.0
+offset_bottom = 26.0
+grow_horizontal = 2
+grow_vertical = 2
 disabled = true
+texture_normal = SubResource("AtlasTexture_8i08r")
+texture_pressed = SubResource("AtlasTexture_0iv23")
+texture_hover = SubResource("AtlasTexture_mwc7r")
+texture_disabled = SubResource("AtlasTexture_s5pfy")
+
+[node name="AcceptButton" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = -28.0
+offset_right = 26.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 0
 texture_normal = SubResource("AtlasTexture_5f00k")
 texture_pressed = SubResource("AtlasTexture_s6x5f")
 texture_hover = SubResource("AtlasTexture_siby5")
 texture_disabled = SubResource("AtlasTexture_1svsj")
 
 [node name="UnitLabel" type="Label" parent="."]
-layout_mode = 0
-offset_left = 127.0
-offset_top = 6.0
-offset_right = 167.0
-offset_bottom = 29.0
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -182.0
+offset_top = 4.0
+offset_right = -10.0
+offset_bottom = 17.0
+grow_horizontal = 2
 text = "Yuka
 "
-label_settings = ExtResource("5_6j3i3")
+label_settings = ExtResource("8_7rv7x")
+horizontal_alignment = 1
 
 [node name="CodexLabel" type="Label" parent="."]
-layout_mode = 0
-offset_left = 349.0
-offset_top = 6.0
-offset_right = 389.0
-offset_bottom = 29.0
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 34.0
+offset_top = 4.0
+offset_right = 226.0
+offset_bottom = 17.0
+grow_horizontal = 2
 text = "Codex
 "
-label_settings = ExtResource("5_6j3i3")
+label_settings = ExtResource("8_7rv7x")
+horizontal_alignment = 1
 
 [node name="UnitIcon" type="TextureRect" parent="."]
-layout_mode = 0
-offset_left = 101.0
-offset_top = 6.0
-offset_right = 117.0
-offset_bottom = 22.0
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -202.0
+offset_top = 4.0
+offset_right = -186.0
+offset_bottom = 20.0
+grow_horizontal = 2
 texture = SubResource("AtlasTexture_4maog")
 stretch_mode = 2
 
@@ -192,3 +276,4 @@ stretch_mode = 2
 [connection signal="button_up" from="MoveDownButton" to="." method="_on_move_down_button_button_up"]
 [connection signal="button_up" from="EquipButton" to="." method="_on_equip_button_button_up"]
 [connection signal="button_up" from="UnequipButton" to="." method="_on_unequip_button_button_up"]
+[connection signal="button_up" from="AcceptButton" to="." method="_on_accept_button_button_up"]

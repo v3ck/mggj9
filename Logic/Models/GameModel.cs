@@ -9,5 +9,9 @@
         public Dictionary<int, SpawnModel> Spawns { get; } = [];
 
         public Dictionary<string, AbilityModel> Abilities { get; } = [];
+
+        public List<string> CodexAbilities { get; } = [];
+
+        public int RewardInterval { get; } = parameters.RewardInterval;
     }
 }

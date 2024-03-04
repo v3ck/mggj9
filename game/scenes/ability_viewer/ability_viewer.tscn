@@ -1,100 +1,120 @@
-[gd_scene load_steps=4 format=3 uid="uid://crwc7ru5ynjdi"]
+[gd_scene load_steps=5 format=3 uid="uid://crwc7ru5ynjdi"]
 
 [ext_resource type="Script" path="res://scenes/ability_viewer/ability_viewer.gd" id="1_fx24e"]
+[ext_resource type="Texture2D" uid="uid://cwdhy1edisjdq" path="res://sprites/ability_viewer_background.png" id="2_ht3tx"]
 [ext_resource type="LabelSettings" uid="uid://nvqwigq2hu0h" path="res://resources/label_settings/normal_label_settings.tres" id="2_o4wnd"]
 [ext_resource type="LabelSettings" uid="uid://cm8p2588pdjtu" path="res://resources/label_settings/header_label_settings.tres" id="3_mhftp"]
 
 [node name="AbilityViewer" type="Control"]
+z_index = 1
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_fx24e")
 
-[node name="TempBackground" type="ColorRect" parent="."]
+[node name="TempBackground" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(200, 215)
 layout_mode = 0
-offset_right = 213.0
-offset_bottom = 249.0
-color = Color(0.380392, 0.439216, 0.466667, 1)
+offset_right = 200.0
+offset_bottom = 213.0
+texture = ExtResource("2_ht3tx")
 
 [node name="ConditionLabel" type="Label" parent="."]
 layout_mode = 0
-offset_top = 50.0
-offset_right = 132.0
-offset_bottom = 76.0
+offset_left = 4.0
+offset_top = 41.0
+offset_right = 196.0
+offset_bottom = 93.0
 text = "<Condition>"
 label_settings = ExtResource("2_o4wnd")
+autowrap_mode = 3
 
 [node name="ChargePointLabel" type="Label" parent="."]
 layout_mode = 0
-offset_left = 44.0
-offset_top = 15.0
-offset_right = 68.0
-offset_bottom = 28.0
+offset_left = 80.0
+offset_top = 14.0
+offset_right = 104.0
+offset_bottom = 27.0
 text = "<CP>"
 label_settings = ExtResource("2_o4wnd")
 
 [node name="AbilityPointLabel" type="Label" parent="."]
 layout_mode = 0
-offset_left = 44.0
-offset_right = 68.0
-offset_bottom = 13.0
+offset_left = 22.0
+offset_top = 14.0
+offset_right = 46.0
+offset_bottom = 27.0
 text = "<AP>"
 label_settings = ExtResource("2_o4wnd")
 
 [node name="ChargeLabel" type="Label" parent="."]
 layout_mode = 0
-offset_left = 1.0
-offset_top = 115.0
-offset_right = 49.0
-offset_bottom = 138.0
+offset_left = 4.0
+offset_top = 106.0
+offset_right = 196.0
+offset_bottom = 145.0
 text = "<Charge>"
 label_settings = ExtResource("2_o4wnd")
+autowrap_mode = 3
 
 [node name="EffectLabel" type="Label" parent="."]
 layout_mode = 0
-offset_left = 1.0
-offset_top = 170.0
-offset_right = 49.0
-offset_bottom = 193.0
+offset_left = 4.0
+offset_top = 159.0
+offset_right = 196.0
+offset_bottom = 211.0
 text = "<Effect>"
 label_settings = ExtResource("2_o4wnd")
+autowrap_mode = 3
 
 [node name="ConditionHeader" type="Label" parent="."]
 layout_mode = 0
-offset_top = 35.0
-offset_right = 66.0
-offset_bottom = 48.0
+offset_left = 4.0
+offset_top = 28.0
+offset_right = 70.0
+offset_bottom = 41.0
 text = "Can Use If:"
 label_settings = ExtResource("3_mhftp")
 
 [node name="ChargeHeader" type="Label" parent="."]
 layout_mode = 0
-offset_left = 2.0
-offset_top = 102.0
-offset_right = 116.0
-offset_bottom = 115.0
+offset_left = 4.0
+offset_top = 93.0
+offset_right = 118.0
+offset_bottom = 106.0
 text = "Gain A Charge When:"
 label_settings = ExtResource("3_mhftp")
 
 [node name="EffectHeader" type="Label" parent="."]
 layout_mode = 0
-offset_left = 2.0
-offset_top = 156.0
-offset_right = 44.0
-offset_bottom = 169.0
+offset_left = 4.0
+offset_top = 145.0
+offset_right = 46.0
+offset_bottom = 158.0
 text = "Effect:"
 label_settings = ExtResource("3_mhftp")
 
 [node name="AbilityPointHeader" type="Label" parent="."]
 layout_mode = 0
-offset_right = 18.0
-offset_bottom = 13.0
+offset_left = 4.0
+offset_top = 14.0
+offset_right = 22.0
+offset_bottom = 27.0
 text = "AP:"
 label_settings = ExtResource("3_mhftp")
 
 [node name="ChargePointHeader" type="Label" parent="."]
 layout_mode = 0
+offset_left = 38.0
 offset_top = 14.0
-offset_right = 72.0
+offset_right = 80.0
 offset_bottom = 27.0
 text = "Charge:"
+label_settings = ExtResource("3_mhftp")
+
+[node name="NameHeader" type="Label" parent="."]
+layout_mode = 0
+offset_left = 4.0
+offset_right = 196.0
+offset_bottom = 13.0
+text = "<Name>"
 label_settings = ExtResource("3_mhftp")

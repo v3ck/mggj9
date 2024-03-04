@@ -23,12 +23,12 @@ namespace Logic.Simulation
             if (init)
             {
                 _unitOrder.Insert(_unitOrder.Count, id);
-                Debug.WriteLine($"Add [{_unitOrder.Count}]");
+                //Debug.WriteLine($"Add [{_unitOrder.Count}]");
             }
             else
             {
                 _unitOrder.Insert(_index, id);
-                Debug.WriteLine($"Add [{_index}]");
+                //Debug.WriteLine($"Add [{_index}]");
                 _index++;
             }
         }
@@ -45,7 +45,7 @@ namespace Logic.Simulation
             {
                 _index = 0;
             }
-            Debug.WriteLine($"Remove [{removeIndex}]");
+            //Debug.WriteLine($"Remove [{removeIndex}]");
         }
     }
 }

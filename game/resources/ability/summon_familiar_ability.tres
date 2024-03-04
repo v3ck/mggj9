@@ -12,3 +12,4 @@ condition_text = "There is an empty adjacent tile."
 effect_text = "Summon a Familiar in an adjacent tile that heals allies."
 charge_text = "An ally takes 1 damage."
 projectile_speed = 10.0
+rarity = 0

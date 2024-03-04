@@ -10,6 +10,6 @@ namespace Logic.Models
 
         public required int MaxHealth { get; init; }
 
-        public IList<string> Abilities { get; } = new List<string>();
+        public List<string> Abilities { get; } = [];
     }
 }
