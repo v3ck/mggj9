@@ -18,6 +18,8 @@ var abilityResourcesDict: Dictionary
 var unitDict: Dictionary
 var hero_id_map: Dictionary
 
+var rewards_earned: Array[AbilityResource] = []
+
 func _ready():
 	_connect_hud()
 	
@@ -79,7 +81,10 @@ func _location_to_position(location: Vector2i):
 	return grid.TileToPixel(location.x, location.y) + grid.position
 
 func _on_turn_timer_timeout():
-	$Logic.TakeTurn()
+	if not rewards_earned.is_empty():
+		hud.open_reward_picker(rewards_earned)
+	else:
+		$Logic.TakeTurn()
 
 func _on_logic_existence_changed(
 	id: int,
@@ -191,11 +196,11 @@ func _on_logic_reward_obtained(ability_codes: Array):
 	for code in ability_codes:
 		why_do_i_have_to_do_this.append(code)
 	var abilities = _ability_codes_to_abilities(why_do_i_have_to_do_this)
-	hud.open_reward_picker(abilities)
+	rewards_earned.append_array(abilities)
 
 func _on_hud_reward_picked(ability_code: String):
 	$Logic.AddCodexAbility(ability_code)
+	rewards_earned = []
 
 func _on_logic_score_changed(amount):
-	print(amount)
 	hud.update_score(amount)

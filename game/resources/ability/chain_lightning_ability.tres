@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="AbilityResource" load_steps=3 format=3 uid="uid://ud30akyd1x8l"]
+
+[ext_resource type="Texture2D" uid="uid://5fy8nnm7wrvy" path="res://sprites/spark_projectile.png" id="1_y6ait"]
+[ext_resource type="Script" path="res://resources/ability/ability_resource.gd" id="2_pg0an"]
+
+[resource]
+script = ExtResource("2_pg0an")
+code = "CHAIN_LIGHTNING"
+display_name = "Chain Lightning"
+max_charge = 3
+default_cost = 3
+condition_text = "There is a enemy within 2 tiles."
+effect_text = "Hits consecutive enemies each within 2 tiles of the last, dealing 1 damage plus 1 for each previous enemy."
+charge_text = "You traverse 3 tiles."
+projectile_texture = ExtResource("1_y6ait")
+projectile_speed = 2.0
+rarity = 2

@@ -13,5 +13,7 @@ namespace Logic.Simulation.Actions
         public required int Amount { get; init; }
 
         public required int PreviousAmount { get; init; }
+
+        public required int SourceUnitId { get; init; }
     }
 }

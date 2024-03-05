@@ -3,12 +3,18 @@ extends Control
 class_name AbilityListItem
 
 @export var resource: AbilityResource
+@export var uncommon_label_settings: LabelSettings
+@export var rare_label_settings: LabelSettings
 
 signal mouse_selected
 signal ability_viewed
 
 func _ready():
 	$NameLabel.text = resource.display_name
+	if 1 == resource.rarity:
+		$NameLabel.label_settings = uncommon_label_settings
+	elif 2 == resource.rarity:
+		$NameLabel.label_settings = rare_label_settings
 
 func highlight(enableHighlight: bool):
 	$Highlight.visible = enableHighlight

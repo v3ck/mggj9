@@ -88,7 +88,8 @@ namespace Logic.Simulation.Abilities
                 UnitId = targetUnit.Id,
                 Location = targetUnit.Location,
                 Amount = targetUnit.Health,
-                PreviousAmount = oldHealth
+                PreviousAmount = oldHealth,
+                SourceUnitId = _user.Id
             });
 
             if (targetUnit.Health <= 0)

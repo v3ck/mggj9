@@ -70,7 +70,6 @@ namespace Logic.Simulation.Abilities
                 return false;
             }
 
-            var candidates = _gameModel.Grid.WithinDistance(hex, 0, 1);
             if (_state.Units.Values
                 .Where(unit => unit.Location is not null)
                 .Where(unit => unit.Model.Faction == _user.Model.Faction)
@@ -114,7 +113,8 @@ namespace Logic.Simulation.Abilities
                 UnitId = target.Id,
                 Location = location,
                 Amount = target.Health,
-                PreviousAmount = oldHealth
+                PreviousAmount = oldHealth,
+                SourceUnitId = _user.Id
             });
 
             if (target.Health <= 0)

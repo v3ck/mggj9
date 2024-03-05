@@ -1,0 +1,8 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://dl68swompx4jv"]
+
+[ext_resource type="FontFile" uid="uid://b5ubunvnnpcpt" path="res://fonts/monogram.ttf" id="1_gnh5v"]
+
+[resource]
+line_spacing = 0.0
+font = ExtResource("1_gnh5v")
+font_color = Color(0.964706, 0.866667, 0.478431, 1)

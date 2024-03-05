@@ -189,9 +189,15 @@ namespace Logic.Simulation
                 return [];
             }
 
+            List<IBattleAction> actions = [];
             _state.Round++;
+            actions.Add(new RoundAction()
+            {
+                Round = _state.Round
+            });
             //Debug.WriteLine($"Round [{_state.Round}]");
-            return SpawnUnits();
+            actions.AddRange(SpawnUnits());
+            return actions;
         }
 
         private List<IBattleAction> SpawnUnits()

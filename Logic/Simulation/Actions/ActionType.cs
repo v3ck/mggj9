@@ -8,6 +8,7 @@
         Status,
         Existence,
         Reward,
-        Score
+        Score,
+        Round
     }
 }

@@ -61,7 +61,8 @@ namespace Logic.Simulation.Abilities
                     UnitId = target.Id,
                     Location = target.Location,
                     Amount = target.Health,
-                    PreviousAmount = oldHealth
+                    PreviousAmount = oldHealth,
+                    SourceUnitId = _user.Id
                 });
             }
 

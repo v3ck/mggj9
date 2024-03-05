@@ -4,14 +4,14 @@ using Logic.Simulation.Actions;
 
 namespace Logic.Simulation.Abilities
 {
-    internal class FireballAbility(AbilityModel model, BattleUnit user, BattleState state, GameModel gameModel)
+    internal class ExplosionAbility(AbilityModel model, BattleUnit user, BattleState state, GameModel gameModel)
         : BattleAbilityBase(model, user, state, gameModel)
     {
-        public override string Code => "FIREBALL";
+        public override string Code => "EXPLOSION";
 
         public static IBattleAbility Create(AbilityModel model, BattleUnit user, BattleState state, GameModel gameModel)
         {
-            return new FireballAbility(model, user, state, gameModel);
+            return new ExplosionAbility(model, user, state, gameModel);
         }
 
         protected override bool CanUseSpecific()
@@ -21,7 +21,43 @@ namespace Logic.Simulation.Abilities
 
         public override void TryCharge(IBattleAction action)
         {
-            // void
+            if (TryResetCharge(action))
+            {
+                return;
+            }
+
+            TryIncrementCharge(action);
+        }
+
+        private bool TryResetCharge(IBattleAction action)
+        {
+            if (action is not HealthAction healthAction)
+            {
+                return false;
+            }
+
+            if (healthAction.SourceUnitId != _user.Id)
+            {
+                return false;
+            }
+
+            if (0 <= (healthAction.Amount - healthAction.PreviousAmount))
+            {
+                return false;
+            }
+
+            _currentCharge = 0;
+            return true;
+        }
+
+        private void TryIncrementCharge(IBattleAction action)
+        {
+            if (action is not RoundAction)
+            {
+                return;
+            }
+
+            _currentCharge += 1;
         }
 
         protected override List<IBattleAction> UseSpecific()
@@ -33,7 +69,8 @@ namespace Logic.Simulation.Abilities
 
             var target = _gameModel.Grid.Hexes
                 .Where(IsTargetValid)
-                .Random();
+                .Shuffle()
+                .MaxBy(CountEnemiesHit);
 
             if (target is null)
             {
@@ -41,16 +78,9 @@ namespace Logic.Simulation.Abilities
             }
 
             List<IBattleAction> actions = [];
-            actions.Add(new AbilityAction()
+            foreach (var hex in _gameModel.Grid.WithinDistance(target, 0, 2))
             {
-                BeginLocation = _user.Location,
-                EndLocation = target,
-                Ability = Code
-            });
-
-            foreach (var hex in _gameModel.Grid.WithinDistance(target, 0, 1))
-            {
-                actions.AddRange(GetActionsAtLocation(hex));
+                actions.AddRange(GetActionsAtLocation(hex, target));
             }
 
             return actions;
@@ -64,7 +94,7 @@ namespace Logic.Simulation.Abilities
             }
 
             var distance = (hex - _user.Location).Magnitude;
-            if ((distance < 2) || (3 < distance))
+            if ((distance < 3) || (5 < distance))
             {
                 return false;
             }
@@ -72,20 +102,29 @@ namespace Logic.Simulation.Abilities
             if (_state.Units.Values
                 .Where(unit => unit.Location is not null)
                 .Where(unit => unit.Model.Faction == _user.Model.Faction)
-                .Where(unit => (hex - unit.Location).Magnitude <= 1)
+                .Where(unit => (hex - unit.Location).Magnitude <= 2)
                 .Any())
             {
                 return false;
             }
 
-            return _state.Units.Values
+            return 5 <= _state.Units.Values
                 .Where(unit => unit.Location is not null)
                 .Where(unit => unit.Model.Faction != _user.Model.Faction)
-                .Where(unit => (hex - unit.Location).Magnitude <= 1)
-                .Any();
+                .Where(unit => (hex - unit.Location).Magnitude <= 2)
+                .Count();
         }
 
-        private List<IBattleAction> GetActionsAtLocation(Hex location)
+        private int CountEnemiesHit(Hex hex)
+        {
+            return _state.Units.Values
+                .Where(unit => unit.Location is not null)
+                .Where(unit => (unit.Location - hex).Magnitude <= 2)
+                .Where(unit => unit.Model.Faction != _user.Model.Faction)
+                .Count();
+        }
+
+        private List<IBattleAction> GetActionsAtLocation(Hex location, Hex targetLocation)
         {
             var target = _state.Units.Values.Where(unit => location == unit.Location)
                 .FirstOrDefault();
@@ -94,10 +133,17 @@ namespace Logic.Simulation.Abilities
                 return [];
             }
 
-            var oldHealth = target.Health;
-            target.Health -= 3;
-
             List<IBattleAction> actions = [];
+            actions.Add(new AbilityAction()
+            {
+                BeginLocation = targetLocation,
+                EndLocation = location,
+                Ability = Code
+            });
+
+            var oldHealth = target.Health;
+            target.Health -= 10;
+
             actions.Add(new HealthAction()
             {
                 UnitId = target.Id,

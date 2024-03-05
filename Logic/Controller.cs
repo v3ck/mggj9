@@ -340,7 +340,7 @@ namespace Logic
             };
         }
 
-        private ScoreChangedEventArgs ScoreActionToEventArgs(IBattleAction action)
+        private static ScoreChangedEventArgs ScoreActionToEventArgs(IBattleAction action)
         {
             if (action is not ScoreAction scoreAction)
             {

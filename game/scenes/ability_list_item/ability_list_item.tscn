@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://djoortudd7ghi"]
+[gd_scene load_steps=7 format=3 uid="uid://djoortudd7ghi"]
 
 [ext_resource type="Script" path="res://scenes/ability_list_item/ability_list_item.gd" id="1_e7m8n"]
 [ext_resource type="Texture2D" uid="uid://17cyedqyof3w" path="res://sprites/ability_list_item_background.png" id="2_78joh"]
+[ext_resource type="LabelSettings" uid="uid://dl68swompx4jv" path="res://resources/label_settings/list_label_uncommon_settings.tres" id="2_gvrpr"]
 [ext_resource type="Texture2D" uid="uid://bf77603xqn8c0" path="res://sprites/ability_list_highlight.png" id="2_s82du"]
 [ext_resource type="LabelSettings" uid="uid://bknbg0c361emk" path="res://resources/label_settings/list_label_settings.tres" id="3_4fu78"]
+[ext_resource type="LabelSettings" uid="uid://drbrb53a6ldjn" path="res://resources/label_settings/list_label_rare_settings.tres" id="3_f6dvf"]
 
 [node name="AbilityListItem" type="Control"]
 custom_minimum_size = Vector2(200, 17)
@@ -12,6 +14,8 @@ anchors_preset = 0
 offset_right = 200.0
 offset_bottom = 17.0
 script = ExtResource("1_e7m8n")
+uncommon_label_settings = ExtResource("2_gvrpr")
+rare_label_settings = ExtResource("3_f6dvf")
 
 [node name="Background" type="TextureRect" parent="."]
 custom_minimum_size = Vector2(200, 17)

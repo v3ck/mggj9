@@ -7,6 +7,7 @@
 
 [node name="AbilityViewer" type="Control"]
 z_index = 1
+custom_minimum_size = Vector2(200, 215)
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_fx24e")
@@ -29,6 +30,7 @@ label_settings = ExtResource("2_o4wnd")
 autowrap_mode = 3
 
 [node name="ChargePointLabel" type="Label" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 80.0
 offset_top = 14.0
@@ -81,7 +83,7 @@ offset_left = 4.0
 offset_top = 93.0
 offset_right = 118.0
 offset_bottom = 106.0
-text = "Gain A Charge When:"
+text = "Charged When:"
 label_settings = ExtResource("3_mhftp")
 
 [node name="EffectHeader" type="Label" parent="."]
@@ -103,6 +105,7 @@ text = "AP:"
 label_settings = ExtResource("3_mhftp")
 
 [node name="ChargePointHeader" type="Label" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 38.0
 offset_top = 14.0

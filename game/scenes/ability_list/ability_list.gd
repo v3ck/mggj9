@@ -21,7 +21,7 @@ func refresh(abilities: Array[AbilityResource]):
 		selection_changed.emit()
 
 func _clear():
-	var items = $Container.get_children()
+	var items = $Scroll/Container.get_children()
 	for item in items:
 		_remove(item)
 	
@@ -30,21 +30,21 @@ func _add(ability: AbilityResource) -> bool:
 	item.resource = ability
 	item.mouse_selected.connect(_on_item_mouse_selected.bind(item))
 	item.ability_viewed.connect(_on_item_ability_viewed.bind(item))
-	$Container.add_child(item)
+	$Scroll/Container.add_child(item)
 	if has_selection and selected_ability_code == ability.code:
 		item.highlight(true)
 		return true
 	return false
 
 func _remove(item: AbilityListItem):
-	$Container.remove_child(item)
+	$Scroll/Container.remove_child(item)
 	item.mouse_selected.disconnect(_on_item_mouse_selected)
 	item.queue_free()
 
 func _on_item_mouse_selected(item: AbilityListItem):
 	if has_selection and selected_ability_code == item.resource.code:
 		return
-	var items = $Container.get_children()
+	var items = $Scroll/Container.get_children()
 	for otherItem in items:
 		(otherItem as AbilityListItem).highlight(false)
 	item.highlight(true)
@@ -56,4 +56,15 @@ func _on_item_ability_viewed(item: AbilityListItem):
 	var ability_viewer = ability_viewer_scene.instantiate()
 	ability_viewer.display(item.resource)
 	add_child(ability_viewer)
+	ability_viewer.global_position.x = clamp(
+		ability_viewer.global_position.x,
+		0,
+		GlobalSettings.x_pixels - ability_viewer.size.x)
+	ability_viewer.global_position.y = clamp(
+		ability_viewer.global_position.y,
+		0,
+		GlobalSettings.y_pixels - ability_viewer.size.y)
+	print(ability_viewer.global_position)
+	print(ability_viewer.position)
+	
 
