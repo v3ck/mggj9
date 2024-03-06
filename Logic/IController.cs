@@ -22,6 +22,8 @@ namespace Logic
 
         public event EventHandler<ScoreChangedEventArgs>? ScoreChanged;
 
+        public event EventHandler<RoundChangedEventArgs>? RoundChanged;
+
         public void StartBattle();
 
         public void TakeTurn();

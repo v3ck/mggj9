@@ -30,6 +30,9 @@ namespace Game
         [Signal]
         public delegate void ScoreChangedEventHandler(int amount);
 
+        [Signal]
+        public delegate void RoundChangedEventHandler(int round);
+
         private readonly Logic.IController _controller = Logic.Api.CreateController();
 
         public override void _Ready()
@@ -41,6 +44,7 @@ namespace Game
             _controller.ExistenceChanged += Controller_ExistenceChanged;
             _controller.RewardObtained += Controller_RewardObtained;
             _controller.ScoreChanged += Controller_ScoreChanged;
+            _controller.RoundChanged += Controller_RoundChanged;
         }
 
         public void AddUnit(Resource unitResource)
@@ -196,6 +200,13 @@ namespace Game
             EmitSignal(
                 SignalName.ScoreChanged,
                 e.Amount);
+        }
+
+        private void Controller_RoundChanged(object sender, Logic.Events.RoundChangedEventArgs e)
+        {
+            EmitSignal(
+                SignalName.RoundChanged,
+                e.Round);
         }
 
         private static Vector2I IntVector2ToVector2I(IntVector2 iv)

@@ -1,9 +1,9 @@
-[gd_resource type="Resource" script_class="SpawnResource" load_steps=3 format=3 uid="uid://bexj1ak44vewr"]
+[gd_resource type="Resource" script_class="SpawnResource" load_steps=3 format=3 uid="uid://7tt1u6stq2wj"]
 
 [ext_resource type="Script" path="res://resources/spawn/spawn_resource.gd" id="1_l8jpr"]
 [ext_resource type="Resource" uid="uid://mq6tutbmfcu1" path="res://resources/unit/slime_unit.tres" id="5_ea13d"]
 
 [resource]
 script = ExtResource("1_l8jpr")
-rounds = Array[int]([])
+rounds = Array[int]([2, 4, 6, 8, 12, 14, 16, 18, 22, 24, 26, 28, 32, 34, 36, 38])
 units = Array[Resource("res://resources/unit/unit_resource.gd")]([ExtResource("5_ea13d")])

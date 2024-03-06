@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="AbilityResource" load_steps=2 format=3 uid="uid://xsu7mbgr083b"]
+
+[ext_resource type="Script" path="res://resources/ability/ability_resource.gd" id="1_1iox4"]
+
+[resource]
+script = ExtResource("1_1iox4")
+code = "SUMMON_MARMOT"
+display_name = "Summon Marmot"
+max_charge = 5
+default_cost = 2
+condition_text = "There is an empty adjacent tile."
+effect_text = "Summon a magical Marmot in an adjacent tile that chases enemies."
+charge_text = "You have taken 5 damage."
+projectile_speed = 10.0
+rarity = 1

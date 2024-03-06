@@ -68,6 +68,9 @@ func open_reward_picker(abilities: Array[AbilityResource]):
 func update_score(score: int):
 	$ScoreLabel.text = "%d" % score
 
+func update_round(rnd: int):
+	$RoundLabel.text = "%d" % rnd
+
 func _on_ability_menu_ability_moved_up(ability_code: String):
 	ability_moved_up.emit(editing_unit_code, ability_code)
 	

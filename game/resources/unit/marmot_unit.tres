@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="UnitResource" load_steps=5 format=3 uid="uid://dg1evvn0kqeji"]
+
+[ext_resource type="Resource" uid="uid://dpd4vmophqpjb" path="res://resources/ability/slime_slap_ability.tres" id="1_djtp2"]
+[ext_resource type="Resource" uid="uid://b3dcbx6nx7h5l" path="res://resources/ability/approach_enemies_1_ability.tres" id="2_d3yda"]
+[ext_resource type="Script" path="res://resources/unit/unit_resource.gd" id="3_bfdpw"]
+[ext_resource type="Texture2D" uid="uid://br8sji83fmcny" path="res://sprites/marmot.png" id="4_rio6u"]
+
+[resource]
+script = ExtResource("3_bfdpw")
+code = "MARMOT"
+display_name = "Marmot"
+sprite_sheet = ExtResource("4_rio6u")
+default_health = 5
+faction = "GOOD"
+default_abilities = Array[Resource("res://resources/ability/ability_resource.gd")]([ExtResource("1_djtp2"), ExtResource("2_d3yda")])

@@ -2,6 +2,7 @@
 using Logic.Models;
 using Logic.Simulation;
 using Logic.Simulation.Actions;
+using System.Diagnostics;
 
 namespace Logic
 {
@@ -22,6 +23,8 @@ namespace Logic
         public event EventHandler<RewardObtainedEventArgs>? RewardObtained;
 
         public event EventHandler<ScoreChangedEventArgs>? ScoreChanged;
+
+        public event EventHandler<RoundChangedEventArgs>? RoundChanged;
 
         private readonly GameModel _model = new(new GameParameters()
         {
@@ -247,6 +250,9 @@ namespace Logic
                 case ActionType.Score:
                     ScoreChanged?.Invoke(this, ScoreActionToEventArgs(action));
                     break;
+                case ActionType.Round:
+                    RoundChanged?.Invoke(this, RoundActionToEventArgs(action));
+                    break;
             }
         }
 
@@ -350,6 +356,19 @@ namespace Logic
             return new ScoreChangedEventArgs()
             {
                 Amount = scoreAction.Amount
+            };
+        }
+
+        private static RoundChangedEventArgs RoundActionToEventArgs(IBattleAction action)
+        {
+            if (action is not RoundAction roundAction)
+            {
+                throw new ArgumentException("Incorrect ActionType", nameof(action));
+            }
+
+            return new RoundChangedEventArgs()
+            {
+                Round = roundAction.Round
             };
         }
     }

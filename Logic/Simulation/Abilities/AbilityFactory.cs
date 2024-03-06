@@ -22,7 +22,9 @@ namespace Logic.Simulation.Abilities
             { "ACCURATE_FIREBALL", typeof(AccurateFireballAbility) },
             { "SUMMON_FAMILIAR", typeof(SummonFamiliarAbility) },
             { "EXPLOSION", typeof(ExplosionAbility) },
-            { "CHAIN_LIGHTNING", typeof(ChainLightningAbility) }
+            { "CHAIN_LIGHTNING", typeof(ChainLightningAbility) },
+            { "SUMMON_MARMOT", typeof(SummonMarmotAbility) },
+            { "DARK_ORB", typeof(DarkOrbAbility) }
         };
 
         public static IBattleAbility? Create(AbilityModel model, BattleUnit user, BattleState battleState, GameModel gameModel)

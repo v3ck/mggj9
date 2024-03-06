@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="AbilityResource" load_steps=3 format=3 uid="uid://bh15jwmbfb4of"]
+
+[ext_resource type="Texture2D" uid="uid://dkms8dxiko8yl" path="res://sprites/dark_orb.png" id="1_dklj5"]
+[ext_resource type="Script" path="res://resources/ability/ability_resource.gd" id="2_7d882"]
+
+[resource]
+script = ExtResource("2_7d882")
+code = "DARK_ORB"
+display_name = "Dark Orb"
+max_charge = 0
+default_cost = 2
+condition_text = "There is an enemy within 3 tiles."
+effect_text = "Deal 3 damage to an enemy within 4 tiles."
+charge_text = ""
+projectile_texture = ExtResource("1_dklj5")
+projectile_speed = 4.0
+rarity = 0

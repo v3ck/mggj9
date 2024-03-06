@@ -50,6 +50,25 @@ text = "0"
 label_settings = ExtResource("8_58isv")
 horizontal_alignment = 2
 
+[node name="RoundHeader" type="Label" parent="."]
+layout_mode = 0
+offset_left = 415.0
+offset_top = 13.0
+offset_right = 451.0
+offset_bottom = 26.0
+text = "Round:"
+label_settings = ExtResource("8_58isv")
+
+[node name="RoundLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 452.0
+offset_top = 13.0
+offset_right = 477.0
+offset_bottom = 26.0
+text = "0"
+label_settings = ExtResource("8_58isv")
+horizontal_alignment = 2
+
 [connection signal="edit_clicked" from="YukaCard" to="." method="_on_yuka_card_edit_clicked"]
 [connection signal="edit_clicked" from="MikanCard" to="." method="_on_mikan_card_edit_clicked"]
 [connection signal="edit_clicked" from="KotoriCard" to="." method="_on_kotori_card_edit_clicked"]

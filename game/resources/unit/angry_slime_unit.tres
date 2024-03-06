@@ -10,6 +10,6 @@ script = ExtResource("3_2hmsr")
 code = "ANGRY_SLIME"
 display_name = "Angry Slime"
 sprite_sheet = ExtResource("4_sunec")
-default_health = 5
+default_health = 3
 faction = "EVIL"
 default_abilities = Array[Resource("res://resources/ability/ability_resource.gd")]([ExtResource("1_fweb7"), ExtResource("2_6vnqp")])

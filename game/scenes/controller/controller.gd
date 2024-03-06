@@ -204,3 +204,6 @@ func _on_hud_reward_picked(ability_code: String):
 
 func _on_logic_score_changed(amount):
 	hud.update_score(amount)
+
+func _on_logic_round_changed(rnd):
+	hud.update_round(rnd)

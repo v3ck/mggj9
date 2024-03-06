@@ -139,19 +139,23 @@ namespace Logic.Simulation
 
         private IBattleAction GenerateRewards()
         {
+            List<string> rewards = [];
+            foreach (var _ in Enumerable.Range(0, 3))
+            {
+                rewards.Add(GenerateReward(rewards));
+            }
             return new RewardAction
             {
-                AbilityCodes = Enumerable.Range(0, 3)
-                    .Select(x => GenerateReward())
-                    .ToArray()
+                AbilityCodes = [.. rewards]
             };
         }
 
-        private string GenerateReward()
+        private string GenerateReward(IEnumerable<string> rewardsFound)
         {
             var rand = rng.Next(13);
             var rarity = (rand < 1) ? 2 : ((rand < 4) ? 1 : 0);
             return _gameModel.Abilities.Values
+                .Where(ability => !rewardsFound.Contains(ability.Code))
                 .Where(ability => rarity == ability.Rarity)
                 .Random()?
                 .Code ?? string.Empty;
@@ -168,7 +172,16 @@ namespace Logic.Simulation
                 return candidates.MaxBy(hex => hex.Y);
             }
 
-            return candidates.MinBy(hex => hex.Y);
+            if (!_state.Units.Values.Any(u => "GOOD" == u.Model.Faction))
+            {
+                return candidates.MinBy(hex => hex.Y);
+            }
+
+            return candidates
+                .MaxBy(hex => _state.Units.Values
+                    .Where(u => "GOOD" == u.Model.Faction)
+                    .Where(u => u.Location is not null)
+                    .Min(u => (u.Location - hex).Magnitude));
         }
 
         private List<IBattleAction> ProcessUnitAction(int unitId)
