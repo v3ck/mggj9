@@ -9,6 +9,7 @@
         Existence,
         Reward,
         Score,
-        Round
+        Round,
+        Turn
     }
 }

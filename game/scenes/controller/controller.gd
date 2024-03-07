@@ -130,7 +130,7 @@ func _ping(location):
 	add_child(ping)
 	ping.play(_location_to_position(location))
 
-func _on_logic_status_changed(_id, _location, _status):
+func _on_logic_status_changed(_id, _location, _status, _is_active):
 	pass
 
 func _on_logic_ability_fired(fromLocation, toLocation, ability):

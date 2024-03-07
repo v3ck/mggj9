@@ -12,3 +12,4 @@ condition_text = "There is an enemy closer than 3 tiles away and a vacant adjace
 effect_text = "Move to an adjacent tile that is farther from any enemies."
 charge_text = ""
 projectile_speed = 10.0
+rarity = 1

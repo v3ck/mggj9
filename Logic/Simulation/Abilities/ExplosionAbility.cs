@@ -166,6 +166,15 @@ namespace Logic.Simulation.Abilities
                 _state.Units.Remove(target.Id);
             }
 
+            _user.StunTurns = Math.Max(_user.StunTurns, 3);
+            actions.Add(new StatusAction()
+            {
+                UnitId = _user.Id,
+                Location = _user.Location,
+                Status = "STUN",
+                Active = true
+            });
+
             return actions;
         }
     }

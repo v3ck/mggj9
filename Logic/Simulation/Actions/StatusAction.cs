@@ -1,5 +1,4 @@
 ﻿using Logic.Models;
-using Logic.Util;
 
 namespace Logic.Simulation.Actions
 {
@@ -12,5 +11,7 @@ namespace Logic.Simulation.Actions
         public required Hex Location { get; init; }
 
         public required string Status { get; init; }
+
+        public required bool Active { get; init; }
     }
 }

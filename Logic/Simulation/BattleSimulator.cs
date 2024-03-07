@@ -22,7 +22,7 @@ namespace Logic.Simulation
 
         public List<IBattleAction> Start()
         {
-            //Debug.WriteLine($"Round [{_state.Round}]");
+            Debug.WriteLine($"Round [{_state.Round}]");
             var actions = SpawnUnits();
             foreach (var action in actions)
             {
@@ -208,7 +208,7 @@ namespace Logic.Simulation
             {
                 Round = _state.Round
             });
-            //Debug.WriteLine($"Round [{_state.Round}]");
+            Debug.WriteLine($"Round [{_state.Round}]");
             actions.AddRange(SpawnUnits());
             return actions;
         }

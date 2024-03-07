@@ -1,6 +1,9 @@
 ﻿using Logic.Models;
 using Logic.Simulation.Abilities;
 using Logic.Simulation.Actions;
+using Logic.Util;
+using System;
+using System.Diagnostics;
 
 namespace Logic.Simulation
 {
@@ -29,6 +32,13 @@ namespace Logic.Simulation
         {
             get => _abilityPoints;
             set => _abilityPoints = value;
+        }
+
+        private int _stunTurns = 0;
+        public int StunTurns
+        {
+            get => _stunTurns;
+            set => _stunTurns = value;
         }
 
         //private readonly List<IBattleAbility> _abilities = [];
@@ -67,15 +77,53 @@ namespace Logic.Simulation
 
         public List<IBattleAction> Act()
         {
-            var ability = SelectAbility();
             List<IBattleAction> actions = [];
-            if (ability is not null && ability.CanPay())
+
+            bool isStunned = (0 < _stunTurns);
+            var ability = GetAbility(isStunned);
+            if (ability is not null)
             {
-                //Debug.WriteLine($"[{_model.Code}] used [{ability.Code}]");
-                actions = ability.Use();
+                actions.AddRange(ability.Use());
             }
+
+            var stunAction = CheckStun();
+            if (stunAction is not null)
+            {
+                actions.Add(stunAction);
+            }
+
             _abilityPoints++;
+            actions.Add(new TurnAction()
+            {
+                UnitId = Id,
+                UnitCode = _model.Code,
+                AbilityPoints = _abilityPoints,
+                AbilityCode = ability?.Code
+            });
+
             return actions;
+        }
+
+        private IBattleAbility? GetAbility(bool isStunned)
+        {
+            if (isStunned)
+            {
+                return null;
+            }
+
+            var ability = SelectAbility();
+            if (ability is null)
+            {
+                return null;
+            }
+            
+            if (!ability.CanPay())
+            {
+                return null;
+            }
+
+            Debug.WriteLine($"[{_model.Code}] used [{ability.Code}]");
+            return ability;
         }
 
         public void ChargeAbilities(IBattleAction action)
@@ -131,6 +179,33 @@ namespace Logic.Simulation
             }
 
             _abilities.Remove(abilityCode);
+        }
+
+        private IBattleAction? CheckStun()
+        {
+            if (0 == _stunTurns)
+            {
+                return null;
+            }
+
+            _stunTurns -= 1;
+            if (0 < _stunTurns)
+            {
+                return null;
+            }
+
+            if (Location is null)
+            {
+                return null;
+            }
+
+            return new StatusAction()
+            {
+                UnitId = Id,
+                Location = Location,
+                Status = "STUN",
+                Active = false
+            };
         }
     }
 }

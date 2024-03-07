@@ -60,14 +60,16 @@ namespace Logic
         private bool TryTakeTurn()
         {
             var actions = _simulator?.TakeTurn() ?? Enumerable.Empty<IBattleAction>();
-            if (!actions.Any())
-            {
-                return false;
-            }
-
             foreach (var action in actions)
             {
                 PropagateAction(action);
+            }
+
+            if (!actions.Any(action =>
+                (action is TurnAction turnAction) &&
+                (turnAction.AbilityCode is not null)))
+            {
+                return false;
             }
 
             return true;
@@ -283,7 +285,8 @@ namespace Logic
             {
                 UnitId = statusAction.UnitId,
                 Location = statusAction.Location.AsIntVector2,
-                Status = statusAction.Status
+                Status = statusAction.Status,
+                Active = statusAction.Active
             };
         }
 

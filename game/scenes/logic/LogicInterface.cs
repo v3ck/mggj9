@@ -13,7 +13,7 @@ namespace Game
         public delegate void UnitMovedEventHandler(int id, Vector2I fromLocation, Vector2I toLocation, bool isTeleport);
 
         [Signal]
-        public delegate void StatusChangedEventHandler(int id, Vector2I location, string status);
+        public delegate void StatusChangedEventHandler(int id, Vector2I location, string status, bool isActive);
 
         [Signal]
         public delegate void HealthChangedEventHandler(int id, Vector2I location, int health);
@@ -157,7 +157,8 @@ namespace Game
                 SignalName.StatusChanged,
                 e.UnitId,
                 IntVector2ToVector2I(e.Location),
-                e.Status);
+                e.Status,
+                e.Active);
         }
 
         private void Controller_HealthChanged(object sender, Logic.Events.HealthChangedEventArgs e)

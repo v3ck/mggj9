@@ -7,11 +7,11 @@
 script = ExtResource("2_lng7l")
 code = "EXPLOSION"
 display_name = "Explosion!"
-max_charge = 10
-default_cost = 3
+max_charge = 5
+default_cost = 2
 condition_text = "There is a circle of radius 3 within 5 tiles that has no allies and at least 5 enemies inside."
-effect_text = "Deal 10 damage to all units in a circle of radius 3 that has no allies and and least 5 enemies inside."
-charge_text = "10 consecutive rounds pass without you dealing any damage."
+effect_text = "Deal 10 damage to all units in a circle of radius 3 that has no allies and and least 5 enemies inside. Stun yourself for 3 rounds."
+charge_text = "5 consecutive rounds pass without you dealing any damage."
 projectile_texture = ExtResource("1_twu2t")
 projectile_speed = 2.0
 rarity = 2

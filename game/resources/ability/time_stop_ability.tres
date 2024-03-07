@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="AbilityResource" load_steps=2 format=3 uid="uid://co21cnb258fw2"]
+
+[ext_resource type="Script" path="res://resources/ability/ability_resource.gd" id="1_ng8sa"]
+
+[resource]
+script = ExtResource("1_ng8sa")
+code = "TIME_STOP"
+display_name = "Time Stop"
+max_charge = 3
+default_cost = 1
+condition_text = "Always."
+effect_text = "Stun all other units for 2 rounds."
+charge_text = "You expend all of your ability points in 3 consecutive rounds."
+projectile_speed = 10.0
+rarity = 2
