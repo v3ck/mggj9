@@ -142,7 +142,7 @@ namespace Logic.Simulation.Abilities
             });
 
             var oldHealth = target.Health;
-            target.Health -= 10;
+            target.Damage(10);
 
             actions.Add(new HealthAction()
             {

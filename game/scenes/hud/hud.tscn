@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cemn37sjhwln8"]
+[gd_scene load_steps=29 format=3 uid="uid://cemn37sjhwln8"]
 
 [ext_resource type="PackedScene" uid="uid://btuo78q6jws4f" path="res://scenes/unit_card/unit_card.tscn" id="1_1vts8"]
 [ext_resource type="Script" path="res://scenes/hud/hud.gd" id="1_8l0s3"]
@@ -8,6 +8,74 @@
 [ext_resource type="Resource" uid="uid://dqb3g7fvxn6lm" path="res://resources/unit/mikan_unit.tres" id="3_b86k0"]
 [ext_resource type="Resource" uid="uid://dcmrdtapq1wb2" path="res://resources/unit/kotori_unit.tres" id="4_h7fy0"]
 [ext_resource type="LabelSettings" uid="uid://cm8p2588pdjtu" path="res://resources/label_settings/header_label_settings.tres" id="8_58isv"]
+[ext_resource type="Texture2D" uid="uid://dfcpbv24xux58" path="res://sprites/pause_button.png" id="9_ev6mh"]
+[ext_resource type="Texture2D" uid="uid://bnara5c734pys" path="res://sprites/step_button.png" id="10_wx321"]
+[ext_resource type="Texture2D" uid="uid://b4lbwx20vaspk" path="res://sprites/play_button.png" id="11_op64l"]
+[ext_resource type="Texture2D" uid="uid://c0copotf2b1i7" path="res://sprites/fast_forward_button.png" id="12_adio4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ddlor"]
+atlas = ExtResource("9_ev6mh")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sfe7e"]
+atlas = ExtResource("9_ev6mh")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1afag"]
+atlas = ExtResource("9_ev6mh")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ln8cn"]
+atlas = ExtResource("9_ev6mh")
+region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pye04"]
+atlas = ExtResource("10_wx321")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2kaqo"]
+atlas = ExtResource("10_wx321")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8vad7"]
+atlas = ExtResource("10_wx321")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kwv5k"]
+atlas = ExtResource("10_wx321")
+region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y3jxw"]
+atlas = ExtResource("11_op64l")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fa3fp"]
+atlas = ExtResource("11_op64l")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7qn3h"]
+atlas = ExtResource("11_op64l")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ydyuh"]
+atlas = ExtResource("11_op64l")
+region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jxw3m"]
+atlas = ExtResource("12_adio4")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o0h4t"]
+atlas = ExtResource("12_adio4")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ghi20"]
+atlas = ExtResource("12_adio4")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v0mwc"]
+atlas = ExtResource("12_adio4")
+region = Rect2(72, 0, 24, 24)
 
 [node name="Hud" type="Control"]
 layout_mode = 3
@@ -21,16 +89,24 @@ ability_menu_scene = ExtResource("2_au8h6")
 reward_picker_scene = ExtResource("2_0406k")
 
 [node name="YukaCard" parent="." instance=ExtResource("1_1vts8")]
+offset_left = 5.0
+offset_top = 4.0
+offset_right = 106.0
+offset_bottom = 54.0
 unit_resource = ExtResource("2_o4gl3")
 
 [node name="MikanCard" parent="." instance=ExtResource("1_1vts8")]
-offset_top = 53.0
-offset_bottom = 53.0
+offset_left = 5.0
+offset_top = 57.0
+offset_right = 106.0
+offset_bottom = 107.0
 unit_resource = ExtResource("3_b86k0")
 
 [node name="KotoriCard" parent="." instance=ExtResource("1_1vts8")]
-offset_top = 106.0
-offset_bottom = 106.0
+offset_left = 5.0
+offset_top = 110.0
+offset_right = 106.0
+offset_bottom = 160.0
 unit_resource = ExtResource("4_h7fy0")
 
 [node name="ScoreHeader" type="Label" parent="."]
@@ -69,6 +145,83 @@ text = "0"
 label_settings = ExtResource("8_58isv")
 horizontal_alignment = 2
 
+[node name="PauseButton" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -476.0
+offset_top = -28.0
+offset_right = -452.0
+offset_bottom = -4.0
+grow_horizontal = 0
+grow_vertical = 0
+toggle_mode = true
+texture_normal = SubResource("AtlasTexture_ddlor")
+texture_pressed = SubResource("AtlasTexture_sfe7e")
+texture_hover = SubResource("AtlasTexture_1afag")
+texture_disabled = SubResource("AtlasTexture_ln8cn")
+
+[node name="StepButton" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -448.0
+offset_top = -28.0
+offset_right = -424.0
+offset_bottom = -4.0
+grow_horizontal = 0
+grow_vertical = 0
+texture_normal = SubResource("AtlasTexture_pye04")
+texture_pressed = SubResource("AtlasTexture_2kaqo")
+texture_hover = SubResource("AtlasTexture_8vad7")
+texture_disabled = SubResource("AtlasTexture_kwv5k")
+
+[node name="PlayButton" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -420.0
+offset_top = -28.0
+offset_right = -396.0
+offset_bottom = -4.0
+grow_horizontal = 0
+grow_vertical = 0
+texture_normal = SubResource("AtlasTexture_y3jxw")
+texture_pressed = SubResource("AtlasTexture_fa3fp")
+texture_hover = SubResource("AtlasTexture_7qn3h")
+texture_disabled = SubResource("AtlasTexture_ydyuh")
+
+[node name="FastForwardButton" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -392.0
+offset_top = -28.0
+offset_right = -368.0
+offset_bottom = -4.0
+grow_horizontal = 0
+grow_vertical = 0
+texture_normal = SubResource("AtlasTexture_jxw3m")
+texture_pressed = SubResource("AtlasTexture_o0h4t")
+texture_hover = SubResource("AtlasTexture_ghi20")
+texture_disabled = SubResource("AtlasTexture_v0mwc")
+
 [connection signal="edit_clicked" from="YukaCard" to="." method="_on_yuka_card_edit_clicked"]
 [connection signal="edit_clicked" from="MikanCard" to="." method="_on_mikan_card_edit_clicked"]
 [connection signal="edit_clicked" from="KotoriCard" to="." method="_on_kotori_card_edit_clicked"]
+[connection signal="toggled" from="PauseButton" to="." method="_on_pause_button_toggled"]
+[connection signal="button_up" from="StepButton" to="." method="_on_step_button_button_up"]
+[connection signal="button_up" from="PlayButton" to="." method="_on_play_button_button_up"]
+[connection signal="button_up" from="FastForwardButton" to="." method="_on_fast_forward_button_button_up"]

@@ -26,6 +26,8 @@ namespace Logic.Simulation.Abilities
             { "SUMMON_MARMOT", typeof(SummonMarmotAbility) },
             { "DARK_ORB", typeof(DarkOrbAbility) },
             { "TIME_STOP", typeof(TimeStopAbility) },
+            { "SHADOW_ORB", typeof(ShadowOrbAbility) },
+            { "STOMP", typeof(StompAbility) }
         };
 
         public static IBattleAbility? Create(AbilityModel model, BattleUnit user, BattleState battleState, GameModel gameModel)

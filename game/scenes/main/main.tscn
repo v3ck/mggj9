@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://bkv8538fxsc61"]
+[gd_scene load_steps=42 format=3 uid="uid://bkv8538fxsc61"]
 
 [ext_resource type="Script" path="res://scenes/main/main.gd" id="1_07pwd"]
 [ext_resource type="PackedScene" uid="uid://b6n0yvlutrlsb" path="res://scenes/grid/grid.tscn" id="1_wr1dv"]
@@ -28,6 +28,7 @@
 [ext_resource type="Resource" uid="uid://bejvo5xohpkwm" path="res://resources/ability/retreat_3_ability.tres" id="14_xgahi"]
 [ext_resource type="Resource" uid="uid://cb7ya2xfsl72w" path="res://resources/ability/assassinate_ability.tres" id="15_w4gft"]
 [ext_resource type="Resource" uid="uid://b3dcbx6nx7h5l" path="res://resources/ability/approach_enemies_1_ability.tres" id="16_aav7o"]
+[ext_resource type="Resource" uid="uid://cpeqjg3gvrihn" path="res://resources/unit/golem_unit.tres" id="17_cokxq"]
 [ext_resource type="Resource" uid="uid://b4btacdxuo1qf" path="res://resources/ability/fireball_ability.tres" id="23_u7p64"]
 [ext_resource type="Resource" uid="uid://2vs3hjxi157g" path="res://resources/ability/accurate_fireball_ability.tres" id="24_kvxay"]
 [ext_resource type="Resource" uid="uid://qg67ld7c5l8u" path="res://resources/ability/rest_ability.tres" id="25_6tlon"]
@@ -38,17 +39,29 @@
 [ext_resource type="Resource" uid="uid://xsu7mbgr083b" path="res://resources/ability/summon_marmot_ability.tres" id="31_t8ha8"]
 [ext_resource type="Resource" uid="uid://bh15jwmbfb4of" path="res://resources/ability/dark_orb_ability.tres" id="33_g0fmu"]
 [ext_resource type="Resource" uid="uid://co21cnb258fw2" path="res://resources/ability/time_stop_ability.tres" id="36_rrkc2"]
+[ext_resource type="Resource" uid="uid://0hm7avaqt6sv" path="res://resources/ability/shadow_orb_ability.tres" id="37_shqjk"]
+[ext_resource type="Resource" uid="uid://bhfeoe3o2kwf" path="res://resources/ability/stomp_ability.tres" id="39_ywq8t"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_07pwd")
 
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 480.0
+offset_bottom = 270.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0666667, 0.247059, 0.509804, 1)
+
 [node name="Grid" parent="." instance=ExtResource("1_wr1dv")]
-position = Vector2(216, 32)
+position = Vector2(144, 16)
 
 [node name="Controller" parent="." node_paths=PackedStringArray("grid", "hud") instance=ExtResource("6_88m1q")]
 spawnResources = Array[Resource("res://resources/spawn/spawn_resource.gd")]([ExtResource("4_88rut"), ExtResource("5_uhfy7"), ExtResource("5_nln8e"), ExtResource("6_dn4wb"), ExtResource("8_oy2a8")])
-unitResources = Array[Resource("res://resources/unit/unit_resource.gd")]([ExtResource("7_nqcj2"), ExtResource("8_ogbh4"), ExtResource("9_oe6ay"), ExtResource("10_efar8"), ExtResource("11_e41fa"), ExtResource("12_6uf5l"), ExtResource("13_q1q55"), ExtResource("14_7ah5y")])
-abilityResources = Array[Resource("res://resources/ability/ability_resource.gd")]([ExtResource("5_iwget"), ExtResource("6_jc3gg"), ExtResource("9_kjkqx"), ExtResource("10_w027o"), ExtResource("10_2phbt"), ExtResource("11_7uflm"), ExtResource("12_xnrpn"), ExtResource("13_vks4q"), ExtResource("14_xgahi"), ExtResource("15_w4gft"), ExtResource("16_aav7o"), ExtResource("23_u7p64"), ExtResource("24_kvxay"), ExtResource("25_6tlon"), ExtResource("27_bxpwg"), ExtResource("28_ylfgr"), ExtResource("29_astua"), ExtResource("31_t8ha8"), ExtResource("33_g0fmu"), ExtResource("36_rrkc2")])
+unitResources = Array[Resource("res://resources/unit/unit_resource.gd")]([ExtResource("7_nqcj2"), ExtResource("8_ogbh4"), ExtResource("9_oe6ay"), ExtResource("10_efar8"), ExtResource("11_e41fa"), ExtResource("12_6uf5l"), ExtResource("13_q1q55"), ExtResource("14_7ah5y"), ExtResource("17_cokxq")])
+abilityResources = Array[Resource("res://resources/ability/ability_resource.gd")]([ExtResource("5_iwget"), ExtResource("6_jc3gg"), ExtResource("9_kjkqx"), ExtResource("10_w027o"), ExtResource("10_2phbt"), ExtResource("11_7uflm"), ExtResource("12_xnrpn"), ExtResource("13_vks4q"), ExtResource("14_xgahi"), ExtResource("15_w4gft"), ExtResource("16_aav7o"), ExtResource("23_u7p64"), ExtResource("24_kvxay"), ExtResource("25_6tlon"), ExtResource("27_bxpwg"), ExtResource("28_ylfgr"), ExtResource("29_astua"), ExtResource("31_t8ha8"), ExtResource("33_g0fmu"), ExtResource("36_rrkc2"), ExtResource("37_shqjk"), ExtResource("39_ywq8t")])
 grid = NodePath("../Grid")
 hud = NodePath("../CanvasLayer/Hud")
 ping_scene = ExtResource("26_2bay3")

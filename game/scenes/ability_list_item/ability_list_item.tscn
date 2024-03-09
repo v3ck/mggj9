@@ -33,7 +33,7 @@ texture = ExtResource("2_s82du")
 stretch_mode = 2
 
 [node name="NameLabel" type="Label" parent="."]
-custom_minimum_size = Vector2(180, 13)
+custom_minimum_size = Vector2(190, 13)
 layout_mode = 0
 offset_left = 5.0
 offset_top = 1.0

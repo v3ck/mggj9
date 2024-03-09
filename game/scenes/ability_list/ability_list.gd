@@ -64,7 +64,5 @@ func _on_item_ability_viewed(item: AbilityListItem):
 		ability_viewer.global_position.y,
 		0,
 		GlobalSettings.y_pixels - ability_viewer.size.y)
-	print(ability_viewer.global_position)
-	print(ability_viewer.position)
 	
 

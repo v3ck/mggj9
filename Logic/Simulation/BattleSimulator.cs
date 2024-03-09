@@ -33,7 +33,7 @@ namespace Logic.Simulation
 
         public List<IBattleAction> TakeTurn()
         {
-            var (unitId, isEndOfRound) = _turnManager.Next();
+            var (unitId, isEndOfRound) = GetNextTurn();
             var unitActions = ProcessUnitAction(unitId);
             var endRoundActions = ProcessEndOfRound(isEndOfRound);
             var actions = unitActions.Concat(endRoundActions).ToList();
@@ -55,6 +55,21 @@ namespace Logic.Simulation
             {
                 unit.RefreshAbilities();
             }
+        }
+
+        private (int, bool) GetNextTurn()
+        {
+            var units = _state.Units.Values.Where(unit => 0 < unit.TimeTurns);
+            if (!units.Any())
+            {
+                return _turnManager.Next();
+            }
+
+            var id = units
+                .Shuffle()
+                .MaxBy(unit => unit.TimeTurns)
+                .Id;
+            return (id, false);
         }
 
         private void UpdateTurns(IBattleAction? action, bool isStarting)

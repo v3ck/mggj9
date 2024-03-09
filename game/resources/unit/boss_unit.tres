@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="UnitResource" load_steps=4 format=3 uid="uid://smcng0civcmi"]
+
+[ext_resource type="Texture2D" uid="uid://desa15bxlrlbc" path="res://sprites/boss.png" id="3_wwtng"]
+[ext_resource type="Resource" uid="uid://upemqtn7fyby" path="res://resources/ability/centre_walk_ability.tres" id="4_fsl0n"]
+[ext_resource type="Script" path="res://resources/unit/unit_resource.gd" id="6_dnsow"]
+
+[resource]
+script = ExtResource("6_dnsow")
+code = "BOSS"
+display_name = "Boss"
+sprite_sheet = ExtResource("3_wwtng")
+default_health = 50
+faction = "EVIL"
+default_abilities = Array[Resource("res://resources/ability/ability_resource.gd")]([ExtResource("4_fsl0n")])

@@ -12,6 +12,9 @@ class_name Controller
 @export var projectile_scene: PackedScene
 @export var ping_scene: PackedScene
 
+@export var normal_tick_rate: float = 2.0
+@export var fast_tick_rate: float = 8.0
+
 var unitResourcesDict: Dictionary
 var abilityResourcesDict: Dictionary
 
@@ -43,6 +46,9 @@ func _connect_hud():
 	hud.edit_clicked.connect(_on_hud_edit_clicked)
 	hud.paused.connect(_on_hud_paused)
 	hud.resumed.connect(_on_hud_resumed)
+	hud.stepped.connect(_on_hud_stepped)
+	hud.speed_normal.connect(_on_hud_speed_normal)
+	hud.speed_fast.connect(_on_hud_speed_fast)
 	hud.ability_moved_up.connect(_on_hud_ability_moved_up)
 	hud.ability_moved_down.connect(_on_hud_ability_moved_down)
 	hud.ability_equipped.connect(_on_hud_ability_equipped)
@@ -207,3 +213,14 @@ func _on_logic_score_changed(amount):
 
 func _on_logic_round_changed(rnd):
 	hud.update_round(rnd)
+
+func _on_hud_stepped():
+	$Logic.TakeTurn()
+
+func _on_hud_speed_normal():
+	GlobalSettings.tick_rate = normal_tick_rate
+	$TurnTimer.wait_time = 1.0 / GlobalSettings.tick_rate
+
+func _on_hud_speed_fast():
+	GlobalSettings.tick_rate = fast_tick_rate
+	$TurnTimer.wait_time = 1.0 / GlobalSettings.tick_rate

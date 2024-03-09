@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://btuo78q6jws4f"]
+[gd_scene load_steps=10 format=3 uid="uid://btuo78q6jws4f"]
 
 [ext_resource type="Script" path="res://scenes/unit_card/unit_card.gd" id="1_fv7yx"]
 [ext_resource type="Texture2D" uid="uid://cu51a58ffm2go" path="res://sprites/yuka_portrait.png" id="1_x80v0"]
+[ext_resource type="Texture2D" uid="uid://jmp3403rc4jp" path="res://sprites/unit_card_backing.png" id="2_ao6qd"]
 [ext_resource type="LabelSettings" uid="uid://b0r421v2a4uh5" path="res://resources/label_settings/card_label_settings.tres" id="2_hkr1u"]
 [ext_resource type="Texture2D" uid="uid://6hxeuol3hd7h" path="res://sprites/edit_button.png" id="4_p40gs"]
 
@@ -30,12 +31,12 @@ offset_right = 102.0
 offset_bottom = 50.0
 script = ExtResource("1_fv7yx")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="Backing" type="TextureRect" parent="."]
 layout_mode = 0
 offset_left = -1.0
 offset_right = 101.0
 offset_bottom = 50.0
-color = Color(0.172549, 0.490196, 0.388235, 1)
+texture = ExtResource("2_ao6qd")
 
 [node name="Portrait" type="Sprite2D" parent="."]
 position = Vector2(19, 30)

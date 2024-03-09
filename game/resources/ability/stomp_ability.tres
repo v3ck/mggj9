@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="AbilityResource" load_steps=2 format=3 uid="uid://bhfeoe3o2kwf"]
+
+[ext_resource type="Script" path="res://resources/ability/ability_resource.gd" id="2_eua73"]
+
+[resource]
+script = ExtResource("2_eua73")
+code = "STOMP"
+display_name = "Stomp"
+max_charge = 0
+default_cost = 2
+condition_text = "There is an adjacent enemy."
+effect_text = "Deal 3 damage to all adjacent enemies."
+charge_text = "Always."
+projectile_speed = 1.0
+rarity = -1

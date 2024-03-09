@@ -31,7 +31,7 @@ namespace Logic.Simulation.Abilities
             }
 
             var oldHealth = _user.Health;
-            _user.Health = Math.Min(_user.Model.MaxHealth, _user.Health + 1);
+            _user.Heal(1);
             if (oldHealth == _user.Health)
             {
                 return [];

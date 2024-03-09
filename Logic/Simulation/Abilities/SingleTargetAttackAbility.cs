@@ -51,7 +51,7 @@ namespace Logic.Simulation.Abilities
             });
 
             var oldHealth = target.Health;
-            target.Health -= _damage;
+            target.Damage(_damage);
             actions.Add(new HealthAction()
             {
                 UnitId = target.Id,

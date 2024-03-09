@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="UnitResource" load_steps=5 format=3 uid="uid://ca8gprwjoh0p8"]
 
-[ext_resource type="Resource" uid="uid://bh15jwmbfb4of" path="res://resources/ability/dark_orb_ability.tres" id="1_c4654"]
+[ext_resource type="Resource" uid="uid://0hm7avaqt6sv" path="res://resources/ability/shadow_orb_ability.tres" id="1_5qtom"]
 [ext_resource type="Resource" uid="uid://xll0sl7stcc1" path="res://resources/ability/random_walk_ability.tres" id="2_grf6q"]
 [ext_resource type="Script" path="res://resources/unit/unit_resource.gd" id="3_g2pmg"]
 [ext_resource type="Texture2D" uid="uid://bc6llostdeayx" path="res://sprites/darkness_spirit.png" id="4_0rloh"]
@@ -12,4 +12,4 @@ display_name = "Dark Spirit"
 sprite_sheet = ExtResource("4_0rloh")
 default_health = 1
 faction = "EVIL"
-default_abilities = Array[Resource("res://resources/ability/ability_resource.gd")]([ExtResource("1_c4654"), ExtResource("2_grf6q")])
+default_abilities = Array[Resource("res://resources/ability/ability_resource.gd")]([ExtResource("1_5qtom"), ExtResource("2_grf6q")])

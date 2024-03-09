@@ -50,9 +50,14 @@ namespace Logic.Simulation.Abilities
             });
 
             var oldHealth = target.Health;
-            target.Health = (target.Model.Faction == _user.Model.Faction) ?
-                Math.Min(target.Model.MaxHealth, target.Health + 1) :
-                target.Health - 1;
+            if (target.Model.Faction == _user.Model.Faction)
+            {
+                target.Heal(1);
+            }
+            else
+            {
+                target.Damage(1);
+            }
 
             if (oldHealth != target.Health)
             {

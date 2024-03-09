@@ -8,9 +8,14 @@ class_name Hud
 var editing_unit_code: String = ""
 var ability_menu: AbilityMenu
 
+var is_user_paused: bool = false
+
 signal edit_clicked(unit_code: String)
 signal paused
 signal resumed
+signal stepped
+signal speed_normal
+signal speed_fast
 signal ability_moved_up(unit_code: String, ability_code: String)
 signal ability_moved_down(unit_code: String, ability_code: String)
 signal ability_equipped(unit_code: String, ability_code: String)
@@ -84,8 +89,30 @@ func _on_ability_menu_ability_unequipped(ability_code: String):
 	ability_unequipped.emit(editing_unit_code, ability_code)
 
 func _on_ability_menu_closed():
+	if is_user_paused:
+		return
 	resumed.emit()
 
 func _on_reward_picker_ability_picked(ability_code: String):
 	reward_picked.emit(ability_code)
+	if is_user_paused:
+		return
 	resumed.emit()
+
+func _on_step_button_button_up():
+	stepped.emit()
+
+func _on_play_button_button_up():
+	speed_normal.emit()
+	$PauseButton.button_pressed = false
+
+func _on_fast_forward_button_button_up():
+	speed_fast.emit()
+	$PauseButton.button_pressed = false
+
+func _on_pause_button_toggled(toggled_on: bool):
+	is_user_paused = toggled_on
+	if toggled_on:
+		paused.emit()
+	else:
+		resumed.emit()

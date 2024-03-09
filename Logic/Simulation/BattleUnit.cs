@@ -41,6 +41,13 @@ namespace Logic.Simulation
             set => _stunTurns = value;
         }
 
+        private int _timeTurns = 0;
+        public int TimeTurns
+        {
+            get => _timeTurns;
+            set => _timeTurns = value;
+        }
+
         //private readonly List<IBattleAbility> _abilities = [];
         private readonly Dictionary<string, IBattleAbility> _abilities = new();
 
@@ -79,17 +86,23 @@ namespace Logic.Simulation
         {
             List<IBattleAction> actions = [];
 
-            bool isStunned = (0 < _stunTurns);
-            var ability = GetAbility(isStunned);
-            if (ability is not null)
+            var timeAction = CheckTime();
+            if (timeAction is not null)
             {
-                actions.AddRange(ability.Use());
+                actions.Add(timeAction);
             }
 
+            bool isStunned = (0 < _stunTurns);
             var stunAction = CheckStun();
             if (stunAction is not null)
             {
                 actions.Add(stunAction);
+            }
+
+            var ability = GetAbility(isStunned);
+            if (ability is not null)
+            {
+                actions.AddRange(ability.Use());
             }
 
             _abilityPoints++;
@@ -132,6 +145,16 @@ namespace Logic.Simulation
             {
                 ability.TryCharge(action);
             }
+        }
+
+        public void Damage(int amount)
+        {
+            _health = Math.Max(0, _health - amount);
+        }
+
+        public void Heal(int amount)
+        {
+            _health = Math.Min(_model.MaxHealth, _health + amount);
         }
 
         private IBattleAbility? SelectAbility()
@@ -205,6 +228,33 @@ namespace Logic.Simulation
                 Location = Location,
                 Status = "STUN",
                 Active = false
+            };
+        }
+
+        private IBattleAction? CheckTime()
+        {
+            if (0 == _timeTurns)
+            {
+                return null;
+            }
+
+            _timeTurns -= 1;
+            if (0 < _timeTurns)
+            {
+                return null;
+            }
+
+            if (_location is null)
+            {
+                return null;
+            }
+
+            return new StatusAction()
+            {
+                Active = false,
+                UnitId = _id,
+                Location = _location,
+                Status = "TIME"
             };
         }
     }

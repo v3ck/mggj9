@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://nlyr4c26msml"]
+
+[ext_resource type="Script" path="res://scenes/turn_log/turn_log.gd" id="1_3j2er"]
+[ext_resource type="PackedScene" uid="uid://dk1sp1vt6taq2" path="res://scenes/turn_log_item/turn_log_item.tscn" id="2_s10ht"]
+
+[node name="TurnLog" type="Control"]
+custom_minimum_size = Vector2(200, 89)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -280.0
+offset_bottom = -181.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3j2er")
+item_count = 5
+turn_log_item_scene = ExtResource("2_s10ht")
+
+[node name="Container" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(200, 89)
+layout_mode = 0
+theme_override_constants/separation = 1

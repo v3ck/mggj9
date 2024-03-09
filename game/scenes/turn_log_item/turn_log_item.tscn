@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://dk1sp1vt6taq2"]
+
+[ext_resource type="Script" path="res://scenes/turn_log_item/turn_log_item.gd" id="1_4funy"]
+[ext_resource type="LabelSettings" uid="uid://bknbg0c361emk" path="res://resources/label_settings/list_label_settings.tres" id="1_60dt0"]
+[ext_resource type="Texture2D" uid="uid://17cyedqyof3w" path="res://sprites/ability_list_item_background.png" id="1_esil3"]
+
+[node name="TurnLogItem" type="Control"]
+custom_minimum_size = Vector2(200, 17)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -280.0
+offset_bottom = -253.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4funy")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 17.0
+texture = ExtResource("1_esil3")
+
+[node name="Label" type="Label" parent="."]
+custom_minimum_size = Vector2(180, 13)
+layout_mode = 0
+offset_left = 5.0
+offset_top = 1.0
+offset_right = 195.0
+offset_bottom = 14.0
+text = "<None>"
+label_settings = ExtResource("1_60dt0")

@@ -35,39 +35,17 @@ namespace Logic.Simulation.Abilities
                 return [];
             }
 
+            _user.TimeTurns += 2;
             List<IBattleAction> actions = [];
-            foreach (var unit in _state.Units.Values)
+            var action = new StatusAction()
             {
-                var action = StunUnit(unit);
-                if (action is not null)
-                {
-                    actions.Add(action);
-                }
-            }
+                Active = true,
+                UnitId = _user.Id,
+                Location = _user.Location,
+                Status = "TIME"
+            };
 
             return actions;
-        }
-
-        private IBattleAction? StunUnit(BattleUnit unit)
-        {
-            if (unit?.Location is null)
-            {
-                return null;
-            }
-
-            if (unit.Id == _user.Id)
-            {
-                return null;
-            }
-
-            unit.StunTurns += 2;
-            return new StatusAction()
-            {
-                UnitId = unit.Id,
-                Location = unit.Location,
-                Status = "STUN",
-                Active = true
-            };
         }
     }
 }
