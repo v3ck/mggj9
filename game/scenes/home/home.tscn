@@ -1,0 +1,176 @@
+[gd_scene load_steps=11 format=3 uid="uid://v0v5kxar45ku"]
+
+[ext_resource type="Texture2D" uid="uid://cu51a58ffm2go" path="res://sprites/yuka_portrait.png" id="1_v6hc1"]
+[ext_resource type="Texture2D" uid="uid://cxrl3e01a3uqe" path="res://sprites/mikan_portrait.png" id="2_glifc"]
+[ext_resource type="Texture2D" uid="uid://brs2tw8ntjnuy" path="res://sprites/kotori_portrait.png" id="3_aso05"]
+[ext_resource type="Texture2D" uid="uid://dii28virsxohc" path="res://sprites/boss_portrait.png" id="4_t0yoe"]
+[ext_resource type="LabelSettings" uid="uid://dbqdiyf3xbom2" path="res://resources/label_settings/title_label_settings.tres" id="5_dt7c8"]
+[ext_resource type="Texture2D" uid="uid://bhnwxl1d5inoq" path="res://sprites/angry_slime.png" id="6_rso0t"]
+[ext_resource type="Texture2D" uid="uid://dxg1vfxxduy3n" path="res://sprites/familiar.png" id="7_mdyd5"]
+[ext_resource type="LabelSettings" uid="uid://bj2sjhi7lhamq" path="res://resources/label_settings/home_message_label_settings.tres" id="8_me5jx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kb32h"]
+atlas = ExtResource("6_rso0t")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ba76t"]
+atlas = ExtResource("7_mdyd5")
+region = Rect2(0, 0, 16, 16)
+
+[node name="Home" type="Node2D"]
+
+[node name="Canvas" type="Control" parent="."]
+custom_minimum_size = Vector2(480, 270)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Background" type="ColorRect" parent="Canvas"]
+custom_minimum_size = Vector2(480, 270)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0588235, 0.203922, 0.247059, 1)
+
+[node name="Title" type="Label" parent="Canvas"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -99.0
+offset_top = 28.0
+offset_right = 99.0
+offset_bottom = 66.0
+grow_horizontal = 2
+text = "AUTO SHOUJO"
+label_settings = ExtResource("5_dt7c8")
+
+[node name="Images" type="Control" parent="Canvas"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Yuka" type="TextureRect" parent="Canvas/Images"]
+offset_left = 56.0
+offset_top = 137.0
+offset_right = 88.0
+offset_bottom = 169.0
+texture = ExtResource("1_v6hc1")
+
+[node name="Mikan" type="TextureRect" parent="Canvas/Images"]
+offset_left = 99.0
+offset_top = 179.0
+offset_right = 131.0
+offset_bottom = 211.0
+texture = ExtResource("2_glifc")
+
+[node name="Kotori" type="TextureRect" parent="Canvas/Images"]
+offset_left = 39.0
+offset_top = 203.0
+offset_right = 71.0
+offset_bottom = 235.0
+texture = ExtResource("3_aso05")
+
+[node name="Satone" type="TextureRect" parent="Canvas/Images"]
+offset_left = 371.0
+offset_top = 146.0
+offset_right = 403.0
+offset_bottom = 178.0
+texture = ExtResource("4_t0yoe")
+flip_h = true
+
+[node name="Slime0" type="TextureRect" parent="Canvas/Images"]
+layout_mode = 0
+offset_left = 356.0
+offset_top = 182.0
+offset_right = 372.0
+offset_bottom = 198.0
+texture = SubResource("AtlasTexture_kb32h")
+flip_h = true
+
+[node name="Slime1" type="TextureRect" parent="Canvas/Images"]
+layout_mode = 0
+offset_left = 425.0
+offset_top = 158.0
+offset_right = 441.0
+offset_bottom = 174.0
+texture = SubResource("AtlasTexture_kb32h")
+flip_h = true
+
+[node name="Slime2" type="TextureRect" parent="Canvas/Images"]
+layout_mode = 0
+offset_left = 338.0
+offset_top = 142.0
+offset_right = 354.0
+offset_bottom = 158.0
+texture = SubResource("AtlasTexture_kb32h")
+flip_h = true
+
+[node name="Slime3" type="TextureRect" parent="Canvas/Images"]
+layout_mode = 0
+offset_left = 335.0
+offset_top = 211.0
+offset_right = 351.0
+offset_bottom = 227.0
+texture = SubResource("AtlasTexture_kb32h")
+flip_h = true
+
+[node name="Slime4" type="TextureRect" parent="Canvas/Images"]
+layout_mode = 0
+offset_left = 396.0
+offset_top = 199.0
+offset_right = 412.0
+offset_bottom = 215.0
+texture = SubResource("AtlasTexture_kb32h")
+flip_h = true
+
+[node name="Familiar" type="TextureRect" parent="Canvas/Images"]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 170.0
+offset_right = 37.0
+offset_bottom = 186.0
+texture = SubResource("AtlasTexture_ba76t")
+
+[node name="FailMessage" type="Label" parent="Canvas"]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -66.0
+offset_top = 87.0
+offset_right = 66.0
+offset_bottom = 113.0
+grow_horizontal = 2
+text = "You Failed!"
+label_settings = ExtResource("8_me5jx")
+horizontal_alignment = 1
+
+[node name="WinMessage" type="Label" parent="Canvas"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -66.0
+offset_top = 87.0
+offset_right = 66.0
+offset_bottom = 113.0
+grow_horizontal = 2
+text = "You Win!"
+label_settings = ExtResource("8_me5jx")
+horizontal_alignment = 1
+
+[node name="StartButton" type="TextureButton" parent="Canvas"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="InstructionsButton" type="TextureButton" parent="Canvas"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0

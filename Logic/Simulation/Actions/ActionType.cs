@@ -10,6 +10,7 @@
         Reward,
         Score,
         Round,
-        Turn
+        Turn,
+        AbilityPoint
     }
 }

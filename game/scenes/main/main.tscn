@@ -1,39 +1,51 @@
-[gd_scene load_steps=42 format=3 uid="uid://bkv8538fxsc61"]
+[gd_scene load_steps=57 format=3 uid="uid://bkv8538fxsc61"]
 
 [ext_resource type="Script" path="res://scenes/main/main.gd" id="1_07pwd"]
 [ext_resource type="PackedScene" uid="uid://b6n0yvlutrlsb" path="res://scenes/grid/grid.tscn" id="1_wr1dv"]
 [ext_resource type="PackedScene" uid="uid://cemn37sjhwln8" path="res://scenes/hud/hud.tscn" id="3_m8th6"]
-[ext_resource type="Resource" uid="uid://b75ok4sawwpf6" path="res://resources/spawn/round0_spawn.tres" id="4_88rut"]
+[ext_resource type="Resource" uid="uid://bomhkosn1k5ha" path="res://resources/spawn/yuka_spawn.tres" id="4_asytx"]
+[ext_resource type="Resource" uid="uid://dk7gg02c4fkp7" path="res://resources/spawn/mikan_spawn.tres" id="5_2ltcb"]
 [ext_resource type="Resource" uid="uid://xll0sl7stcc1" path="res://resources/ability/random_walk_ability.tres" id="5_iwget"]
-[ext_resource type="Resource" uid="uid://bexj1ak44vewr" path="res://resources/spawn/round_10_spawn.tres" id="5_nln8e"]
-[ext_resource type="Resource" uid="uid://7tt1u6stq2wj" path="res://resources/spawn/slime_spawn.tres" id="5_uhfy7"]
 [ext_resource type="PackedScene" uid="uid://wr0i5dvkm6gs" path="res://scenes/controller/controller.tscn" id="6_88m1q"]
-[ext_resource type="Resource" uid="uid://cpd44xrl32dcy" path="res://resources/spawn/round_20_spawn.tres" id="6_dn4wb"]
+[ext_resource type="Resource" uid="uid://dpp3xmmggj7y8" path="res://resources/spawn/kotori_spawn.tres" id="6_ecldq"]
 [ext_resource type="Resource" uid="uid://d0b7xwsdp5fet" path="res://resources/ability/spark_ability.tres" id="6_jc3gg"]
 [ext_resource type="Resource" uid="uid://ddqd1niuges3u" path="res://resources/unit/yuka_unit.tres" id="7_nqcj2"]
 [ext_resource type="Resource" uid="uid://dqb3g7fvxn6lm" path="res://resources/unit/mikan_unit.tres" id="8_ogbh4"]
-[ext_resource type="Resource" uid="uid://4m6prar6y2ap" path="res://resources/spawn/round_30_spawn.tres" id="8_oy2a8"]
+[ext_resource type="Resource" uid="uid://4w55rm06nvpy" path="res://resources/spawn/angry_slime_spawn_a.tres" id="8_v25f4"]
+[ext_resource type="Resource" uid="uid://dqs5xjxprpp5j" path="res://resources/spawn/angry_slime_spawn_b.tres" id="9_4puwr"]
 [ext_resource type="Resource" uid="uid://upemqtn7fyby" path="res://resources/ability/centre_walk_ability.tres" id="9_kjkqx"]
 [ext_resource type="Resource" uid="uid://dcmrdtapq1wb2" path="res://resources/unit/kotori_unit.tres" id="9_oe6ay"]
 [ext_resource type="Resource" uid="uid://bk8rf8066d7sg" path="res://resources/ability/approach_enemies_2_ability.tres" id="10_2phbt"]
 [ext_resource type="Resource" uid="uid://mq6tutbmfcu1" path="res://resources/unit/slime_unit.tres" id="10_efar8"]
 [ext_resource type="Resource" uid="uid://dvwcxiqf4xxwu" path="res://resources/ability/light_orb_ability.tres" id="10_w027o"]
 [ext_resource type="Resource" uid="uid://cuhdde8q8fjrd" path="res://resources/ability/approach_all_3_ability.tres" id="11_7uflm"]
+[ext_resource type="Resource" uid="uid://cpcae8paf3yul" path="res://resources/spawn/dark_spirit_spawn.tres" id="11_a4jhd"]
 [ext_resource type="Resource" uid="uid://6movworpe6ql" path="res://resources/unit/angry_slime_unit.tres" id="11_e41fa"]
+[ext_resource type="Resource" uid="uid://b2kqfua7bcm3e" path="res://resources/spawn/slime_spawn_a.tres" id="12_5whxh"]
 [ext_resource type="Resource" uid="uid://byq23g468qaw3" path="res://resources/unit/familiar_unit.tres" id="12_6uf5l"]
+[ext_resource type="Resource" uid="uid://ca7barokogpc0" path="res://resources/spawn/golem_spawn.tres" id="12_31lxx"]
 [ext_resource type="Resource" uid="uid://dpd4vmophqpjb" path="res://resources/ability/slime_slap_ability.tres" id="12_xnrpn"]
+[ext_resource type="Resource" uid="uid://qskpnawla0dg" path="res://resources/spawn/slime_spawn_b.tres" id="13_fuooc"]
 [ext_resource type="Resource" uid="uid://dg1evvn0kqeji" path="res://resources/unit/marmot_unit.tres" id="13_q1q55"]
 [ext_resource type="Resource" uid="uid://jduynkc2nju4" path="res://resources/ability/retreat_2_ability.tres" id="13_vks4q"]
+[ext_resource type="Resource" uid="uid://n4t6o3hs8dar" path="res://resources/spawn/dark_slime_spawn.tres" id="13_wodp0"]
 [ext_resource type="Resource" uid="uid://ca8gprwjoh0p8" path="res://resources/unit/dark_spirit_unit.tres" id="14_7ah5y"]
+[ext_resource type="Resource" uid="uid://defw1qmhgtp4m" path="res://resources/spawn/slime_spawn_c.tres" id="14_feom3"]
 [ext_resource type="Resource" uid="uid://bejvo5xohpkwm" path="res://resources/ability/retreat_3_ability.tres" id="14_xgahi"]
+[ext_resource type="Resource" uid="uid://sj1ileytykt7" path="res://resources/spawn/lucent_spirit_spawn.tres" id="15_8jy6j"]
+[ext_resource type="Resource" uid="uid://d1jsiri52lci3" path="res://resources/spawn/slime_spawn_d.tres" id="15_kwpp0"]
 [ext_resource type="Resource" uid="uid://cb7ya2xfsl72w" path="res://resources/ability/assassinate_ability.tres" id="15_w4gft"]
 [ext_resource type="Resource" uid="uid://b3dcbx6nx7h5l" path="res://resources/ability/approach_enemies_1_ability.tres" id="16_aav7o"]
+[ext_resource type="Resource" uid="uid://dsntmbqf71oj3" path="res://resources/spawn/boss_spawn.tres" id="16_dv1i4"]
 [ext_resource type="Resource" uid="uid://cpeqjg3gvrihn" path="res://resources/unit/golem_unit.tres" id="17_cokxq"]
+[ext_resource type="Resource" uid="uid://dh71vvdue40k6" path="res://resources/unit/dark_slime_unit.tres" id="23_qfd1w"]
 [ext_resource type="Resource" uid="uid://b4btacdxuo1qf" path="res://resources/ability/fireball_ability.tres" id="23_u7p64"]
 [ext_resource type="Resource" uid="uid://2vs3hjxi157g" path="res://resources/ability/accurate_fireball_ability.tres" id="24_kvxay"]
 [ext_resource type="Resource" uid="uid://qg67ld7c5l8u" path="res://resources/ability/rest_ability.tres" id="25_6tlon"]
 [ext_resource type="PackedScene" uid="uid://dpvca101loa23" path="res://scenes/ping/ping.tscn" id="26_2bay3"]
+[ext_resource type="Resource" uid="uid://bfsdp1buh602k" path="res://resources/unit/lucent_spirit_unit.tres" id="27_0t22j"]
 [ext_resource type="Resource" uid="uid://c6h2yam44f4s6" path="res://resources/ability/summon_familiar_ability.tres" id="27_bxpwg"]
+[ext_resource type="Resource" uid="uid://smcng0civcmi" path="res://resources/unit/boss_unit.tres" id="28_h3hgs"]
 [ext_resource type="Resource" uid="uid://brykdxcrnjcbq" path="res://resources/ability/explosion_ability.tres" id="28_ylfgr"]
 [ext_resource type="Resource" uid="uid://ud30akyd1x8l" path="res://resources/ability/chain_lightning_ability.tres" id="29_astua"]
 [ext_resource type="Resource" uid="uid://xsu7mbgr083b" path="res://resources/ability/summon_marmot_ability.tres" id="31_t8ha8"]
@@ -41,6 +53,9 @@
 [ext_resource type="Resource" uid="uid://co21cnb258fw2" path="res://resources/ability/time_stop_ability.tres" id="36_rrkc2"]
 [ext_resource type="Resource" uid="uid://0hm7avaqt6sv" path="res://resources/ability/shadow_orb_ability.tres" id="37_shqjk"]
 [ext_resource type="Resource" uid="uid://bhfeoe3o2kwf" path="res://resources/ability/stomp_ability.tres" id="39_ywq8t"]
+[ext_resource type="Resource" uid="uid://c0r5lulylqp7b" path="res://resources/ability/slime_burst_ability.tres" id="46_5okvg"]
+[ext_resource type="Resource" uid="uid://bko86gvkn5pup" path="res://resources/ability/light_beam_ability.tres" id="53_uxmsy"]
+[ext_resource type="Resource" uid="uid://bi0l2521hyejt" path="res://resources/ability/approach_enemies_3_ability.tres" id="54_cye8n"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_07pwd")
@@ -53,15 +68,15 @@ offset_right = 480.0
 offset_bottom = 270.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.0666667, 0.247059, 0.509804, 1)
+color = Color(0.0823529, 0.0823529, 0.337255, 1)
 
 [node name="Grid" parent="." instance=ExtResource("1_wr1dv")]
 position = Vector2(144, 16)
 
 [node name="Controller" parent="." node_paths=PackedStringArray("grid", "hud") instance=ExtResource("6_88m1q")]
-spawnResources = Array[Resource("res://resources/spawn/spawn_resource.gd")]([ExtResource("4_88rut"), ExtResource("5_uhfy7"), ExtResource("5_nln8e"), ExtResource("6_dn4wb"), ExtResource("8_oy2a8")])
-unitResources = Array[Resource("res://resources/unit/unit_resource.gd")]([ExtResource("7_nqcj2"), ExtResource("8_ogbh4"), ExtResource("9_oe6ay"), ExtResource("10_efar8"), ExtResource("11_e41fa"), ExtResource("12_6uf5l"), ExtResource("13_q1q55"), ExtResource("14_7ah5y"), ExtResource("17_cokxq")])
-abilityResources = Array[Resource("res://resources/ability/ability_resource.gd")]([ExtResource("5_iwget"), ExtResource("6_jc3gg"), ExtResource("9_kjkqx"), ExtResource("10_w027o"), ExtResource("10_2phbt"), ExtResource("11_7uflm"), ExtResource("12_xnrpn"), ExtResource("13_vks4q"), ExtResource("14_xgahi"), ExtResource("15_w4gft"), ExtResource("16_aav7o"), ExtResource("23_u7p64"), ExtResource("24_kvxay"), ExtResource("25_6tlon"), ExtResource("27_bxpwg"), ExtResource("28_ylfgr"), ExtResource("29_astua"), ExtResource("31_t8ha8"), ExtResource("33_g0fmu"), ExtResource("36_rrkc2"), ExtResource("37_shqjk"), ExtResource("39_ywq8t")])
+spawnResources = Array[Resource("res://resources/spawn/spawn_resource.gd")]([ExtResource("4_asytx"), ExtResource("5_2ltcb"), ExtResource("6_ecldq"), ExtResource("8_v25f4"), ExtResource("9_4puwr"), ExtResource("11_a4jhd"), ExtResource("12_31lxx"), ExtResource("13_wodp0"), ExtResource("12_5whxh"), ExtResource("13_fuooc"), ExtResource("14_feom3"), ExtResource("15_kwpp0"), ExtResource("15_8jy6j"), ExtResource("16_dv1i4")])
+unitResources = Array[Resource("res://resources/unit/unit_resource.gd")]([ExtResource("7_nqcj2"), ExtResource("8_ogbh4"), ExtResource("9_oe6ay"), ExtResource("10_efar8"), ExtResource("11_e41fa"), ExtResource("12_6uf5l"), ExtResource("13_q1q55"), ExtResource("14_7ah5y"), ExtResource("17_cokxq"), ExtResource("23_qfd1w"), ExtResource("27_0t22j"), ExtResource("28_h3hgs")])
+abilityResources = Array[Resource("res://resources/ability/ability_resource.gd")]([ExtResource("5_iwget"), ExtResource("6_jc3gg"), ExtResource("9_kjkqx"), ExtResource("10_w027o"), ExtResource("10_2phbt"), ExtResource("11_7uflm"), ExtResource("12_xnrpn"), ExtResource("13_vks4q"), ExtResource("14_xgahi"), ExtResource("15_w4gft"), ExtResource("16_aav7o"), ExtResource("23_u7p64"), ExtResource("24_kvxay"), ExtResource("25_6tlon"), ExtResource("27_bxpwg"), ExtResource("28_ylfgr"), ExtResource("29_astua"), ExtResource("31_t8ha8"), ExtResource("33_g0fmu"), ExtResource("36_rrkc2"), ExtResource("37_shqjk"), ExtResource("39_ywq8t"), ExtResource("46_5okvg"), ExtResource("53_uxmsy"), ExtResource("54_cye8n")])
 grid = NodePath("../Grid")
 hud = NodePath("../CanvasLayer/Hud")
 ping_scene = ExtResource("26_2bay3")

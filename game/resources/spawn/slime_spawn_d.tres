@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="SpawnResource" load_steps=3 format=3 uid="uid://d1jsiri52lci3"]
+
+[ext_resource type="Script" path="res://resources/spawn/spawn_resource.gd" id="1_sxywr"]
+[ext_resource type="Resource" uid="uid://mq6tutbmfcu1" path="res://resources/unit/slime_unit.tres" id="2_r4jw1"]
+
+[resource]
+script = ExtResource("1_sxywr")
+begin_round = 60
+end_round = 100
+unit_resource = ExtResource("2_r4jw1")
+rate = 0.2
+volatility = 1.0

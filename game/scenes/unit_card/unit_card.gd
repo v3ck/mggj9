@@ -13,7 +13,7 @@ func _ready():
 	$NameLabel.text = unit_resource.display_name
 	max_health = unit_resource.default_health
 	set_health(max_health)
-	set_ability_points(-1)
+	set_ability_points(1)
 
 func _on_edit_button_button_down():
 	edit_clicked.emit()

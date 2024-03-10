@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="SpawnResource" load_steps=3 format=3 uid="uid://n4t6o3hs8dar"]
+
+[ext_resource type="Script" path="res://resources/spawn/spawn_resource.gd" id="1_plhjh"]
+[ext_resource type="Resource" uid="uid://dh71vvdue40k6" path="res://resources/unit/dark_slime_unit.tres" id="2_vede3"]
+
+[resource]
+script = ExtResource("1_plhjh")
+begin_round = 80
+end_round = 100
+unit_resource = ExtResource("2_vede3")
+rate = 0.2
+volatility = 0.5

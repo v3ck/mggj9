@@ -24,6 +24,8 @@ namespace Logic
 
         public event EventHandler<RoundChangedEventArgs>? RoundChanged;
 
+        public event EventHandler<AbilityPointsChangedEventArgs>? AbilityPointsChanged;
+
         public void StartBattle();
 
         public void TakeTurn();
@@ -46,7 +48,7 @@ namespace Logic
 
         public void UnequipAbility(string unitCode, string abilityCode);
 
-        public void AddSpawn(int[] rounds, string[] unitCodes);
+        public void AddSpawn(int beginRound, int endRound, string unitCode, double rate, double volatility);
 
         public void AddAbility(string abilityCode, int maxCharge, int cost, int rarity);
     }

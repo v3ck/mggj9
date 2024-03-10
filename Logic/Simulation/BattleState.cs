@@ -2,8 +2,11 @@
 {
     internal class BattleState
     {
-        private readonly IDictionary<int, BattleUnit> _units = new Dictionary<int, BattleUnit>();
-        public IDictionary<int, BattleUnit> Units => _units;
+        private readonly Dictionary<int, BattleUnit> _units = [];
+        public Dictionary<int, BattleUnit> Units => _units;
+
+        private readonly List<BattleSpawn> _spawns = [];
+        public List<BattleSpawn> Spawns => _spawns;
 
         public int Round { get; set; }
 

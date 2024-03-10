@@ -105,12 +105,18 @@ namespace Logic.Simulation
                 actions.AddRange(ability.Use());
             }
 
-            _abilityPoints++;
+            _abilityPoints += 1;
+
+            actions.Add(new AbilityPointAction()
+            {
+                UnitId = _id,
+                Amount = _abilityPoints
+            });
+
             actions.Add(new TurnAction()
             {
                 UnitId = Id,
                 UnitCode = _model.Code,
-                AbilityPoints = _abilityPoints,
                 AbilityCode = ability?.Code
             });
 
@@ -135,7 +141,7 @@ namespace Logic.Simulation
                 return null;
             }
 
-            Debug.WriteLine($"[{_model.Code}] used [{ability.Code}]");
+            //Debug.WriteLine($"[{_model.Code}] used [{ability.Code}]");
             return ability;
         }
 

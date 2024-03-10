@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="SpawnResource" load_steps=3 format=3 uid="uid://dsntmbqf71oj3"]
+
+[ext_resource type="Script" path="res://resources/spawn/spawn_resource.gd" id="1_pglfy"]
+[ext_resource type="Resource" uid="uid://smcng0civcmi" path="res://resources/unit/boss_unit.tres" id="2_agdt6"]
+
+[resource]
+script = ExtResource("1_pglfy")
+begin_round = 100
+end_round = 101
+unit_resource = ExtResource("2_agdt6")
+rate = 1.0
+volatility = 0.0

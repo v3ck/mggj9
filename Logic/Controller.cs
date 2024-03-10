@@ -26,6 +26,8 @@ namespace Logic
 
         public event EventHandler<RoundChangedEventArgs>? RoundChanged;
 
+        public event EventHandler<AbilityPointsChangedEventArgs>? AbilityPointsChanged;
+
         private readonly GameModel _model = new(new GameParameters()
         {
             GridRadius = 5,
@@ -200,18 +202,16 @@ namespace Logic
             _simulator?.UpdateUnitAbilities(unitCode);
         }
 
-        public void AddSpawn(int[] rounds, string[] unitCodes)
+        public void AddSpawn(int beginRound, int endRound, string unitCode, double rate, double volatility)
         {
-            foreach (var round in rounds)
+            _model.Spawns.Add(new SpawnModel()
             {
-                _model.Spawns.Add(
-                    round,
-                    new SpawnModel()
-                    {
-                        UnitCodes = unitCodes,
-                        Round = round
-                    });
-            }
+                BeginRound = beginRound,
+                EndRound = endRound,
+                UnitCode = unitCode,
+                Rate = rate,
+                Volatility = volatility
+            });
         }
 
         public void AddAbility(string abilityCode, int maxCharge, int cost, int rarity)
@@ -254,6 +254,9 @@ namespace Logic
                     break;
                 case ActionType.Round:
                     RoundChanged?.Invoke(this, RoundActionToEventArgs(action));
+                    break;
+                case ActionType.AbilityPoint:
+                    AbilityPointsChanged?.Invoke(this, AbilityPointActionToEventArgs(action));
                     break;
             }
         }
@@ -372,6 +375,20 @@ namespace Logic
             return new RoundChangedEventArgs()
             {
                 Round = roundAction.Round
+            };
+        }
+
+        private static AbilityPointsChangedEventArgs AbilityPointActionToEventArgs(IBattleAction action)
+        {
+            if (action is not AbilityPointAction abilityPointAction)
+            {
+                throw new ArgumentException("Incorrect ActionType", nameof(action));
+            }
+
+            return new AbilityPointsChangedEventArgs()
+            {
+                UnitId = abilityPointAction.UnitId,
+                Amount = abilityPointAction.Amount
             };
         }
     }

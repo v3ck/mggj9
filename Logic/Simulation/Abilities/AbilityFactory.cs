@@ -27,7 +27,10 @@ namespace Logic.Simulation.Abilities
             { "DARK_ORB", typeof(DarkOrbAbility) },
             { "TIME_STOP", typeof(TimeStopAbility) },
             { "SHADOW_ORB", typeof(ShadowOrbAbility) },
-            { "STOMP", typeof(StompAbility) }
+            { "STOMP", typeof(StompAbility) },
+            { "SLIME_BURST", typeof(SlimeBurstAbility) },
+            { "LIGHT_BEAM", typeof(LightBeamAbility) },
+            { "APPROACH_ENEMIES_3", typeof(ApproachEnemies3Ability) }
         };
 
         public static IBattleAbility? Create(AbilityModel model, BattleUnit user, BattleState battleState, GameModel gameModel)

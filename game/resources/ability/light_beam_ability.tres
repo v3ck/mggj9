@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="AbilityResource" load_steps=3 format=3 uid="uid://bko86gvkn5pup"]
+
+[ext_resource type="Texture2D" uid="uid://c3rm5p8rf267j" path="res://sprites/light_beam.png" id="1_vs5aj"]
+[ext_resource type="Script" path="res://resources/ability/ability_resource.gd" id="2_yhcbw"]
+
+[resource]
+script = ExtResource("2_yhcbw")
+code = "LIGHT_BEAM"
+display_name = "Light Beam"
+max_charge = 0
+default_cost = 1
+condition_text = "There is a enemy within 3 tiles."
+effect_text = "Deals 2 damage to an enemy within 3 tiles and another enemy adjacent to it."
+charge_text = "Always."
+projectile_texture = ExtResource("1_vs5aj")
+projectile_speed = 4.0
+rarity = -1

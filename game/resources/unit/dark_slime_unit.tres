@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="UnitResource" load_steps=5 format=3 uid="uid://dh71vvdue40k6"]
+
+[ext_resource type="Resource" uid="uid://c0r5lulylqp7b" path="res://resources/ability/slime_burst_ability.tres" id="1_peqlk"]
+[ext_resource type="Resource" uid="uid://b3dcbx6nx7h5l" path="res://resources/ability/approach_enemies_1_ability.tres" id="2_4ixqn"]
+[ext_resource type="Script" path="res://resources/unit/unit_resource.gd" id="3_2wdvc"]
+[ext_resource type="Texture2D" uid="uid://d0spjag3qpnrv" path="res://sprites/dark_slime.png" id="4_vsrpn"]
+
+[resource]
+script = ExtResource("3_2wdvc")
+code = "DARK_SLIME"
+display_name = "Dark Slime"
+sprite_sheet = ExtResource("4_vsrpn")
+default_health = 6
+faction = "EVIL"
+default_abilities = Array[Resource("res://resources/ability/ability_resource.gd")]([ExtResource("1_peqlk"), ExtResource("2_4ixqn")])

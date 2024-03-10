@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="SpawnResource" load_steps=3 format=3 uid="uid://cpcae8paf3yul"]
+
+[ext_resource type="Script" path="res://resources/spawn/spawn_resource.gd" id="1_jl2oa"]
+[ext_resource type="Resource" uid="uid://ca8gprwjoh0p8" path="res://resources/unit/dark_spirit_unit.tres" id="2_oxhe8"]
+
+[resource]
+script = ExtResource("1_jl2oa")
+begin_round = 20
+end_round = 80
+unit_resource = ExtResource("2_oxhe8")
+rate = 0.2
+volatility = 0.5

@@ -21,7 +21,7 @@ var abilityResourcesDict: Dictionary
 var unitDict: Dictionary
 var hero_id_map: Dictionary
 
-var rewards_earned: Array[AbilityResource] = []
+var rewards_earned: Array[Reward] = []
 
 func _ready():
 	_connect_hud()
@@ -54,6 +54,7 @@ func _connect_hud():
 	hud.ability_equipped.connect(_on_hud_ability_equipped)
 	hud.ability_unequipped.connect(_on_hud_ability_unequipped)
 	hud.reward_picked.connect(_on_hud_reward_picked)
+	hud.reward_requested.connect(_on_hud_reward_requested)
 
 func _destroy_unit(id: int):
 	if not unitDict.has(id):
@@ -87,10 +88,7 @@ func _location_to_position(location: Vector2i):
 	return grid.TileToPixel(location.x, location.y) + grid.position
 
 func _on_turn_timer_timeout():
-	if not rewards_earned.is_empty():
-		hud.open_reward_picker(rewards_earned)
-	else:
-		$Logic.TakeTurn()
+	$Logic.TakeTurn()
 
 func _on_logic_existence_changed(
 	id: int,
@@ -128,7 +126,7 @@ func _on_logic_health_changed(id, location, health):
 		return
 	var unit = unitDict[id]
 	unit.set_health(max(0, health))
-	hud.update_unit(unit.resource.code, health, -1)
+	hud.update_unit_health(unit.resource.code, health)
 	_ping(location)
 
 func _ping(location):
@@ -202,11 +200,24 @@ func _on_logic_reward_obtained(ability_codes: Array):
 	for code in ability_codes:
 		why_do_i_have_to_do_this.append(code)
 	var abilities = _ability_codes_to_abilities(why_do_i_have_to_do_this)
-	rewards_earned.append_array(abilities)
+	var reward = Reward.new()
+	reward.abilities = abilities
+	rewards_earned.push_back(reward)
+	hud.update_rewards(rewards_earned.size())
 
 func _on_hud_reward_picked(ability_code: String):
 	$Logic.AddCodexAbility(ability_code)
-	rewards_earned = []
+	offer_reward()
+
+func _on_hud_reward_requested():
+	offer_reward()
+
+func offer_reward():
+	if rewards_earned.is_empty():
+		return
+	var rewards = rewards_earned.pop_front()
+	hud.update_rewards(rewards_earned.size())
+	hud.open_reward_picker(rewards.abilities)
 
 func _on_logic_score_changed(amount):
 	hud.update_score(amount)
@@ -224,3 +235,10 @@ func _on_hud_speed_normal():
 func _on_hud_speed_fast():
 	GlobalSettings.tick_rate = fast_tick_rate
 	$TurnTimer.wait_time = 1.0 / GlobalSettings.tick_rate
+
+func _on_logic_ability_points_changed(id: int, amount: int):
+	if not unitDict.has(id):
+		print("Controller._on_logic_ability_points_changed() -- id not found")
+		return
+	var unit = unitDict[id]
+	hud.update_unit_ability_points(unit.resource.code, amount)

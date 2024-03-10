@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="UnitResource" load_steps=5 format=3 uid="uid://bfsdp1buh602k"]
+
+[ext_resource type="Resource" uid="uid://bko86gvkn5pup" path="res://resources/ability/light_beam_ability.tres" id="1_7fd6o"]
+[ext_resource type="Resource" uid="uid://bi0l2521hyejt" path="res://resources/ability/approach_enemies_3_ability.tres" id="2_5q1vq"]
+[ext_resource type="Script" path="res://resources/unit/unit_resource.gd" id="3_tesoo"]
+[ext_resource type="Texture2D" uid="uid://d3p3new16jh6q" path="res://sprites/lucent_spirit.png" id="4_pxwfb"]
+
+[resource]
+script = ExtResource("3_tesoo")
+code = "LUCENT_SPIRIT"
+display_name = "Lucent Spirit"
+sprite_sheet = ExtResource("4_pxwfb")
+default_health = 2
+faction = "EVIL"
+default_abilities = Array[Resource("res://resources/ability/ability_resource.gd")]([ExtResource("1_7fd6o"), ExtResource("2_5q1vq")])

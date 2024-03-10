@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="AbilityResource" load_steps=3 format=3 uid="uid://c0r5lulylqp7b"]
+
+[ext_resource type="Texture2D" uid="uid://dkms8dxiko8yl" path="res://sprites/dark_orb.png" id="1_4j8lh"]
+[ext_resource type="Script" path="res://resources/ability/ability_resource.gd" id="2_x5lvy"]
+
+[resource]
+script = ExtResource("2_x5lvy")
+code = "SLIME_BURST"
+display_name = "Slime Burst"
+max_charge = 0
+default_cost = 1
+condition_text = "There is an enemy within 2 tiles."
+effect_text = "Move to the tile within 1 tile that is adjacent to the most enemies and deal 3 damage to all of them."
+charge_text = "Always."
+projectile_texture = ExtResource("1_4j8lh")
+projectile_speed = 1.0
+rarity = -1

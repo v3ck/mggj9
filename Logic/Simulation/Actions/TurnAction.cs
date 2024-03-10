@@ -8,8 +8,6 @@
         
         public required string UnitCode { get; init; }
 
-        public required int AbilityPoints { get; init; }
-
         public required string? AbilityCode { get; init; }
     }
 }

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="AbilityResource" load_steps=2 format=3 uid="uid://bi0l2521hyejt"]
+
+[ext_resource type="Script" path="res://resources/ability/ability_resource.gd" id="1_rcb3w"]
+
+[resource]
+script = ExtResource("1_rcb3w")
+code = "APPROACH_ENEMIES_3"
+display_name = "Approach Enemies  (3 Tiles)"
+max_charge = 0
+default_cost = 1
+condition_text = "There is an enemy in play but not within 3 tiles."
+effect_text = "Move to the adjacent tile that is closest to an enemy."
+charge_text = ""
+projectile_speed = 10.0
+rarity = 1

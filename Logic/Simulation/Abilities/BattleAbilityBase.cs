@@ -41,7 +41,14 @@ namespace Logic.Simulation.Abilities
         {
             _currentCharge = 0;
             _user.AbilityPoints -= _model.Cost;
-            return UseSpecific();
+            List<IBattleAction> actions = [];
+            actions.AddRange(UseSpecific());
+            actions.Add(new AbilityPointAction()
+            {
+                UnitId = _user.Id,
+                Amount = _user.AbilityPoints
+            });
+            return actions;
         }
 
         protected abstract List<IBattleAction> UseSpecific();

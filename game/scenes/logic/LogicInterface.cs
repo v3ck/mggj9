@@ -33,6 +33,9 @@ namespace Game
         [Signal]
         public delegate void RoundChangedEventHandler(int round);
 
+        [Signal]
+        public delegate void AbilityPointsChangedEventHandler(int id, int amount);
+
         private readonly Logic.IController _controller = Logic.Api.CreateController();
 
         public override void _Ready()
@@ -45,6 +48,7 @@ namespace Game
             _controller.RewardObtained += Controller_RewardObtained;
             _controller.ScoreChanged += Controller_ScoreChanged;
             _controller.RoundChanged += Controller_RoundChanged;
+            _controller.AbilityPointsChanged += Controller_AbilityPointsChanged;
         }
 
         public void AddUnit(Resource unitResource)
@@ -65,21 +69,18 @@ namespace Game
 
         public void AddSpawn(Resource spawnResource)
         {
-            var rounds = spawnResource
-                .Get("rounds")
-                .AsGodotArray<int>()
-                .ToArray();
-
-            var unitCodes = spawnResource
-                .Get("units")
-                .AsGodotArray<Resource>()
-                .AsEnumerable()
-                .Select(unitResource => unitResource.Get("code").AsString())
-                .ToArray();
+            var unitCode = spawnResource
+                .Get("unit_resource")
+                .AsGodotObject()
+                .Get("code")
+                .AsString();
 
             _controller.AddSpawn(
-                rounds,
-                unitCodes);
+                spawnResource.Get("begin_round").AsInt32(),
+                spawnResource.Get("end_round").AsInt32(),
+                unitCode,
+                spawnResource.Get("rate").AsDouble(),
+                spawnResource.Get("volatility").AsDouble());
         }
 
         public void AddAbility(Resource abilityResource)
@@ -208,6 +209,14 @@ namespace Game
             EmitSignal(
                 SignalName.RoundChanged,
                 e.Round);
+        }
+
+        private void Controller_AbilityPointsChanged(object sender, Logic.Events.AbilityPointsChangedEventArgs e)
+        {
+            EmitSignal(
+                SignalName.AbilityPointsChanged,
+                e.UnitId,
+                e.Amount);
         }
 
         private static Vector2I IntVector2ToVector2I(IntVector2 iv)

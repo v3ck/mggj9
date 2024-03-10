@@ -21,9 +21,10 @@ signal ability_moved_down(unit_code: String, ability_code: String)
 signal ability_equipped(unit_code: String, ability_code: String)
 signal ability_unequipped(unit_code: String, ability_code: String)
 signal reward_picked(ability_code: String)
+signal reward_requested
 
-func update_unit(code: String, health: int, ability_points: int):
-	var update_func = func(card): _update_card(card, health, ability_points)
+func update_unit_health(code: String, health: int):
+	var update_func = func(card): _update_card_health(card, health)
 	match code:
 		"YUKA":
 			update_func.call($YukaCard)
@@ -32,9 +33,21 @@ func update_unit(code: String, health: int, ability_points: int):
 		"KOTORI":
 			update_func.call($KotoriCard)
 
-func _update_card(card: UnitCard, health: int, ability_points: int):
+func _update_card_health(card: UnitCard, health: int):
 	card.set_health(health)
-	card.set_ability_points(ability_points)
+
+func update_unit_ability_points(code: String, amount: int):
+	var update_func = func(card): _update_card_ability_points(card, amount)
+	match code:
+		"YUKA":
+			update_func.call($YukaCard)
+		"MIKAN":
+			update_func.call($MikanCard)
+		"KOTORI":
+			update_func.call($KotoriCard)
+
+func _update_card_ability_points(card: UnitCard, amount: int):
+	card.set_ability_points(amount)
 
 func _on_yuka_card_edit_clicked():
 	edit_clicked.emit("YUKA")
@@ -76,6 +89,10 @@ func update_score(score: int):
 func update_round(rnd: int):
 	$RoundLabel.text = "%d" % rnd
 
+func update_rewards(count: int):
+	$RewardLabel.text = "%d Unclaimed" % count	
+	$RewardButton.disabled = (0 == count)
+
 func _on_ability_menu_ability_moved_up(ability_code: String):
 	ability_moved_up.emit(editing_unit_code, ability_code)
 	
@@ -116,3 +133,6 @@ func _on_pause_button_toggled(toggled_on: bool):
 		paused.emit()
 	else:
 		resumed.emit()
+
+func _on_reward_button_button_up():
+	reward_requested.emit()

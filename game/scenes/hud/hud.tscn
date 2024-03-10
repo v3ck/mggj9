@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://cemn37sjhwln8"]
+[gd_scene load_steps=34 format=3 uid="uid://cemn37sjhwln8"]
 
 [ext_resource type="PackedScene" uid="uid://btuo78q6jws4f" path="res://scenes/unit_card/unit_card.tscn" id="1_1vts8"]
 [ext_resource type="Script" path="res://scenes/hud/hud.gd" id="1_8l0s3"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://bnara5c734pys" path="res://sprites/step_button.png" id="10_wx321"]
 [ext_resource type="Texture2D" uid="uid://b4lbwx20vaspk" path="res://sprites/play_button.png" id="11_op64l"]
 [ext_resource type="Texture2D" uid="uid://c0copotf2b1i7" path="res://sprites/fast_forward_button.png" id="12_adio4"]
+[ext_resource type="Texture2D" uid="uid://cvr25p015fetd" path="res://sprites/reward_button.png" id="13_7khnq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ddlor"]
 atlas = ExtResource("9_ev6mh")
@@ -77,6 +78,22 @@ region = Rect2(48, 0, 24, 24)
 atlas = ExtResource("12_adio4")
 region = Rect2(72, 0, 24, 24)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_mku3w"]
+atlas = ExtResource("13_7khnq")
+region = Rect2(0, 0, 43, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_elhmw"]
+atlas = ExtResource("13_7khnq")
+region = Rect2(43, 0, 43, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3be8o"]
+atlas = ExtResource("13_7khnq")
+region = Rect2(86, 0, 43, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_55urd"]
+atlas = ExtResource("13_7khnq")
+region = Rect2(129, 0, 43, 25)
+
 [node name="Hud" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -114,7 +131,7 @@ layout_mode = 0
 offset_left = 415.0
 offset_right = 451.0
 offset_bottom = 13.0
-text = "Score:"
+text = "Kills:"
 label_settings = ExtResource("8_58isv")
 
 [node name="ScoreLabel" type="Label" parent="."]
@@ -218,6 +235,35 @@ texture_pressed = SubResource("AtlasTexture_o0h4t")
 texture_hover = SubResource("AtlasTexture_ghi20")
 texture_disabled = SubResource("AtlasTexture_v0mwc")
 
+[node name="RewardButton" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -447.0
+offset_top = -86.0
+offset_right = -404.0
+offset_bottom = -61.0
+grow_horizontal = 0
+grow_vertical = 0
+disabled = true
+texture_normal = SubResource("AtlasTexture_mku3w")
+texture_pressed = SubResource("AtlasTexture_elhmw")
+texture_hover = SubResource("AtlasTexture_3be8o")
+texture_disabled = SubResource("AtlasTexture_55urd")
+
+[node name="RewardLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 209.0
+offset_right = 106.0
+offset_bottom = 222.0
+text = "0 Unclaimed"
+label_settings = ExtResource("8_58isv")
+horizontal_alignment = 1
+
 [connection signal="edit_clicked" from="YukaCard" to="." method="_on_yuka_card_edit_clicked"]
 [connection signal="edit_clicked" from="MikanCard" to="." method="_on_mikan_card_edit_clicked"]
 [connection signal="edit_clicked" from="KotoriCard" to="." method="_on_kotori_card_edit_clicked"]
@@ -225,3 +271,4 @@ texture_disabled = SubResource("AtlasTexture_v0mwc")
 [connection signal="button_up" from="StepButton" to="." method="_on_step_button_button_up"]
 [connection signal="button_up" from="PlayButton" to="." method="_on_play_button_button_up"]
 [connection signal="button_up" from="FastForwardButton" to="." method="_on_fast_forward_button_button_up"]
+[connection signal="button_up" from="RewardButton" to="." method="_on_reward_button_button_up"]

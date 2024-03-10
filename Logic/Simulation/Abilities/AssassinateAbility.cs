@@ -108,29 +108,6 @@ namespace Logic.Simulation.Abilities
             return actions;
         }
 
-        //private bool IsTargetValid(BattleUnit unit)
-        //{
-        //    if (_user.Location is null)
-        //    {
-        //        return false;
-        //    }
-
-        //    if (unit.Location is null)
-        //    {
-        //        return false;
-        //    }
-
-        //    if (unit.Model.Faction == _user.Model.Faction)
-        //    {
-        //        return false;
-        //    }
-
-        //    return _gameModel.Grid.AtDistance(unit.Location, 1)
-        //        .Where(hex => (hex - _user.Location).Magnitude < 3)
-        //        .Where(hex => !_state.Units.Values.Any(otherUnit => otherUnit.Location == hex))
-        //        .Any();
-        //}
-
         private bool IsTargetValid(Hex hex)
         {
             if (_user.Location is null)

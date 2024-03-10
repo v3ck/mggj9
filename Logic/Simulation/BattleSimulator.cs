@@ -22,7 +22,14 @@ namespace Logic.Simulation
 
         public List<IBattleAction> Start()
         {
-            Debug.WriteLine($"Round [{_state.Round}]");
+            //Debug.WriteLine($"Round [{_state.Round}]");
+
+            foreach (var spawnModel in _gameModel.Spawns)
+            {
+                _state.Spawns.Add(new BattleSpawn(spawnModel));
+                //Debug.WriteLine($"{spawnModel.UnitCode}, {spawnModel.BeginRound}, {spawnModel.EndRound}, {spawnModel.Rate}, {spawnModel.Volatility}");
+            }
+
             var actions = SpawnUnits();
             foreach (var action in actions)
             {
@@ -223,7 +230,7 @@ namespace Logic.Simulation
             {
                 Round = _state.Round
             });
-            Debug.WriteLine($"Round [{_state.Round}]");
+            //Debug.WriteLine($"Round [{_state.Round}]");
             actions.AddRange(SpawnUnits());
             return actions;
         }
@@ -231,20 +238,26 @@ namespace Logic.Simulation
         private List<IBattleAction> SpawnUnits()
         {
             List<IBattleAction> actions = [];
-            if (!_gameModel.Spawns.TryGetValue(_state.Round, out var spawn))
+            foreach (var spawn in _state.Spawns)
             {
-                return actions;
+                actions.AddRange(ProcSpawn(spawn));
             }
 
-            foreach (var unitCode in spawn.UnitCodes)
+            return actions;
+        }
+
+        private List<IBattleAction> ProcSpawn(BattleSpawn spawn)
+        {
+            List<IBattleAction> actions = [];
+            var count = spawn.Spawn(_state.Round);
+            foreach (var _ in Enumerable.Range(0, count))
             {
-                var action = TrySpawnUnit(unitCode);
+                var action = TrySpawnUnit(spawn.UnitCode);
                 if (action is not null)
                 {
                     actions.Add(action);
                 }
             }
-
             return actions;
         }
 

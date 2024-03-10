@@ -3,7 +3,7 @@
 namespace Logic.Simulation.Abilities
 {
     internal class ShadowOrbAbility(AbilityModel model, BattleUnit user, BattleState state, GameModel gameModel)
-        : SingleTargetAttackAbility(model, user, state, gameModel, 3, 2)
+        : SingleTargetAttackAbility(model, user, state, gameModel, 4, 2)
     {
         public override string Code => "SHADOW_ORB";
 
