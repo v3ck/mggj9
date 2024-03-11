@@ -4,11 +4,14 @@ class_name Hud
 
 @export var ability_menu_scene: PackedScene
 @export var reward_picker_scene: PackedScene
+@export var help_scene: PackedScene
 
 var editing_unit_code: String = ""
 var ability_menu: AbilityMenu
 
 var is_user_paused: bool = false
+
+var help_page: HelpPage
 
 signal edit_clicked(unit_code: String)
 signal paused
@@ -22,6 +25,11 @@ signal ability_equipped(unit_code: String, ability_code: String)
 signal ability_unequipped(unit_code: String, ability_code: String)
 signal reward_picked(ability_code: String)
 signal reward_requested
+signal sound_toggled(is_on: bool)
+signal quit
+
+func _ready():
+	$SoundButton.button_pressed = not GlobalSettings.sound_on
 
 func update_unit_health(code: String, health: int):
 	var update_func = func(card): _update_card_health(card, health)
@@ -111,10 +119,10 @@ func _on_ability_menu_closed():
 	resumed.emit()
 
 func _on_reward_picker_ability_picked(ability_code: String):
+	resumed.emit()
 	reward_picked.emit(ability_code)
 	if is_user_paused:
 		return
-	resumed.emit()
 
 func _on_step_button_button_up():
 	stepped.emit()
@@ -136,3 +144,20 @@ func _on_pause_button_toggled(toggled_on: bool):
 
 func _on_reward_button_button_up():
 	reward_requested.emit()
+
+func _on_help_button_button_up():
+	help_page = help_scene.instantiate()
+	help_page.exited.connect(_on_help_page_exited)
+	add_child(help_page)
+	paused.emit()
+
+func _on_sound_button_toggled(toggled_on):
+	sound_toggled.emit(!toggled_on)
+
+func _on_quit_button_button_up():
+	quit.emit()
+
+func _on_help_page_exited():
+	remove_child(help_page)
+	help_page.queue_free()
+	resumed.emit()

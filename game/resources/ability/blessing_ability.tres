@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="AbilityResource" load_steps=3 format=3 uid="uid://gq14fepqn7k0"]
+
+[ext_resource type="Texture2D" uid="uid://y3hd63y5pq62" path="res://sprites/light_orb_projectile.png" id="1_j3ey4"]
+[ext_resource type="Script" path="res://resources/ability/ability_resource.gd" id="2_m7xr8"]
+
+[resource]
+script = ExtResource("2_m7xr8")
+code = "BLESSING"
+display_name = "Blessing"
+max_charge = 3
+default_cost = 2
+condition_text = "There is an ally below half health."
+effect_text = "Restore 4 health to the ally missing the most health, including yourself."
+charge_text = "You have restored 4 health to other allies."
+projectile_texture = ExtResource("1_j3ey4")
+projectile_speed = 10.0
+rarity = 1

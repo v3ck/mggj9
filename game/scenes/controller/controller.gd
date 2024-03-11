@@ -7,6 +7,7 @@ class_name Controller
 @export var abilityResources: Array[AbilityResource]
 @export var grid: Grid
 @export var hud: Hud
+@export var audio_player: AudioStreamPlayer2D
 
 @export var unit_scene: PackedScene
 @export var projectile_scene: PackedScene
@@ -22,6 +23,10 @@ var unitDict: Dictionary
 var hero_id_map: Dictionary
 
 var rewards_earned: Array[Reward] = []
+
+var is_audio_playing: bool = false
+
+signal game_over(is_victory: bool, round: int, score: int)
 
 func _ready():
 	_connect_hud()
@@ -55,6 +60,8 @@ func _connect_hud():
 	hud.ability_unequipped.connect(_on_hud_ability_unequipped)
 	hud.reward_picked.connect(_on_hud_reward_picked)
 	hud.reward_requested.connect(_on_hud_reward_requested)
+	hud.sound_toggled.connect(_on_hud_sound_toggled)
+	hud.quit.connect(_on_hud_quit)
 
 func _destroy_unit(id: int):
 	if not unitDict.has(id):
@@ -134,8 +141,13 @@ func _ping(location):
 	add_child(ping)
 	ping.play(_location_to_position(location))
 
-func _on_logic_status_changed(_id, _location, _status, _is_active):
-	pass
+func _on_logic_status_changed(id, _location, status, is_active):
+	if not unitDict.has(id):
+		print("Controller._on_logic_status_changed() -- id not found")
+		return
+	var unit = unitDict[id]
+	if "STUN" == status:
+		unit.stun(is_active)
 
 func _on_logic_ability_fired(fromLocation, toLocation, ability):
 	if not abilityResourcesDict.has(ability):
@@ -242,3 +254,17 @@ func _on_logic_ability_points_changed(id: int, amount: int):
 		return
 	var unit = unitDict[id]
 	hud.update_unit_ability_points(unit.resource.code, amount)
+	
+func _on_hud_sound_toggled(is_on: bool):
+	if is_audio_playing:
+		audio_player.stream_paused = not is_on
+	elif is_on:
+		audio_player.play()
+		is_audio_playing = true
+	GlobalSettings.sound_on = is_on
+
+func _on_logic_game_over(isVictory, final_round, score):
+	game_over.emit(isVictory, final_round, score)
+
+func _on_hud_quit():
+	game_over.emit(false, 0, 0)

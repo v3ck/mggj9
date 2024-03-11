@@ -12,6 +12,9 @@ func _ready():
 func kill():
 	$DeathTimer.start(1.0 / GlobalSettings.tick_rate)
 
+func stun(is_stunned: bool):
+	$StunSprite.visible = is_stunned
+
 func set_health(current_health: int):
 	$HealthBar.update(current_health, resource.default_health)
 

@@ -11,6 +11,7 @@
         Score,
         Round,
         Turn,
-        AbilityPoint
+        AbilityPoint,
+        GameOver
     }
 }

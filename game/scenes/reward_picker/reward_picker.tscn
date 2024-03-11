@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://cdluvd2xr8u5k"]
+[gd_scene load_steps=10 format=3 uid="uid://cdluvd2xr8u5k"]
 
 [ext_resource type="PackedScene" uid="uid://dlcrb35vhekeg" path="res://scenes/ability_list/ability_list.tscn" id="1_8iufu"]
 [ext_resource type="Script" path="res://scenes/reward_picker/reward_picker.gd" id="1_efer1"]
 [ext_resource type="Texture2D" uid="uid://cl3mea1jd5ejq" path="res://sprites/accept_button.png" id="2_aun14"]
 [ext_resource type="LabelSettings" uid="uid://bq3a27jj6i6mt" path="res://resources/label_settings/list_header_label_settings.tres" id="3_7xkpm"]
+[ext_resource type="Texture2D" uid="uid://b11w61scsdwnm" path="res://sprites/view_ability_tip.png" id="5_27iwk"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nmhqr"]
 atlas = ExtResource("2_aun14")
@@ -74,9 +75,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -12.0
+offset_left = 2.0
 offset_top = 31.0
-offset_right = 12.0
+offset_right = 26.0
 offset_bottom = 55.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -85,6 +86,21 @@ texture_normal = SubResource("AtlasTexture_nmhqr")
 texture_pressed = SubResource("AtlasTexture_ekkmf")
 texture_hover = SubResource("AtlasTexture_5gfkq")
 texture_disabled = SubResource("AtlasTexture_x6fej")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -26.0
+offset_top = 31.0
+offset_right = -2.0
+offset_bottom = 55.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_27iwk")
 
 [connection signal="selection_changed" from="AbilityList" to="." method="_on_ability_list_selection_changed"]
 [connection signal="button_up" from="AcceptButton" to="." method="_on_accept_button_button_up"]

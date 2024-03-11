@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="UnitResource" load_steps=8 format=3 uid="uid://dcmrdtapq1wb2"]
+[gd_resource type="Resource" script_class="UnitResource" load_steps=9 format=3 uid="uid://dcmrdtapq1wb2"]
 
 [ext_resource type="Resource" uid="uid://upemqtn7fyby" path="res://resources/ability/centre_walk_ability.tres" id="1_83mll"]
 [ext_resource type="Resource" uid="uid://dvwcxiqf4xxwu" path="res://resources/ability/light_orb_ability.tres" id="1_dylil"]
+[ext_resource type="Resource" uid="uid://gq14fepqn7k0" path="res://resources/ability/blessing_ability.tres" id="1_tb7j4"]
 [ext_resource type="Resource" uid="uid://bk8rf8066d7sg" path="res://resources/ability/approach_enemies_2_ability.tres" id="2_7d8wp"]
 [ext_resource type="Script" path="res://resources/unit/unit_resource.gd" id="3_w5hvu"]
 [ext_resource type="Texture2D" uid="uid://bdv1ubjyexj7y" path="res://sprites/kotori.png" id="4_gktax"]
@@ -16,4 +17,4 @@ sprite_sheet = ExtResource("4_gktax")
 portrait_sprite = ExtResource("7_qg0qd")
 default_health = 20
 faction = "GOOD"
-default_abilities = Array[Resource("res://resources/ability/ability_resource.gd")]([ExtResource("1_dylil"), ExtResource("2_7d8wp"), ExtResource("5_nc1jf"), ExtResource("1_83mll")])
+default_abilities = Array[Resource("res://resources/ability/ability_resource.gd")]([ExtResource("1_tb7j4"), ExtResource("1_dylil"), ExtResource("2_7d8wp"), ExtResource("5_nc1jf"), ExtResource("1_83mll")])

@@ -37,13 +37,13 @@ namespace Logic.Simulation.Abilities
 
             _user.TimeTurns += 2;
             List<IBattleAction> actions = [];
-            var action = new StatusAction()
+            actions.Add(new StatusAction()
             {
                 Active = true,
                 UnitId = _user.Id,
                 Location = _user.Location,
                 Status = "TIME"
-            };
+            });
 
             return actions;
         }

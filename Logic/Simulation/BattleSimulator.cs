@@ -51,6 +51,7 @@ namespace Logic.Simulation
             }
 
             actions.AddRange(UpdateScores(actions));
+            actions.AddRange(CheckGameOver(actions));
 
             return actions;
         }
@@ -120,6 +121,59 @@ namespace Logic.Simulation
                 .Where(scoreAction => scoreAction is not null)
                 .Select(scoreAction => scoreAction!)
                 .ToList();
+        }
+
+        private List<IBattleAction> CheckGameOver(IEnumerable<IBattleAction> actions)
+        {
+            return actions
+                .Select(CheckActionForGameOver)
+                .Where(action => action is not null)
+                .Select(action => action!)
+                .ToList();
+        }
+
+        private IBattleAction? CheckActionForGameOver(IBattleAction action)
+        {
+            if (action is not ExistenceAction existenceAction)
+            {
+                return null;
+            }
+
+            if (existenceAction.Exists)
+            {
+                return null;
+            }
+
+            var won = false;
+            var lost = false;
+            switch (existenceAction.UnitCode)
+            {
+                case "BOSS":
+                    won = true;
+                    break;
+                case "YUKA":
+                case "MIKAN":
+                case "KOTORI":
+                    lost = !_state.Units.Values.Any(unit =>
+                        ("YUKA" == unit.Model.Code) ||
+                        ("MIKAN" == unit.Model.Code) ||
+                        ("KOTORI" == unit.Model.Code));
+                    break;
+                default:
+                    return null;
+            }
+
+            if (!won && !lost)
+            {
+                return null;
+            }
+
+            return new GameOverAction()
+            {
+                IsVictory = won,
+                Round = _state.Round,
+                Score = _state.Score
+            };
         }
 
         private List<IBattleAction> UpdateScore(IBattleAction? action)

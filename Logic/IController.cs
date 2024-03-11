@@ -26,6 +26,8 @@ namespace Logic
 
         public event EventHandler<AbilityPointsChangedEventArgs>? AbilityPointsChanged;
 
+        public event EventHandler<GameOverEventArgs>? GameOver;
+
         public void StartBattle();
 
         public void TakeTurn();

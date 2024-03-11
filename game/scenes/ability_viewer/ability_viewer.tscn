@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://crwc7ru5ynjdi"]
+[gd_scene load_steps=6 format=3 uid="uid://crwc7ru5ynjdi"]
 
 [ext_resource type="Script" path="res://scenes/ability_viewer/ability_viewer.gd" id="1_fx24e"]
 [ext_resource type="Texture2D" uid="uid://cwdhy1edisjdq" path="res://sprites/ability_viewer_background.png" id="2_ht3tx"]
 [ext_resource type="LabelSettings" uid="uid://nvqwigq2hu0h" path="res://resources/label_settings/normal_label_settings.tres" id="2_o4wnd"]
 [ext_resource type="LabelSettings" uid="uid://cm8p2588pdjtu" path="res://resources/label_settings/header_label_settings.tres" id="3_mhftp"]
+[ext_resource type="LabelSettings" uid="uid://dgo51dbypeoa" path="res://resources/label_settings/ability_header_label_settings.tres" id="4_ow2uu"]
 
 [node name="AbilityViewer" type="Control"]
 z_index = 1
@@ -12,7 +13,7 @@ layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_fx24e")
 
-[node name="TempBackground" type="TextureRect" parent="."]
+[node name="Background" type="TextureRect" parent="."]
 custom_minimum_size = Vector2(200, 215)
 layout_mode = 0
 offset_right = 200.0
@@ -75,7 +76,7 @@ offset_top = 28.0
 offset_right = 70.0
 offset_bottom = 41.0
 text = "Can Use If:"
-label_settings = ExtResource("3_mhftp")
+label_settings = ExtResource("4_ow2uu")
 
 [node name="ChargeHeader" type="Label" parent="."]
 layout_mode = 0
@@ -84,7 +85,7 @@ offset_top = 93.0
 offset_right = 118.0
 offset_bottom = 106.0
 text = "Charged When:"
-label_settings = ExtResource("3_mhftp")
+label_settings = ExtResource("4_ow2uu")
 
 [node name="EffectHeader" type="Label" parent="."]
 layout_mode = 0
@@ -93,7 +94,7 @@ offset_top = 145.0
 offset_right = 46.0
 offset_bottom = 158.0
 text = "Effect:"
-label_settings = ExtResource("3_mhftp")
+label_settings = ExtResource("4_ow2uu")
 
 [node name="AbilityPointHeader" type="Label" parent="."]
 layout_mode = 0
@@ -102,7 +103,7 @@ offset_top = 14.0
 offset_right = 22.0
 offset_bottom = 27.0
 text = "AP:"
-label_settings = ExtResource("3_mhftp")
+label_settings = ExtResource("4_ow2uu")
 
 [node name="ChargePointHeader" type="Label" parent="."]
 visible = false
@@ -120,4 +121,4 @@ offset_left = 4.0
 offset_right = 196.0
 offset_bottom = 13.0
 text = "<Name>"
-label_settings = ExtResource("3_mhftp")
+label_settings = ExtResource("4_ow2uu")

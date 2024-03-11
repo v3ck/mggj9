@@ -30,7 +30,8 @@ namespace Logic.Simulation.Abilities
             { "STOMP", typeof(StompAbility) },
             { "SLIME_BURST", typeof(SlimeBurstAbility) },
             { "LIGHT_BEAM", typeof(LightBeamAbility) },
-            { "APPROACH_ENEMIES_3", typeof(ApproachEnemies3Ability) }
+            { "APPROACH_ENEMIES_3", typeof(ApproachEnemies3Ability) },
+            { "BLESSING", typeof(BlessingAbility) }
         };
 
         public static IBattleAbility? Create(AbilityModel model, BattleUnit user, BattleState battleState, GameModel gameModel)

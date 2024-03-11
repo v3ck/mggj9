@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://borq772raudgp"]
+[gd_scene load_steps=32 format=3 uid="uid://borq772raudgp"]
 
 [ext_resource type="Script" path="res://scenes/ability_menu/ability_menu.gd" id="1_u3vyq"]
 [ext_resource type="PackedScene" uid="uid://dlcrb35vhekeg" path="res://scenes/ability_list/ability_list.tscn" id="2_kw6xt"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://jgqlqqchxlch" path="res://sprites/yuka.png" id="6_iguhp"]
 [ext_resource type="Texture2D" uid="uid://cl3mea1jd5ejq" path="res://sprites/accept_button.png" id="6_ywfay"]
 [ext_resource type="LabelSettings" uid="uid://bq3a27jj6i6mt" path="res://resources/label_settings/list_header_label_settings.tres" id="8_7rv7x"]
+[ext_resource type="Texture2D" uid="uid://b11w61scsdwnm" path="res://sprites/view_ability_tip.png" id="10_0um6g"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bwdh4"]
 atlas = ExtResource("3_0gchx")
@@ -254,8 +255,7 @@ offset_top = 4.0
 offset_right = 226.0
 offset_bottom = 17.0
 grow_horizontal = 2
-text = "Codex
-"
+text = "Codex - Unequipped"
 label_settings = ExtResource("8_7rv7x")
 horizontal_alignment = 1
 
@@ -270,6 +270,19 @@ offset_right = -186.0
 offset_bottom = 20.0
 grow_horizontal = 2
 texture = SubResource("AtlasTexture_4maog")
+stretch_mode = 2
+
+[node name="ViewTip" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 2.0
+offset_top = 24.0
+offset_right = 26.0
+offset_bottom = 48.0
+grow_horizontal = 2
+texture = ExtResource("10_0um6g")
 stretch_mode = 2
 
 [connection signal="selection_changed" from="UnitAbilityList" to="." method="_on_unit_ability_list_selection_changed"]

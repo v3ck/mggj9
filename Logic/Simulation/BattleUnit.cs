@@ -1,9 +1,6 @@
 ﻿using Logic.Models;
 using Logic.Simulation.Abilities;
 using Logic.Simulation.Actions;
-using Logic.Util;
-using System;
-using System.Diagnostics;
 
 namespace Logic.Simulation
 {
@@ -105,7 +102,7 @@ namespace Logic.Simulation
                 actions.AddRange(ability.Use());
             }
 
-            _abilityPoints += 1;
+            GainAbilityPoints(isStunned);
 
             actions.Add(new AbilityPointAction()
             {
@@ -143,6 +140,16 @@ namespace Logic.Simulation
 
             //Debug.WriteLine($"[{_model.Code}] used [{ability.Code}]");
             return ability;
+        }
+
+        private void GainAbilityPoints(bool isStunned)
+        {
+            if (isStunned)
+            {
+                return;
+            }
+
+            _abilityPoints += 1;
         }
 
         public void ChargeAbilities(IBattleAction action)

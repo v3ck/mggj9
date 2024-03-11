@@ -4,7 +4,10 @@ class_name AbilityViewer
 
 func display(abilityResource: AbilityResource):
 	$NameHeader.text = abilityResource.display_name
-	$ConditionLabel.text = abilityResource.condition_text
+	if "" == abilityResource.condition_text:
+		$ConditionLabel.text = "Always."
+	else:
+		$ConditionLabel.text = abilityResource.condition_text
 	if "" == abilityResource.charge_text:
 		$ChargeLabel.text = "Always."
 	else:

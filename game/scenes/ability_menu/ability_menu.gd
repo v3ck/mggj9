@@ -15,7 +15,7 @@ func set_available_abilities(abilities: Array[AbilityResource]):
 	$AvailableAbilityList.refresh(abilities)
 
 func set_unit(unit: UnitResource):
-	$UnitLabel.text = unit.display_name
+	$UnitLabel.text = "%s - Equipped" %unit.display_name
 	$UnitIcon.texture.atlas = unit.sprite_sheet
 
 func _on_move_up_button_button_up():

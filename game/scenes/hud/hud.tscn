@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://cemn37sjhwln8"]
+[gd_scene load_steps=50 format=3 uid="uid://cemn37sjhwln8"]
 
 [ext_resource type="PackedScene" uid="uid://btuo78q6jws4f" path="res://scenes/unit_card/unit_card.tscn" id="1_1vts8"]
 [ext_resource type="Script" path="res://scenes/hud/hud.gd" id="1_8l0s3"]
@@ -7,12 +7,16 @@
 [ext_resource type="Resource" uid="uid://ddqd1niuges3u" path="res://resources/unit/yuka_unit.tres" id="2_o4gl3"]
 [ext_resource type="Resource" uid="uid://dqb3g7fvxn6lm" path="res://resources/unit/mikan_unit.tres" id="3_b86k0"]
 [ext_resource type="Resource" uid="uid://dcmrdtapq1wb2" path="res://resources/unit/kotori_unit.tres" id="4_h7fy0"]
+[ext_resource type="PackedScene" uid="uid://dinr1sxkrrqf0" path="res://scenes/help_page/help_page.tscn" id="4_vlooy"]
 [ext_resource type="LabelSettings" uid="uid://cm8p2588pdjtu" path="res://resources/label_settings/header_label_settings.tres" id="8_58isv"]
 [ext_resource type="Texture2D" uid="uid://dfcpbv24xux58" path="res://sprites/pause_button.png" id="9_ev6mh"]
 [ext_resource type="Texture2D" uid="uid://bnara5c734pys" path="res://sprites/step_button.png" id="10_wx321"]
 [ext_resource type="Texture2D" uid="uid://b4lbwx20vaspk" path="res://sprites/play_button.png" id="11_op64l"]
+[ext_resource type="Texture2D" uid="uid://bqa3yieotmuje" path="res://sprites/help_button.png" id="12_4jrfy"]
 [ext_resource type="Texture2D" uid="uid://c0copotf2b1i7" path="res://sprites/fast_forward_button.png" id="12_adio4"]
 [ext_resource type="Texture2D" uid="uid://cvr25p015fetd" path="res://sprites/reward_button.png" id="13_7khnq"]
+[ext_resource type="Texture2D" uid="uid://cq7kix4i1sqyf" path="res://sprites/sound_button.png" id="13_rygif"]
+[ext_resource type="Texture2D" uid="uid://7ppjupdsnhoo" path="res://sprites/quit_button.png" id="14_2ulh5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ddlor"]
 atlas = ExtResource("9_ev6mh")
@@ -62,6 +66,54 @@ region = Rect2(48, 0, 24, 24)
 atlas = ExtResource("11_op64l")
 region = Rect2(72, 0, 24, 24)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_0wd04"]
+atlas = ExtResource("12_4jrfy")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ao4jl"]
+atlas = ExtResource("12_4jrfy")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_owmtj"]
+atlas = ExtResource("12_4jrfy")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_se2ik"]
+atlas = ExtResource("12_4jrfy")
+region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_solel"]
+atlas = ExtResource("14_2ulh5")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e1pf4"]
+atlas = ExtResource("14_2ulh5")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vuxj7"]
+atlas = ExtResource("14_2ulh5")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iupmr"]
+atlas = ExtResource("14_2ulh5")
+region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7xakl"]
+atlas = ExtResource("13_rygif")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_encsk"]
+atlas = ExtResource("13_rygif")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8r40b"]
+atlas = ExtResource("13_rygif")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w2t06"]
+atlas = ExtResource("13_rygif")
+region = Rect2(72, 0, 24, 24)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_jxw3m"]
 atlas = ExtResource("12_adio4")
 region = Rect2(0, 0, 24, 24)
@@ -104,6 +156,7 @@ grow_vertical = 2
 script = ExtResource("1_8l0s3")
 ability_menu_scene = ExtResource("2_au8h6")
 reward_picker_scene = ExtResource("2_0406k")
+help_scene = ExtResource("4_vlooy")
 
 [node name="YukaCard" parent="." instance=ExtResource("1_1vts8")]
 offset_left = 5.0
@@ -217,6 +270,61 @@ texture_pressed = SubResource("AtlasTexture_fa3fp")
 texture_hover = SubResource("AtlasTexture_7qn3h")
 texture_disabled = SubResource("AtlasTexture_ydyuh")
 
+[node name="HelpButton" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -56.0
+offset_top = -28.0
+offset_right = -32.0
+offset_bottom = -4.0
+grow_horizontal = 0
+grow_vertical = 0
+texture_normal = SubResource("AtlasTexture_0wd04")
+texture_pressed = SubResource("AtlasTexture_ao4jl")
+texture_hover = SubResource("AtlasTexture_owmtj")
+texture_disabled = SubResource("AtlasTexture_se2ik")
+
+[node name="QuitButton" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -28.0
+offset_top = -28.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 0
+grow_vertical = 0
+texture_normal = SubResource("AtlasTexture_solel")
+texture_pressed = SubResource("AtlasTexture_e1pf4")
+texture_hover = SubResource("AtlasTexture_vuxj7")
+texture_disabled = SubResource("AtlasTexture_iupmr")
+
+[node name="SoundButton" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -84.0
+offset_top = -28.0
+offset_right = -60.0
+offset_bottom = -4.0
+grow_horizontal = 0
+grow_vertical = 0
+toggle_mode = true
+texture_normal = SubResource("AtlasTexture_7xakl")
+texture_pressed = SubResource("AtlasTexture_encsk")
+texture_hover = SubResource("AtlasTexture_8r40b")
+texture_disabled = SubResource("AtlasTexture_w2t06")
+
 [node name="FastForwardButton" type="TextureButton" parent="."]
 layout_mode = 1
 anchors_preset = 3
@@ -270,5 +378,8 @@ horizontal_alignment = 1
 [connection signal="toggled" from="PauseButton" to="." method="_on_pause_button_toggled"]
 [connection signal="button_up" from="StepButton" to="." method="_on_step_button_button_up"]
 [connection signal="button_up" from="PlayButton" to="." method="_on_play_button_button_up"]
+[connection signal="button_up" from="HelpButton" to="." method="_on_help_button_button_up"]
+[connection signal="button_up" from="QuitButton" to="." method="_on_quit_button_button_up"]
+[connection signal="toggled" from="SoundButton" to="." method="_on_sound_button_toggled"]
 [connection signal="button_up" from="FastForwardButton" to="." method="_on_fast_forward_button_button_up"]
 [connection signal="button_up" from="RewardButton" to="." method="_on_reward_button_button_up"]

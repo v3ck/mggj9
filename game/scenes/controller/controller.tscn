@@ -17,6 +17,7 @@ projectile_scene = ExtResource("9_hi8et")
 [connection signal="AbilityFired" from="Logic" to="." method="_on_logic_ability_fired"]
 [connection signal="AbilityPointsChanged" from="Logic" to="." method="_on_logic_ability_points_changed"]
 [connection signal="ExistenceChanged" from="Logic" to="." method="_on_logic_existence_changed"]
+[connection signal="GameOver" from="Logic" to="." method="_on_logic_game_over"]
 [connection signal="HealthChanged" from="Logic" to="." method="_on_logic_health_changed"]
 [connection signal="RewardObtained" from="Logic" to="." method="_on_logic_reward_obtained"]
 [connection signal="RoundChanged" from="Logic" to="." method="_on_logic_round_changed"]

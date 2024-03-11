@@ -1,0 +1,95 @@
+[gd_scene load_steps=9 format=3 uid="uid://dinr1sxkrrqf0"]
+
+[ext_resource type="Script" path="res://scenes/help_page/help_page.gd" id="1_62fji"]
+[ext_resource type="LabelSettings" uid="uid://b6kovepf4mgrw" path="res://resources/label_settings/help_label_settings.tres" id="1_d3xi8"]
+[ext_resource type="Texture2D" uid="uid://cl3mea1jd5ejq" path="res://sprites/accept_button.png" id="2_8h2c7"]
+[ext_resource type="LabelSettings" uid="uid://cm8p2588pdjtu" path="res://resources/label_settings/header_label_settings.tres" id="3_k54p4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1sbmt"]
+atlas = ExtResource("2_8h2c7")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4q8id"]
+atlas = ExtResource("2_8h2c7")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_txbyt"]
+atlas = ExtResource("2_8h2c7")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_em71x"]
+atlas = ExtResource("2_8h2c7")
+region = Rect2(72, 0, 24, 24)
+
+[node name="HelpPage" type="Control"]
+custom_minimum_size = Vector2(480, 270)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_62fji")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0588235, 0.203922, 0.247059, 0.937255)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 4.0
+offset_top = 34.0
+offset_right = -4.0
+offset_bottom = 223.0
+grow_horizontal = 2
+text = "- Units on the battlefield automatically take actions one at a time.
+- Click the EDIT button to view, swap, and reorder a magical girl's abilities.
+- Right-click an ability to see what it does.
+- Each ability has:
+    - an ability point cost
+    - a condition for use
+    - a rule for charging up
+    - an effect
+- A unit uses the first charged ability on the list whose condition is met.
+- If a unit doesn't have enough ability points, it passes the turn.
+- Each unit gains 1 ability point every turn.
+- You gain new abilities to give to your magical girls by defeating enemies."
+label_settings = ExtResource("1_d3xi8")
+
+[node name="OkButton" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -12.0
+offset_top = -28.0
+offset_right = 12.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 0
+texture_normal = SubResource("AtlasTexture_1sbmt")
+texture_pressed = SubResource("AtlasTexture_4q8id")
+texture_hover = SubResource("AtlasTexture_txbyt")
+texture_disabled = SubResource("AtlasTexture_em71x")
+
+[node name="Header" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 4.0
+offset_bottom = 27.0
+grow_horizontal = 2
+text = "INSTRUCTIONS"
+label_settings = ExtResource("3_k54p4")
+horizontal_alignment = 1
+
+[connection signal="button_up" from="OkButton" to="." method="_on_ok_button_button_up"]

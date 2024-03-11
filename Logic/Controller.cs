@@ -28,6 +28,8 @@ namespace Logic
 
         public event EventHandler<AbilityPointsChangedEventArgs>? AbilityPointsChanged;
 
+        public event EventHandler<GameOverEventArgs>? GameOver;
+
         private readonly GameModel _model = new(new GameParameters()
         {
             GridRadius = 5,
@@ -258,6 +260,9 @@ namespace Logic
                 case ActionType.AbilityPoint:
                     AbilityPointsChanged?.Invoke(this, AbilityPointActionToEventArgs(action));
                     break;
+                case ActionType.GameOver:
+                    GameOver?.Invoke(this, GameOverActionToEventArgs(action));
+                    break;
             }
         }
 
@@ -389,6 +394,21 @@ namespace Logic
             {
                 UnitId = abilityPointAction.UnitId,
                 Amount = abilityPointAction.Amount
+            };
+        }
+
+        private static GameOverEventArgs GameOverActionToEventArgs(IBattleAction action)
+        {
+            if (action is not GameOverAction gameOverAction)
+            {
+                throw new ArgumentException("Incorrect ActionType", nameof(action));
+            }
+
+            return new GameOverEventArgs()
+            {
+                IsVictory = gameOverAction.IsVictory,
+                Round = gameOverAction.Round,
+                Score = gameOverAction.Score
             };
         }
     }

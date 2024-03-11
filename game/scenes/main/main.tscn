@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://bkv8538fxsc61"]
+[gd_scene load_steps=59 format=3 uid="uid://bkv8538fxsc61"]
 
 [ext_resource type="Script" path="res://scenes/main/main.gd" id="1_07pwd"]
 [ext_resource type="PackedScene" uid="uid://b6n0yvlutrlsb" path="res://scenes/grid/grid.tscn" id="1_wr1dv"]
@@ -56,6 +56,8 @@
 [ext_resource type="Resource" uid="uid://c0r5lulylqp7b" path="res://resources/ability/slime_burst_ability.tres" id="46_5okvg"]
 [ext_resource type="Resource" uid="uid://bko86gvkn5pup" path="res://resources/ability/light_beam_ability.tres" id="53_uxmsy"]
 [ext_resource type="Resource" uid="uid://bi0l2521hyejt" path="res://resources/ability/approach_enemies_3_ability.tres" id="54_cye8n"]
+[ext_resource type="Resource" uid="uid://gq14fepqn7k0" path="res://resources/ability/blessing_ability.tres" id="55_vf164"]
+[ext_resource type="AudioStream" uid="uid://bgpo4hsg67rjy" path="res://music/mggjloop.ogg" id="57_fmd35"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_07pwd")
@@ -73,14 +75,21 @@ color = Color(0.0823529, 0.0823529, 0.337255, 1)
 [node name="Grid" parent="." instance=ExtResource("1_wr1dv")]
 position = Vector2(144, 16)
 
-[node name="Controller" parent="." node_paths=PackedStringArray("grid", "hud") instance=ExtResource("6_88m1q")]
+[node name="Controller" parent="." node_paths=PackedStringArray("grid", "hud", "audio_player") instance=ExtResource("6_88m1q")]
 spawnResources = Array[Resource("res://resources/spawn/spawn_resource.gd")]([ExtResource("4_asytx"), ExtResource("5_2ltcb"), ExtResource("6_ecldq"), ExtResource("8_v25f4"), ExtResource("9_4puwr"), ExtResource("11_a4jhd"), ExtResource("12_31lxx"), ExtResource("13_wodp0"), ExtResource("12_5whxh"), ExtResource("13_fuooc"), ExtResource("14_feom3"), ExtResource("15_kwpp0"), ExtResource("15_8jy6j"), ExtResource("16_dv1i4")])
 unitResources = Array[Resource("res://resources/unit/unit_resource.gd")]([ExtResource("7_nqcj2"), ExtResource("8_ogbh4"), ExtResource("9_oe6ay"), ExtResource("10_efar8"), ExtResource("11_e41fa"), ExtResource("12_6uf5l"), ExtResource("13_q1q55"), ExtResource("14_7ah5y"), ExtResource("17_cokxq"), ExtResource("23_qfd1w"), ExtResource("27_0t22j"), ExtResource("28_h3hgs")])
-abilityResources = Array[Resource("res://resources/ability/ability_resource.gd")]([ExtResource("5_iwget"), ExtResource("6_jc3gg"), ExtResource("9_kjkqx"), ExtResource("10_w027o"), ExtResource("10_2phbt"), ExtResource("11_7uflm"), ExtResource("12_xnrpn"), ExtResource("13_vks4q"), ExtResource("14_xgahi"), ExtResource("15_w4gft"), ExtResource("16_aav7o"), ExtResource("23_u7p64"), ExtResource("24_kvxay"), ExtResource("25_6tlon"), ExtResource("27_bxpwg"), ExtResource("28_ylfgr"), ExtResource("29_astua"), ExtResource("31_t8ha8"), ExtResource("33_g0fmu"), ExtResource("36_rrkc2"), ExtResource("37_shqjk"), ExtResource("39_ywq8t"), ExtResource("46_5okvg"), ExtResource("53_uxmsy"), ExtResource("54_cye8n")])
+abilityResources = Array[Resource("res://resources/ability/ability_resource.gd")]([ExtResource("5_iwget"), ExtResource("6_jc3gg"), ExtResource("9_kjkqx"), ExtResource("10_w027o"), ExtResource("10_2phbt"), ExtResource("11_7uflm"), ExtResource("12_xnrpn"), ExtResource("13_vks4q"), ExtResource("14_xgahi"), ExtResource("15_w4gft"), ExtResource("16_aav7o"), ExtResource("23_u7p64"), ExtResource("24_kvxay"), ExtResource("25_6tlon"), ExtResource("27_bxpwg"), ExtResource("28_ylfgr"), ExtResource("29_astua"), ExtResource("31_t8ha8"), ExtResource("33_g0fmu"), ExtResource("36_rrkc2"), ExtResource("37_shqjk"), ExtResource("39_ywq8t"), ExtResource("46_5okvg"), ExtResource("53_uxmsy"), ExtResource("54_cye8n"), ExtResource("55_vf164")])
 grid = NodePath("../Grid")
 hud = NodePath("../CanvasLayer/Hud")
+audio_player = NodePath("../AudioPlayer")
 ping_scene = ExtResource("26_2bay3")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Hud" parent="CanvasLayer" instance=ExtResource("3_m8th6")]
+
+[node name="AudioPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("57_fmd35")
+volume_db = -8.0
+
+[connection signal="game_over" from="Controller" to="." method="_on_controller_game_over"]

@@ -36,6 +36,9 @@ namespace Game
         [Signal]
         public delegate void AbilityPointsChangedEventHandler(int id, int amount);
 
+        [Signal]
+        public delegate void GameOverEventHandler(bool isVictory, int round, int score);
+
         private readonly Logic.IController _controller = Logic.Api.CreateController();
 
         public override void _Ready()
@@ -49,6 +52,7 @@ namespace Game
             _controller.ScoreChanged += Controller_ScoreChanged;
             _controller.RoundChanged += Controller_RoundChanged;
             _controller.AbilityPointsChanged += Controller_AbilityPointsChanged;
+            _controller.GameOver += Controller_GameOver;
         }
 
         public void AddUnit(Resource unitResource)
@@ -217,6 +221,15 @@ namespace Game
                 SignalName.AbilityPointsChanged,
                 e.UnitId,
                 e.Amount);
+        }
+
+        private void Controller_GameOver(object sender, Logic.Events.GameOverEventArgs e)
+        {
+            EmitSignal(
+                SignalName.GameOver,
+                e.IsVictory,
+                e.Round,
+                e.Score);
         }
 
         private static Vector2I IntVector2ToVector2I(IntVector2 iv)
