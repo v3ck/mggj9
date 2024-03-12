@@ -4,14 +4,14 @@ using Logic.Simulation.Actions;
 
 namespace Logic.Simulation.Abilities
 {
-    internal class BlessingAbility(AbilityModel model, BattleUnit user, BattleState state, GameModel gameModel)
+    internal class RadianceAbility(AbilityModel model, BattleUnit user, BattleState state, GameModel gameModel)
         : BattleAbilityBase(model, user, state, gameModel)
     {
-        public override string Code => "BLESSING";
+        public override string Code => "RADIANCE";
 
         public static IBattleAbility Create(AbilityModel model, BattleUnit user, BattleState state, GameModel gameModel)
         {
-            return new BlessingAbility(model, user, state, gameModel);
+            return new RadianceAbility(model, user, state, gameModel);
         }
 
         protected override bool CanUseSpecific()
@@ -31,12 +31,7 @@ namespace Logic.Simulation.Abilities
                 return;
             }
 
-            if (healthAction.UnitId == _user.Id)
-            {
-                return;
-            }
-
-            _currentCharge += Math.Max(0, healthAction.Amount - healthAction.PreviousAmount);
+            _currentCharge += Math.Max(0, healthAction.PreviousAmount - healthAction.Amount);
         }
 
         protected override List<IBattleAction> UseSpecific()
@@ -46,34 +41,36 @@ namespace Logic.Simulation.Abilities
                 return [];
             }
 
-            var target = _state.Units.Values
-                .Where(IsTargetValid)
-                .Shuffle()
-                .MaxBy(GetMissingHealth);
+            var targets = _state.Units.Values.Where(IsTargetValid);
 
-            if (target?.Location is null)
+            List<IBattleAction> actions = [];
+            foreach (var target in targets)
             {
-                return [];
+                actions.AddRange(HealUnit(target));
             }
+            return actions;
+        }
+
+        private List<IBattleAction> HealUnit(BattleUnit unit)
+        {
 
             List<IBattleAction> actions = [];
             actions.Add(new AbilityAction()
             {
                 BeginLocation = _user.Location,
-                EndLocation = target.Location,
+                EndLocation = unit.Location,
                 Ability = Code
             });
 
-            var oldHealth = target.Health;
-            target.Heal(5);
-
-            if (oldHealth != target.Health)
+            var oldHealth = unit.Health;
+            unit.Heal(4);
+            if (oldHealth != unit.Health)
             {
                 actions.Add(new HealthAction()
                 {
-                    UnitId = target.Id,
-                    Location = target.Location,
-                    Amount = target.Health,
+                    UnitId = unit.Id,
+                    Location = unit.Location,
+                    Amount = unit.Health,
                     PreviousAmount = oldHealth,
                     SourceUnitId = _user.Id
                 });
@@ -99,12 +96,12 @@ namespace Logic.Simulation.Abilities
                 return false;
             }
 
-            return (unit.Health < (1 + unit.Model.MaxHealth) / 2);
-        }
+            if (4 < (unit.Location - _user.Location).Magnitude)
+            {
+                return false;
+            }
 
-        private int GetMissingHealth(BattleUnit unit)
-        {
-            return unit.Model.MaxHealth - unit.Health;
+            return (unit.Health < unit.Model.MaxHealth);
         }
     }
 }

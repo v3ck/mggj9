@@ -148,6 +148,8 @@ func _on_logic_status_changed(id, _location, status, is_active):
 	var unit = unitDict[id]
 	if "STUN" == status:
 		unit.stun(is_active)
+	elif "SHIELD" == status:
+		unit.shield(is_active)
 
 func _on_logic_ability_fired(fromLocation, toLocation, ability):
 	if not abilityResourcesDict.has(ability):

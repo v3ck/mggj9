@@ -93,7 +93,7 @@ namespace Logic.Simulation.Abilities
             });
 
             var oldHealth = targetUnit.Health;
-            targetUnit.Damage(3);
+            actions.AddRange(targetUnit.Damage(3));
 
             actions.Add(new HealthAction()
             {

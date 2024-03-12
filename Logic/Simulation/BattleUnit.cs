@@ -45,6 +45,13 @@ namespace Logic.Simulation
             set => _timeTurns = value;
         }
 
+        private int _shieldCount = 0;
+        public int ShieldCount
+        {
+            get => _shieldCount;
+            set => _shieldCount = value;
+        }
+
         //private readonly List<IBattleAbility> _abilities = [];
         private readonly Dictionary<string, IBattleAbility> _abilities = new();
 
@@ -160,9 +167,32 @@ namespace Logic.Simulation
             }
         }
 
-        public void Damage(int amount)
+        public List<IBattleAction> Damage(int amount)
         {
-            _health = Math.Max(0, _health - amount);
+            if (0 == _shieldCount)
+            {
+                _health = Math.Max(0, _health - amount);
+                return [];
+            }
+
+            _shieldCount -= 1;
+            if (0 < _shieldCount)
+            {
+                return [];
+            }
+
+            if (_location is null)
+            {
+                return [];
+            }
+
+            return [new StatusAction()
+            {
+                UnitId = _id,
+                Location = _location,
+                Status = "SHIELD",
+                Active = false
+            }];
         }
 
         public void Heal(int amount)

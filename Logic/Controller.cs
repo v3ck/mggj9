@@ -40,6 +40,10 @@ namespace Logic
 
         public void StartBattle()
         {
+            //Debug.WriteLine(_model.Abilities.Values.Where(x => 0 == x.Rarity).Count().ToString());
+            //Debug.WriteLine(_model.Abilities.Values.Where(x => 1 == x.Rarity).Count().ToString());
+            //Debug.WriteLine(_model.Abilities.Values.Where(x => 2 == x.Rarity).Count().ToString());
+
             _simulator = new(_model);
             var actions = _simulator.Start();
             foreach (var action in actions)

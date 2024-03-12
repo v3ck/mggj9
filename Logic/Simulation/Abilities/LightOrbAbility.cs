@@ -56,7 +56,7 @@ namespace Logic.Simulation.Abilities
             }
             else
             {
-                target.Damage(1);
+                actions.AddRange(target.Damage(1));
             }
 
             if (oldHealth != target.Health)

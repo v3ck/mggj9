@@ -15,6 +15,9 @@ func kill():
 func stun(is_stunned: bool):
 	$StunSprite.visible = is_stunned
 
+func shield(is_shielded: bool):
+	$ShieldSprite.visible = is_shielded
+
 func set_health(current_health: int):
 	$HealthBar.update(current_health, resource.default_health)
 

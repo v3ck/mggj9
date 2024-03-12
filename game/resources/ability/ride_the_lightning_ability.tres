@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="AbilityResource" load_steps=3 format=3 uid="uid://cameh2tclv1u6"]
+
+[ext_resource type="Texture2D" uid="uid://5fy8nnm7wrvy" path="res://sprites/spark_projectile.png" id="1_jq1p5"]
+[ext_resource type="Script" path="res://resources/ability/ability_resource.gd" id="2_rs4g4"]
+
+[resource]
+script = ExtResource("2_rs4g4")
+code = "RIDE_THE_LIGHTNING"
+display_name = "Ride The Lightning"
+max_charge = 2
+default_cost = 2
+condition_text = ""
+effect_text = "Target 8 consecutive tiles, each adjacent to the last, dealing 1 damage to all adjacent enemies per target. Move to the last empty tile."
+charge_text = ""
+projectile_texture = ExtResource("1_jq1p5")
+projectile_speed = 2.0
+rarity = 2

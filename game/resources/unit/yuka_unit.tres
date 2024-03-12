@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="UnitResource" load_steps=8 format=3 uid="uid://ddqd1niuges3u"]
 
 [ext_resource type="Script" path="res://resources/unit/unit_resource.gd" id="1_3d3cf"]
-[ext_resource type="Resource" uid="uid://d0b7xwsdp5fet" path="res://resources/ability/spark_ability.tres" id="1_rrmlr"]
+[ext_resource type="Resource" uid="uid://clcherpyfu37s" path="res://resources/ability/void_orb_ability.tres" id="1_igg18"]
 [ext_resource type="Resource" uid="uid://bk8rf8066d7sg" path="res://resources/ability/approach_enemies_2_ability.tres" id="2_lnm4v"]
 [ext_resource type="Resource" uid="uid://upemqtn7fyby" path="res://resources/ability/centre_walk_ability.tres" id="3_feooi"]
 [ext_resource type="Texture2D" uid="uid://jgqlqqchxlch" path="res://sprites/yuka.png" id="4_ejl7v"]
@@ -16,4 +16,4 @@ sprite_sheet = ExtResource("4_ejl7v")
 portrait_sprite = ExtResource("7_qbvq5")
 default_health = 20
 faction = "GOOD"
-default_abilities = Array[Resource("res://resources/ability/ability_resource.gd")]([ExtResource("1_rrmlr"), ExtResource("2_lnm4v"), ExtResource("6_ct1tl"), ExtResource("3_feooi")])
+default_abilities = Array[Resource("res://resources/ability/ability_resource.gd")]([ExtResource("1_igg18"), ExtResource("2_lnm4v"), ExtResource("6_ct1tl"), ExtResource("3_feooi")])

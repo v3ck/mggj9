@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="AbilityResource" load_steps=3 format=3 uid="uid://cb83owqec1423"]
+
+[ext_resource type="Texture2D" uid="uid://y3hd63y5pq62" path="res://sprites/light_orb_projectile.png" id="1_nf7dx"]
+[ext_resource type="Script" path="res://resources/ability/ability_resource.gd" id="2_0loex"]
+
+[resource]
+script = ExtResource("2_0loex")
+code = "RADIANCE"
+display_name = "Radiance"
+max_charge = 15
+default_cost = 1
+condition_text = "There is an ally within 4 tiles missing health."
+effect_text = "Restore 4 health to all allies within 4 tiles, including yourself."
+charge_text = "You have dealt 15 damage."
+projectile_texture = ExtResource("1_nf7dx")
+projectile_speed = 4.0
+rarity = 2

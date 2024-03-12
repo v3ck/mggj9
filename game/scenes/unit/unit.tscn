@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://765ik4ctipst"]
+[gd_scene load_steps=9 format=3 uid="uid://765ik4ctipst"]
 
 [ext_resource type="Script" path="res://scenes/unit/unit.gd" id="1_l6ft8"]
 [ext_resource type="Texture2D" uid="uid://bmuptkq2ls44k" path="res://sprites/slime.png" id="2_ddjpu"]
 [ext_resource type="PackedScene" uid="uid://3ruxyshq3xbf" path="res://scenes/health_bar/health_bar.tscn" id="3_oj2v3"]
 [ext_resource type="Texture2D" uid="uid://bqw3e8t14ydmk" path="res://sprites/stun.png" id="4_15hs0"]
+[ext_resource type="Texture2D" uid="uid://d1xdgojab3cek" path="res://sprites/shield.png" id="5_ux7ko"]
 
 [sub_resource type="Animation" id="Animation_hu5xt"]
 resource_name = "Idle"
@@ -63,5 +64,9 @@ position = Vector2(0, -10)
 [node name="StunSprite" type="Sprite2D" parent="."]
 visible = false
 texture = ExtResource("4_15hs0")
+
+[node name="ShieldSprite" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("5_ux7ko")
 
 [connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]

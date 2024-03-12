@@ -4,26 +4,29 @@ using Logic.Simulation.Actions;
 
 namespace Logic.Simulation.Abilities
 {
-    internal abstract class SingleTargetAttackAbility(
-        AbilityModel model,
-        BattleUnit user,
-        BattleState state,
-        GameModel gameModel,
-        int range,
-        int damage)
+    internal class AcidEruptionAbility(AbilityModel model, BattleUnit user, BattleState state, GameModel gameModel)
         : BattleAbilityBase(model, user, state, gameModel)
     {
-        private readonly int _range = range;
-        private readonly int _damage = damage;
+        public override string Code => "ACID_ERUPTION";
+
+        public static IBattleAbility Create(AbilityModel model, BattleUnit user, BattleState state, GameModel gameModel)
+        {
+            return new AcidEruptionAbility(model, user, state, gameModel);
+        }
 
         protected override bool CanUseSpecific()
         {
-            return _state.Units.Values.Any(IsTargetValid);
+            return _user?.Location is not null;
         }
 
         public override void TryCharge(IBattleAction action)
         {
-            // void
+            if (action is not RoundAction)
+            {
+                return;
+            }
+
+            _currentCharge++;
         }
 
         protected override List<IBattleAction> UseSpecific()
@@ -33,29 +36,45 @@ namespace Logic.Simulation.Abilities
                 return [];
             }
 
-            var target = _state.Units.Values
-                .Where(IsTargetValid)
-                .Random();
+            var targets = _gameModel.Grid.Hexes
+                .Where(hex => hex != _user.Location)
+                .Shuffle()
+                .Take(45);
 
-            if (target?.Location is null)
+            List<IBattleAction> actions = [];
+            foreach (var hex in targets)
             {
-                return [];
+                actions.AddRange(GetActionsAtLocation(hex));
             }
 
+            return actions;
+        }
+
+
+        private List<IBattleAction> GetActionsAtLocation(Hex location)
+        {
             List<IBattleAction> actions = [];
             actions.Add(new AbilityAction()
             {
                 BeginLocation = _user.Location,
-                EndLocation = target.Location,
+                EndLocation = location,
                 Ability = Code
             });
 
+            var target = _state.Units.Values.Where(unit => location == unit.Location)
+                .FirstOrDefault();
+            if (target is null)
+            {
+                return actions;
+            }
+
             var oldHealth = target.Health;
-            actions.AddRange(target.Damage(_damage));
+            actions.AddRange(target.Damage(4));
+
             actions.Add(new HealthAction()
             {
                 UnitId = target.Id,
-                Location = target.Location,
+                Location = location,
                 Amount = target.Health,
                 PreviousAmount = oldHealth,
                 SourceUnitId = _user.Id
@@ -67,7 +86,7 @@ namespace Logic.Simulation.Abilities
                 {
                     UnitId = target.Id,
                     UnitCode = target.Model.Code,
-                    Location = target.Location,
+                    Location = location,
                     Exists = false
                 });
 
@@ -75,14 +94,6 @@ namespace Logic.Simulation.Abilities
             }
 
             return actions;
-        }
-
-        private bool IsTargetValid(BattleUnit unit)
-        {
-            return _user.Location is not null &&
-                unit.Location is not null &&
-                (unit.Location - _user.Location).Magnitude <= _range &&
-                unit.Model.Faction != _user.Model.Faction;
         }
     }
 }

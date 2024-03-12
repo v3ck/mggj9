@@ -14,3 +14,4 @@ effect_text = "Teleport within 2 tiles next to the lowest health enemy in range,
 charge_text = ""
 projectile_texture = ExtResource("1_ckuet")
 projectile_speed = 1.0
+rarity = 0

@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="AbilityResource" load_steps=3 format=3 uid="uid://clcherpyfu37s"]
+
+[ext_resource type="Texture2D" uid="uid://dkms8dxiko8yl" path="res://sprites/dark_orb.png" id="1_8e6vk"]
+[ext_resource type="Script" path="res://resources/ability/ability_resource.gd" id="2_hlf3b"]
+
+[resource]
+script = ExtResource("2_hlf3b")
+code = "VOID_ORB"
+display_name = "Void Orb"
+max_charge = 3
+default_cost = 2
+condition_text = "There is an enemy within 5 tiles."
+effect_text = "Deal 8 damage to the enemy with the most health within 5 tiles."
+charge_text = "You haven't moved for 3 consecutive rounds."
+projectile_texture = ExtResource("1_8e6vk")
+projectile_speed = 5.0
+rarity = 1

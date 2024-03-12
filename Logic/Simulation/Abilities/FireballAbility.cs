@@ -95,9 +95,9 @@ namespace Logic.Simulation.Abilities
             }
 
             var oldHealth = target.Health;
-            target.Damage(3);
-
             List<IBattleAction> actions = [];
+            actions.AddRange(target.Damage(3));
+
             actions.Add(new HealthAction()
             {
                 UnitId = target.Id,

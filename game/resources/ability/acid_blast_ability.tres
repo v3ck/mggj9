@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="AbilityResource" load_steps=3 format=3 uid="uid://teriovvnbuja"]
+
+[ext_resource type="Texture2D" uid="uid://dfk5xgs5d33sb" path="res://sprites/acid_blast_projectile.png" id="1_2ll5d"]
+[ext_resource type="Script" path="res://resources/ability/ability_resource.gd" id="2_bdr74"]
+
+[resource]
+script = ExtResource("2_bdr74")
+code = "ACID_BLAST"
+display_name = "Acid Blast"
+max_charge = 0
+default_cost = 1
+condition_text = "There is an enemy within 3 tiles."
+effect_text = "Deal 8 damage to an enemy within 3 tiles."
+charge_text = ""
+projectile_texture = ExtResource("1_2ll5d")
+projectile_speed = 3.0
+rarity = -1

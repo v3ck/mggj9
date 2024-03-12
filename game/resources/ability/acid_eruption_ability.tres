@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="AbilityResource" load_steps=3 format=3 uid="uid://cdk587kijwcph"]
+
+[ext_resource type="Texture2D" uid="uid://dk8i3qf7jpf2o" path="res://sprites/acid_projectile.png" id="1_jjkhc"]
+[ext_resource type="Script" path="res://resources/ability/ability_resource.gd" id="2_4f8y8"]
+
+[resource]
+script = ExtResource("2_4f8y8")
+code = "ACID_ERUPTION"
+display_name = "Acid Eruption"
+max_charge = 3
+default_cost = 1
+condition_text = ""
+effect_text = "50% chance to deal 4 damage to each unit execpt yourself."
+charge_text = "3 rounds have passed."
+projectile_texture = ExtResource("1_jjkhc")
+projectile_speed = 5.0
+rarity = -1

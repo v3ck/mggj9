@@ -65,7 +65,7 @@ namespace Logic.Simulation.Abilities
 
             hitIds.Add(target.Id);
             var oldHealth = target.Health;
-            target.Damage(2);
+            actions.AddRange(target.Damage(2));
 
             actions.Add(new HealthAction()
             {

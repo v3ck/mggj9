@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="AbilityResource" load_steps=3 format=3 uid="uid://c17s5ah2q7nhp"]
+
+[ext_resource type="Texture2D" uid="uid://coy26alvicrws" path="res://sprites/slime_slap_projectile.png" id="1_yofsx"]
+[ext_resource type="Script" path="res://resources/ability/ability_resource.gd" id="2_hg7sn"]
+
+[resource]
+script = ExtResource("2_hg7sn")
+code = "WARP_SPACE"
+display_name = "Warp Space"
+max_charge = 4
+default_cost = 1
+condition_text = "There is a vacant tile within 2 that is next to an enemy."
+effect_text = "Teleport within 2 tiles next to as many enemies as possible, stunning them for 1 turn. Block the next attack."
+charge_text = "4 rounds have passed."
+projectile_texture = ExtResource("1_yofsx")
+projectile_speed = 1.0
+rarity = 1

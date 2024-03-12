@@ -7,11 +7,11 @@
 script = ExtResource("2_pg0an")
 code = "CHAIN_LIGHTNING"
 display_name = "Chain Lightning"
-max_charge = 3
-default_cost = 3
+max_charge = 2
+default_cost = 2
 condition_text = "There is a enemy within 2 tiles."
-effect_text = "Hits consecutive enemies each within 2 tiles of the last, dealing 1 damage plus 1 for each previous enemy."
-charge_text = "You traverse 3 tiles."
+effect_text = "Hits consecutive enemies each within 2 tiles of the last, dealing 2 damage to each."
+charge_text = "You traverse 2 tiles."
 projectile_texture = ExtResource("1_y6ait")
 projectile_speed = 2.0
-rarity = 2
+rarity = 1

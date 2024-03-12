@@ -31,7 +31,13 @@ namespace Logic.Simulation.Abilities
             { "SLIME_BURST", typeof(SlimeBurstAbility) },
             { "LIGHT_BEAM", typeof(LightBeamAbility) },
             { "APPROACH_ENEMIES_3", typeof(ApproachEnemies3Ability) },
-            { "BLESSING", typeof(BlessingAbility) }
+            { "BLESSING", typeof(BlessingAbility) },
+            { "ACID_ERUPTION", typeof(AcidEruptionAbility) },
+            { "ACID_BLAST", typeof(AcidBlastAbility) },
+            { "SLIME_RAIN", typeof(SlimeRainAbility) },
+            { "RADIANCE", typeof(RadianceAbility) },
+            { "WARP_SPACE", typeof(WarpSpaceAbility) },
+            { "VOID_ORB", typeof(VoidOrbAbility) }
         };
 
         public static IBattleAbility? Create(AbilityModel model, BattleUnit user, BattleState battleState, GameModel gameModel)

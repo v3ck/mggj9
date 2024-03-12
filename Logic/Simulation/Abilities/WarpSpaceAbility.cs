@@ -1,17 +1,16 @@
-﻿using Logic.Extensions;
-using Logic.Models;
+﻿using Logic.Models;
 using Logic.Simulation.Actions;
 
 namespace Logic.Simulation.Abilities
 {
-    internal class AssassinateAbility(AbilityModel model, BattleUnit user, BattleState state, GameModel gameModel)
+    internal class WarpSpaceAbility(AbilityModel model, BattleUnit user, BattleState state, GameModel gameModel)
         : BattleAbilityBase(model, user, state, gameModel)
     {
-        public override string Code => "ASSASSINATE";
+        public override string Code => "WARP_SPACE";
 
         public static IBattleAbility Create(AbilityModel model, BattleUnit user, BattleState state, GameModel gameModel)
         {
-            return new AssassinateAbility(model, user, state, gameModel);
+            return new WarpSpaceAbility(model, user, state, gameModel);
         }
 
         protected override bool CanUseSpecific()
@@ -27,7 +26,12 @@ namespace Logic.Simulation.Abilities
 
         public override void TryCharge(IBattleAction action)
         {
-            // void
+            if (action is not RoundAction)
+            {
+                return;
+            }
+
+            _currentCharge++;
         }
 
         protected override List<IBattleAction> UseSpecific()
@@ -39,7 +43,7 @@ namespace Logic.Simulation.Abilities
 
             var targetLocation = _gameModel.Grid.WithinDistance(_user.Location, 0, 2)
                 .Where(IsTargetValid)
-                .MinBy(hex => _state.Units.Values
+                .MaxBy(hex => _state.Units.Values
                     .Where(unit => unit.Location is not null)
                     .Where(unit => unit.Model.Faction != _user.Model.Faction)
                     .Where(unit => 1 == (hex - unit.Location).Magnitude)
@@ -50,16 +54,10 @@ namespace Logic.Simulation.Abilities
                 return [];
             }
 
-            var targetUnit = _state.Units.Values
+            var targetUnits = _state.Units.Values
                 .Where(unit => unit.Location is not null)
                 .Where(unit => unit.Model.Faction != _user.Model.Faction)
-                .Where(unit => 1 == (targetLocation - unit.Location).Magnitude)
-                .MinBy(unit => unit.Health);
-
-            if (targetUnit is null)
-            {
-                return [];
-            }
+                .Where(unit => 1 == (targetLocation - unit.Location).Magnitude);
 
             List<IBattleAction> actions = [];
 
@@ -73,37 +71,48 @@ namespace Logic.Simulation.Abilities
                 IsTeleport = true
             });
 
+            _user.ShieldCount += 1;
+            actions.Add(new StatusAction()
+            {
+                UnitId = _user.Id,
+                Location = targetLocation,
+                Status = "SHIELD",
+                Active = true
+
+            });
+
+            foreach (var unit in targetUnits)
+            {
+                actions.AddRange(StunUnit(unit, targetLocation));
+            }
+
+            return actions;
+        }
+
+        private List<IBattleAction> StunUnit(BattleUnit unit, Hex targetLocation)
+        {
+            if (unit?.Location is null)
+            {
+                return [];
+            }
+
+            List<IBattleAction> actions = [];
             actions.Add(new AbilityAction()
             {
                 BeginLocation = targetLocation,
-                EndLocation = targetUnit.Location,
+                EndLocation = unit.Location,
                 Ability = Code
             });
 
-            var oldHealth = targetUnit.Health;
-            actions.AddRange(targetUnit.Damage(4));
+            unit.StunTurns += 1;
 
-            actions.Add(new HealthAction()
+            actions.Add(new StatusAction()
             {
-                UnitId = targetUnit.Id,
-                Location = targetUnit.Location,
-                Amount = targetUnit.Health,
-                PreviousAmount = oldHealth,
-                SourceUnitId = _user.Id
+                UnitId = unit.Id,
+                Location = unit.Location,
+                Status = "STUN",
+                Active = true
             });
-
-            if (targetUnit.Health <= 0)
-            {
-                actions.Add(new ExistenceAction()
-                {
-                    UnitId = targetUnit.Id,
-                    UnitCode = targetUnit.Model.Code,
-                    Location = targetUnit.Location,
-                    Exists = false
-                });
-
-                _state.Units.Remove(targetUnit.Id);
-            }
 
             return actions;
         }
