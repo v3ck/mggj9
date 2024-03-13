@@ -10,6 +10,6 @@ script = ExtResource("3_2wdvc")
 code = "DARK_SLIME"
 display_name = "Dark Slime"
 sprite_sheet = ExtResource("4_vsrpn")
-default_health = 6
+default_health = 5
 faction = "EVIL"
 default_abilities = Array[Resource("res://resources/ability/ability_resource.gd")]([ExtResource("1_peqlk"), ExtResource("2_4ixqn")])

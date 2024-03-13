@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="AbilityResource" load_steps=3 format=3 uid="uid://c8pbey0q5c0xe"]
+
+[ext_resource type="Texture2D" uid="uid://oq5ufmryh35w" path="res://sprites/freeze_projectile.png" id="1_708xv"]
+[ext_resource type="Script" path="res://resources/ability/ability_resource.gd" id="2_bvf0s"]
+
+[resource]
+script = ExtResource("2_bvf0s")
+code = "FREEZE"
+display_name = "Freeze"
+max_charge = 0
+default_cost = 1
+condition_text = "There is an enemy within 2 tiles."
+effect_text = "Deal 1 damage to an enemy within 2 tiles and stun it for 1 turn."
+charge_text = ""
+projectile_texture = ExtResource("1_708xv")
+projectile_speed = 2.0
+rarity = 0

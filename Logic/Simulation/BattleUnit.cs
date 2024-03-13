@@ -1,6 +1,7 @@
 ﻿using Logic.Models;
 using Logic.Simulation.Abilities;
 using Logic.Simulation.Actions;
+using System.Diagnostics;
 
 namespace Logic.Simulation
 {
@@ -145,7 +146,7 @@ namespace Logic.Simulation
                 return null;
             }
 
-            //Debug.WriteLine($"[{_model.Code}] used [{ability.Code}]");
+            Debug.WriteLine($"[{_model.Code}] used [{ability.Code}]");
             return ability;
         }
 

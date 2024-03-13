@@ -15,7 +15,12 @@ namespace Logic.Simulation.Abilities
 
         protected override bool CanUseSpecific()
         {
-            return _user?.Location is not null;
+            if (_user?.Location is null)
+            {
+                return false;
+            }
+
+            return _user.Health < _user.Model.MaxHealth;
         }
 
         public override void TryCharge(IBattleAction action)

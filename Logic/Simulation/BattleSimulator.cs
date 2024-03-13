@@ -228,8 +228,8 @@ namespace Logic.Simulation
 
         private string GenerateReward(IEnumerable<string> rewardsFound)
         {
-            var rand = rng.Next(13);
-            var rarity = (rand < 1) ? 2 : ((rand < 4) ? 1 : 0);
+            var rand = rng.Next(15);
+            var rarity = (rand < 2) ? 2 : ((rand < 7) ? 1 : 0);
             return _gameModel.Abilities.Values
                 .Where(ability => !rewardsFound.Contains(ability.Code))
                 .Where(ability => rarity == ability.Rarity)

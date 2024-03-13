@@ -266,7 +266,7 @@ func _on_hud_sound_toggled(is_on: bool):
 	GlobalSettings.sound_on = is_on
 
 func _on_logic_game_over(isVictory, final_round, score):
-	game_over.emit(isVictory, final_round, score)
+	game_over.emit(isVictory, final_round, score, false)
 
 func _on_hud_quit():
-	game_over.emit(false, 0, 0)
+	game_over.emit(false, 0, 0, true)

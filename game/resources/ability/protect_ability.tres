@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="AbilityResource" load_steps=3 format=3 uid="uid://b88a8aeks263d"]
+
+[ext_resource type="Texture2D" uid="uid://coy26alvicrws" path="res://sprites/slime_slap_projectile.png" id="1_qacst"]
+[ext_resource type="Script" path="res://resources/ability/ability_resource.gd" id="2_4roe6"]
+
+[resource]
+script = ExtResource("2_4roe6")
+code = "PROTECT"
+display_name = "Protect"
+max_charge = 0
+default_cost = 1
+condition_text = "There is an ally within 3 tiles that is not full health and not blocking."
+effect_text = "An ally within 3 tiles that is not full health and not blocking, including yourself, blocks 1 attack."
+charge_text = ""
+projectile_texture = ExtResource("1_qacst")
+projectile_speed = 3.0
+rarity = 0

@@ -38,11 +38,13 @@ namespace Logic
 
         private BattleSimulator? _simulator = null;
 
+        private bool _isGameOver = false;
+
         public void StartBattle()
         {
-            //Debug.WriteLine(_model.Abilities.Values.Where(x => 0 == x.Rarity).Count().ToString());
-            //Debug.WriteLine(_model.Abilities.Values.Where(x => 1 == x.Rarity).Count().ToString());
-            //Debug.WriteLine(_model.Abilities.Values.Where(x => 2 == x.Rarity).Count().ToString());
+            Debug.WriteLine(_model.Abilities.Values.Where(x => 0 == x.Rarity).Count().ToString());
+            Debug.WriteLine(_model.Abilities.Values.Where(x => 1 == x.Rarity).Count().ToString());
+            Debug.WriteLine(_model.Abilities.Values.Where(x => 2 == x.Rarity).Count().ToString());
 
             _simulator = new(_model);
             var actions = _simulator.Start();
@@ -62,7 +64,10 @@ namespace Logic
                 }
             }
 
-            throw new Exception("The simulation is stuck.");
+            if (!_isGameOver)
+            {
+                throw new Exception("The simulation is stuck.");
+            }
         }
 
         private bool TryTakeTurn()
@@ -266,6 +271,7 @@ namespace Logic
                     break;
                 case ActionType.GameOver:
                     GameOver?.Invoke(this, GameOverActionToEventArgs(action));
+                    _isGameOver = true;
                     break;
             }
         }

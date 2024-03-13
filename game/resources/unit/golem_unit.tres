@@ -10,6 +10,6 @@ script = ExtResource("3_afdwh")
 code = "GOLEM"
 display_name = "Golem"
 sprite_sheet = ExtResource("3_4xsa5")
-default_health = 9
+default_health = 8
 faction = "EVIL"
 default_abilities = Array[Resource("res://resources/ability/ability_resource.gd")]([ExtResource("1_lp5i0"), ExtResource("1_18go1")])

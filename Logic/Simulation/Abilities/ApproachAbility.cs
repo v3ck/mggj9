@@ -89,6 +89,11 @@ namespace Logic.Simulation.Abilities
 
         private bool IsValidFaction(BattleUnit unit)
         {
+            if (unit.Id == _user.Id)
+            {
+                return false;
+            }
+
             if (!_approachAllies && (unit.Model.Faction == _user.Model.Faction))
             {
                 return false;

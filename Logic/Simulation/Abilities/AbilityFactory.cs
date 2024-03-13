@@ -37,7 +37,11 @@ namespace Logic.Simulation.Abilities
             { "SLIME_RAIN", typeof(SlimeRainAbility) },
             { "RADIANCE", typeof(RadianceAbility) },
             { "WARP_SPACE", typeof(WarpSpaceAbility) },
-            { "VOID_ORB", typeof(VoidOrbAbility) }
+            { "VOID_ORB", typeof(VoidOrbAbility) },
+            { "RIDE_THE_LIGHTNING", typeof(RideTheLightningAbility) },
+            { "PROTECT", typeof(ProtectAbility) },
+            { "FREEZE", typeof(FreezeAbility) },
+            { "APPROACH_ALLIES_2", typeof(ApproachAllies2Ability) }
         };
 
         public static IBattleAbility? Create(AbilityModel model, BattleUnit user, BattleState battleState, GameModel gameModel)

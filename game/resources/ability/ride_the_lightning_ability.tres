@@ -7,11 +7,11 @@
 script = ExtResource("2_rs4g4")
 code = "RIDE_THE_LIGHTNING"
 display_name = "Ride The Lightning"
-max_charge = 2
+max_charge = 0
 default_cost = 2
-condition_text = ""
-effect_text = "Target 8 consecutive tiles, each adjacent to the last, dealing 1 damage to all adjacent enemies per target. Move to the last empty tile."
-charge_text = ""
+condition_text = "There is an enemy within 2 tiles."
+effect_text = "Target 8 circles of radius 2 centred on an 8-tile path. Deal 1 damage to all enemies in each circle. Move to the end."
+charge_text = "An enemy has died."
 projectile_texture = ExtResource("1_jq1p5")
-projectile_speed = 2.0
+projectile_speed = 1.0
 rarity = 2

@@ -13,6 +13,6 @@ script = ExtResource("6_dnsow")
 code = "BOSS"
 display_name = "Satone"
 sprite_sheet = ExtResource("3_wwtng")
-default_health = 50
+default_health = 40
 faction = "EVIL"
 default_abilities = Array[Resource("res://resources/ability/ability_resource.gd")]([ExtResource("1_td5st"), ExtResource("1_5jybl"), ExtResource("2_nn6i2"), ExtResource("3_w1s0v"), ExtResource("2_h3adk")])

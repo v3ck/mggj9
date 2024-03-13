@@ -4,25 +4,18 @@ using Logic.Simulation.Actions;
 
 namespace Logic.Simulation.Abilities
 {
-    internal abstract class SingleTargetAttackAbility(
-        AbilityModel model,
-        BattleUnit user,
-        BattleState state,
-        GameModel gameModel,
-        int range,
-        int damage)
+    internal class FreezeAbility(AbilityModel model, BattleUnit user, BattleState state, GameModel gameModel)
         : BattleAbilityBase(model, user, state, gameModel)
     {
-        private readonly int _range = range;
-        private readonly int _damage = damage;
+        public override string Code => "FREEZE";
+
+        public static IBattleAbility Create(AbilityModel model, BattleUnit user, BattleState state, GameModel gameModel)
+        {
+            return new FreezeAbility(model, user, state, gameModel);
+        }
 
         protected override bool CanUseSpecific()
         {
-            if (_user?.Location is null)
-            {
-                return false;
-            }
-
             return _state.Units.Values.Any(IsTargetValid);
         }
 
@@ -55,16 +48,28 @@ namespace Logic.Simulation.Abilities
                 Ability = Code
             });
 
-            var oldHealth = target.Health;
-            actions.AddRange(target.Damage(_damage));
-            actions.Add(new HealthAction()
+            target.StunTurns += 1;
+            actions.Add(new StatusAction()
             {
                 UnitId = target.Id,
                 Location = target.Location,
-                Amount = target.Health,
-                PreviousAmount = oldHealth,
-                SourceUnitId = _user.Id
+                Status = "STUN",
+                Active = true
             });
+
+            var oldHealth = target.Health;
+            actions.AddRange(target.Damage(1));
+            if (oldHealth != target.Health)
+            {
+                actions.Add(new HealthAction()
+                {
+                    UnitId = target.Id,
+                    Location = target.Location,
+                    Amount = target.Health,
+                    PreviousAmount = oldHealth,
+                    SourceUnitId = _user.Id
+                });
+            }
 
             if (target.Health <= 0)
             {
@@ -84,10 +89,27 @@ namespace Logic.Simulation.Abilities
 
         private bool IsTargetValid(BattleUnit unit)
         {
-            return _user.Location is not null &&
-                unit.Location is not null &&
-                (unit.Location - _user.Location).Magnitude <= _range &&
-                unit.Model.Faction != _user.Model.Faction;
+            if (_user.Location is null)
+            {
+                return false;
+            }
+
+            if (unit.Location is null)
+            {
+                return false;
+            }
+
+            if (2 < (unit.Location - _user.Location).Magnitude)
+            {
+                return false;
+            }
+
+            if (unit.Model.Faction == _user.Model.Faction)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

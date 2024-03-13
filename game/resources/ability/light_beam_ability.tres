@@ -13,5 +13,5 @@ condition_text = "There is a enemy within 3 tiles."
 effect_text = "Deals 2 damage to an enemy within 3 tiles and another enemy adjacent to it."
 charge_text = "Always."
 projectile_texture = ExtResource("1_vs5aj")
-projectile_speed = 4.0
+projectile_speed = 3.0
 rarity = -1
