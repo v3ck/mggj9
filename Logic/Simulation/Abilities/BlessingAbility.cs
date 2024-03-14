@@ -1,6 +1,7 @@
 ﻿using Logic.Extensions;
 using Logic.Models;
 using Logic.Simulation.Actions;
+using System.Diagnostics;
 
 namespace Logic.Simulation.Abilities
 {
@@ -8,6 +9,8 @@ namespace Logic.Simulation.Abilities
         : BattleAbilityBase(model, user, state, gameModel)
     {
         public override string Code => "BLESSING";
+
+        private bool _usedThisRound = false;
 
         public static IBattleAbility Create(AbilityModel model, BattleUnit user, BattleState state, GameModel gameModel)
         {
@@ -21,6 +24,17 @@ namespace Logic.Simulation.Abilities
 
         public override void TryCharge(IBattleAction action)
         {
+            if (action is RoundAction)
+            {
+                _usedThisRound = false;
+                return;
+            }
+
+            if (_usedThisRound)
+            {
+                return;
+            }
+
             if (action is not HealthAction healthAction)
             {
                 return;
@@ -65,7 +79,7 @@ namespace Logic.Simulation.Abilities
             });
 
             var oldHealth = target.Health;
-            target.Heal(5);
+            target.Heal(6);
 
             if (oldHealth != target.Health)
             {
@@ -78,6 +92,8 @@ namespace Logic.Simulation.Abilities
                     SourceUnitId = _user.Id
                 });
             }
+
+            _usedThisRound = true;
 
             return actions;
         }

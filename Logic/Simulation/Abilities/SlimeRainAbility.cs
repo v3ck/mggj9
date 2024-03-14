@@ -84,19 +84,30 @@ namespace Logic.Simulation.Abilities
 
         private List<IBattleAction> Summon(Hex location, UnitModel unitModel)
         {
+            List<IBattleAction> actions = [];
+
+            actions.Add(new AbilityAction()
+            {
+                BeginLocation = _user.Location,
+                EndLocation = location,
+                Ability = Code
+            });
+
             var unit = new BattleUnit(unitModel, _state, _gameModel)
             {
                 Location = location
             };
 
             _state.Units[unit.Id] = unit;
-            return [new ExistenceAction()
+            actions.Add(new ExistenceAction()
             {
                 UnitId = unit.Id,
                 UnitCode = "ANGRY_SLIME",
                 Exists = true,
                 Location = unit.Location
-            }];
+            });
+
+            return actions;
         }
     }
 }

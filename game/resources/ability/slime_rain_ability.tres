@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="AbilityResource" load_steps=2 format=3 uid="uid://d22mssxkoc7kb"]
+[gd_resource type="Resource" script_class="AbilityResource" load_steps=3 format=3 uid="uid://d22mssxkoc7kb"]
 
+[ext_resource type="Texture2D" uid="uid://coy26alvicrws" path="res://sprites/slime_slap_projectile.png" id="1_hkpmh"]
 [ext_resource type="Script" path="res://resources/ability/ability_resource.gd" id="1_pguc1"]
 
 [resource]
@@ -11,5 +12,6 @@ default_cost = 1
 condition_text = "There is an enemy within 4 tiles."
 effect_text = "Summon an Angry Slime in all empty tiles adjacent to an enemy within 4."
 charge_text = "A 1 in 4 chance every round."
-projectile_speed = 10.0
+projectile_texture = ExtResource("1_hkpmh")
+projectile_speed = 5.0
 rarity = -1

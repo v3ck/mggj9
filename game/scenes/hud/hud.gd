@@ -119,10 +119,10 @@ func _on_ability_menu_closed():
 	resumed.emit()
 
 func _on_reward_picker_ability_picked(ability_code: String):
-	resumed.emit()
 	reward_picked.emit(ability_code)
 	if is_user_paused:
 		return
+	resumed.emit()
 
 func _on_step_button_button_up():
 	stepped.emit()
@@ -160,4 +160,6 @@ func _on_quit_button_button_up():
 func _on_help_page_exited():
 	remove_child(help_page)
 	help_page.queue_free()
+	if is_user_paused:
+		return
 	resumed.emit()

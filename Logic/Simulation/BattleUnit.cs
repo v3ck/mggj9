@@ -53,8 +53,9 @@ namespace Logic.Simulation
             set => _shieldCount = value;
         }
 
-        //private readonly List<IBattleAbility> _abilities = [];
-        private readonly Dictionary<string, IBattleAbility> _abilities = new();
+        private readonly Dictionary<string, IBattleAbility> _abilities = [];
+
+        private IBattleAbility? _randomWalk;
 
         private readonly UnitModel _model;
         public UnitModel Model => _model;
@@ -72,6 +73,7 @@ namespace Logic.Simulation
             _gameModel = gameModel;
             _health = model.MaxHealth;
             RefreshAbilities();
+            InitRandomWalk();
         }
 
         public void RefreshAbilities()
@@ -146,7 +148,7 @@ namespace Logic.Simulation
                 return null;
             }
 
-            Debug.WriteLine($"[{_model.Code}] used [{ability.Code}]");
+            //Debug.WriteLine($"[{_model.Code}] used [{ability.Code}]");
             return ability;
         }
 
@@ -209,7 +211,7 @@ namespace Logic.Simulation
                 .FirstOrDefault();
             if (code is null)
             {
-                return null;
+                return _randomWalk;
             }
 
             return _abilities[code];
@@ -300,6 +302,22 @@ namespace Logic.Simulation
                 Location = _location,
                 Status = "TIME"
             };
+        }
+
+        private void InitRandomWalk()
+        {
+            if (!_gameModel.Abilities.TryGetValue("RANDOM_WALK", out var abilityModel))
+            {
+                return;
+            }
+
+            var ability = AbilityFactory.Create(abilityModel, this, _state, _gameModel);
+            if (ability is not RandomWalkAbility)
+            {
+                return;
+            }
+
+            _randomWalk = ability as RandomWalkAbility;
         }
     }
 }

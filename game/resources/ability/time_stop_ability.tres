@@ -10,6 +10,6 @@ max_charge = 3
 default_cost = 1
 condition_text = "Always."
 effect_text = "Take 2 extra turns."
-charge_text = "You expend all of your ability points in 3 consecutive rounds."
+charge_text = "You have not exceeded 1 ability point for at least 3 rounds."
 projectile_speed = 10.0
 rarity = 2

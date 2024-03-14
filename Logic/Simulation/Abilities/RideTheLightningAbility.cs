@@ -9,6 +9,8 @@ namespace Logic.Simulation.Abilities
     {
         public override string Code => "RIDE_THE_LIGHTNING";
 
+        private int _kills = 0;
+
         public static IBattleAbility Create(AbilityModel model, BattleUnit user, BattleState state, GameModel gameModel)
         {
             return new RideTheLightningAbility(model, user, state, gameModel);
@@ -50,7 +52,14 @@ namespace Logic.Simulation.Abilities
                 return;
             }
 
-            _currentCharge += 1;
+            if (0 < _kills)
+            {
+                _kills -= 1;
+            }
+            else
+            {
+                _currentCharge += 1;
+            }
         }
 
         protected override List<IBattleAction> UseSpecific()
@@ -60,14 +69,7 @@ namespace Logic.Simulation.Abilities
                 return [];
             }
 
-            List<IBattleAction> actions = [];
-            foreach (var unit in _state.Units.Values)
-            {
-                actions.AddRange(HitUnit(unit, _user.Location));
-            }
-
-            actions.AddRange(UseChain(_user.Location, [_user.Location]));
-            return actions;
+            return UseChain(_user.Location, [_user.Location]);
         }
 
         private List<IBattleAction> UseChain(Hex location, List<Hex> hitLocations)
@@ -152,6 +154,7 @@ namespace Logic.Simulation.Abilities
                 });
 
                 _state.Units.Remove(unit.Id);
+                _kills += 1;
             }
 
             return actions;
